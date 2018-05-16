@@ -35,9 +35,12 @@ console.log(els instanceof Array); // false
 ```
 
 유사배열은 forEach 같은 배열의 메서드를 쓸 수 없다.
-age.forEach(function(el) {console.log(el);}); // 10, 11
-els.forEach(function(el) {console.log(el);}); // Uncaught TypeError: els.forEach is not a function
-(div 는 Node 프로토타입에 forEach 가 있어서 된다.)
+```
+age.forEach(function(el) { console.log(el); }); // 10, 11
+els.forEach(function(el) { console.log(el); }); // Uncaught TypeError: els.forEach is not a function
+// (div 는 Node 프로토타입에 forEach 가 있어서 된다.)
+```
+
 
 이럴 때는 배열의 메서드를 **빌려와서** 사용할 수 있다.
 call 이나 apply 를 쓰면 된다.
@@ -46,8 +49,7 @@ var tds = this.getElementsByTagName("td");
 Array.prototype.forEach.call(tds, function (el) {
   console.log(el);
 });
-```
-```
+
 // <td style="border: 1px solid rgb(176, 176, 176); border-image: none;">00</td>
 // <td style="border: 1px solid rgb(176, 176, 176); border-image: none;">전체</td>
 // <td style="border: 1px solid rgb(176, 176, 176); border-image: none;">11</td>
