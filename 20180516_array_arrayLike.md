@@ -42,7 +42,15 @@ els.forEach(function(el) {console.log(el);}); // Uncaught TypeError: els.forEach
 이럴 때는 배열의 메서드를 **빌려와서** 사용할 수 있다.
 call 이나 apply 를 쓰면 된다.
 ```
-Array.prototype.forEach.call(div, function(el) { console.log(el); });
+var tds = this.getElementsByTagName("td");
+Array.prototype.forEach.call(tds, function (el) {
+  console.log(el);
+});
+```
+```
+// <td style="border: 1px solid rgb(176, 176, 176); border-image: none;">00</td>
+// <td style="border: 1px solid rgb(176, 176, 176); border-image: none;">전체</td>
+// <td style="border: 1px solid rgb(176, 176, 176); border-image: none;">11</td>
 ```
 
 최신 자바스크립트에서는 Array.from 으로 더 간단히 사용할 수 있다고 하니 참고하면 좋을 듯 하다.
