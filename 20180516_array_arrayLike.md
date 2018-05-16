@@ -6,6 +6,7 @@
 오늘자 의미있던 것
 https://www.zerocho.com/category/JavaScript/post/5af6f9e707d77a001bb579d2
 
+
 **배열과 유사배열**
 
 javascript 를 하면서 헷갈리고 답답했던 게 HTMLDomElement 였다.
@@ -19,6 +20,7 @@ var age = [10, 11]; // array [10, 11]
 var div = document.querySelectorAll('div'); // NodeList [div, div, div, ...]
 var els = document.body.children; // HTMLCollection [noscript, link, div, ...]
 ```
+
 
 배열과 유사배열을 구분하고 싶다면 다음을 사용한다.
 1. isArray
