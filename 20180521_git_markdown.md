@@ -97,10 +97,10 @@ ___
 - 이미지를 따로 저장 안하는 방법이 있다.
 - github issue 창으로 가서 새 issue 를 클릭하면 Write 부분에 내용을 적을 수 있는 곳이 생긴다.
 - 이 곳에 이미지 파일을 복사, 붙여넣기 하면 된다. (난 그림판에서 복붙했다.)
-<img src="https://user-images.githubusercontent.com/12723983/40458307-4e684246-5f36-11e8-9b60-9212a525ad52.png" alt="그림판에서 복사한 후" width="50%">
-<img src="https://user-images.githubusercontent.com/12723983/40457693-d417b07e-5f32-11e8-8931-bb91955f6c63.png" alt="issue write 에서 붙여넣기" width="50%">
+<img src="https://user-images.githubusercontent.com/12723983/40458307-4e684246-5f36-11e8-9b60-9212a525ad52.png" alt="그림판에서 복사한 후" width="50%"><img src="https://user-images.githubusercontent.com/12723983/40457693-d417b07e-5f32-11e8-8931-bb91955f6c63.png" alt="issue write 에서 붙여넣기" width="50%">
 
 ![해피](https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png)
+
 ```
 ![해피](https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png)
 ```
@@ -120,4 +120,36 @@ ___
 ```
 
 # 이미지 정렬
-- 왼쪽, 가운데, 오른쪽 정렬을 할 수 있다.
+- html 태그의 align 속성으로 왼쪽, 가운데, 오른쪽 정렬을 할 수 있다.
+- 가운데 정렬은 p 로 감싸주고 p 태그에 align 을 넣어준다.
+
+`left` 정렬
+<img align="left" src="https://user-images.githubusercontent.com/12723983/40458597-c2edd968-5f37-11e8-854d-9b4740747e1f.png" alt="왼쪽 정렬" width="100">
+
+```
+<img align="left" src="https://user-images.githubusercontent.com/12723983/40458597-c2edd968-5f37-11e8-854d-9b4740747e1f.png" alt="왼쪽 정렬" width="100">
+```
+
+---
+
+`center` 정렬
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/12723983/40458597-c2edd968-5f37-11e8-854d-9b4740747e1f.png" alt="중간 정렬" width="100">
+</p>
+
+```
+<p align="center">
+<img src="https://user-images.githubusercontent.com/12723983/40458597-c2edd968-5f37-11e8-854d-9b4740747e1f.png" alt="중간 정렬" width="100">
+</p>
+```
+
+---
+
+`right` 정렬
+
+<img align="right" src="https://user-images.githubusercontent.com/12723983/40458597-c2edd968-5f37-11e8-854d-9b4740747e1f.png" alt="오른쪽 정렬" width="100">
+
+```
+<img align="right" src="https://user-images.githubusercontent.com/12723983/40458597-c2edd968-5f37-11e8-854d-9b4740747e1f.png" alt="오른쪽 정렬" width="100">
+```
