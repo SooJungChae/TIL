@@ -29,17 +29,28 @@
 ```
 # 글씨 스타일
 
+- 기울이기
+
 *기울이기*
 ```
 *기울이기*
 _기울이기_
 ```
 
+- 볼드체
 **볼드체**
 ```
 **볼드체**
 __볼드체__
 ```
+
+- 기울이기 + 볼드체
+
+**_기울이기+볼드체_++
+```
+**_기울이기+볼드체_++
+```
+
 
 ~~취소선~~
 ```
@@ -68,3 +79,45 @@ ___
 ---
 ___
 ```
+
+# 상태 아이콘 넣기
+- [이 링크를 참고한다.](https://shields.io/)
+![image](https://user-images.githubusercontent.com/12723983/40457622-8705b34e-5f32-11e8-8f25-79c787021c8e.png)
+- 원하는 걸 클릭하면 해당 아이콘의 documentation 이 뜨고, Markdown 부분을 사용하면 된다.
+
+![Coveralls bitbucket](https://img.shields.io/coveralls/bitbucket/pyKLIP/pyklip.svg)
+![continuousphp](https://img.shields.io/continuousphp/git-hub/doctrine/dbal/master.svg)
+
+```
+![Coveralls bitbucket](https://img.shields.io/coveralls/bitbucket/pyKLIP/pyklip.svg)
+![continuousphp](https://img.shields.io/continuousphp/git-hub/doctrine/dbal/master.svg)
+```
+
+# 이미지 삽입
+- 이미지를 따로 저장 안하는 방법이 있다.
+- github issue 창으로 가서 새 issue 를 클릭하면 Write 부분에 내용을 적을 수 있는 곳이 생긴다.
+- 이 곳에 이미지 파일을 복사, 붙여넣기 하면 된다. (난 그림판에서 복붙했다.)
+<img src="https://user-images.githubusercontent.com/12723983/40458307-4e684246-5f36-11e8-9b60-9212a525ad52.png" alt="그림판에서 복사한 후" width="50%">
+<img src="https://user-images.githubusercontent.com/12723983/40457693-d417b07e-5f32-11e8-8931-bb91955f6c63.png" alt="issue write 에서 붙여넣기" width="50%">
+
+![해피](https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png)
+```
+![해피](https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png)
+```
+
+# 이미지 사이즈 조절
+- jekyll 테마를 쓰는 사람과 github 자체만으로 사용하는 사람의 스타일 지정 방법이 다르다.
+- 테마를 쓴다면 style 태그를 지정해주면 된다. 
+```![해피](https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png){:width=100 height=100}```
+- 하지만, github 자체에서 이미지 사이즈를 지정해주고 싶다면 html 태그를 사용해서 width, height 를 지정해줘야 한다.
+```<img src="경로" alt="설명" width="사이즈" height="사이즈">```
+- width, height 를 지정해줄 수 있는데 px, % 둘다 상관없다.
+- 숫자 뒤에 px 을 안 붙이면 자동 px 이 된다.
+<img src="https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png" alt="issue write 에서 붙여넣기" width="50%">
+
+```
+<img src="https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png" alt="issue write 에서 붙여넣기" width="50%">
+```
+
+# 이미지 정렬
+- 왼쪽, 가운데, 오른쪽 정렬을 할 수 있다.
