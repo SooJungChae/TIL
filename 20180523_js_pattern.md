@@ -1,85 +1,140 @@
-다음 내용들은 PACKT 출판사의 사이먼 팀스가 지은 자바스크립트 디자인 패턴 서적을 보며 정리한 내용이며 
-이해가 안가는 부분은 직접 추가했습니다.
-***
+반갑습니다~
+**유지보수가 쉬운 코드**를 작성하기 위해 공부하는 페이지입니다.
 
-# 프로토타입 패턴
-프로토타입은 **상속**을 지원하는 패턴이다.
+자바스크립트 패턴을 알기 위해선 개념을 확실하게 알고 들어가야 이해하기 쉽습니다. 가장 기본이라 할 수 있는 **함수**부터 정리해볼께요.
 
-기존 구성되어 있는 객체를 복사하는 건 매우 유용하고 편리하다. 
-- 기존의 인스턴스를 저장함으로써 쉽게 객체 상태 기록을 유지할 수 있다.
-복잡한 객체를 단 한 번만 생성하고, 약간의 변화가 있는 다수의 객체로 복사 될 수 있도록 허용한다.
-즉, 원본 객체가 복잡할수록 얻는 이득이 크다.
+# 자바스크립트 기본 개념
+## 함수
+함수는 한 번 정의하면 몇 번이고 재사용할 수 있는 코드블럭을 얘기합니다.
+함수는 3가지 역할을 하죠.
+1) 진짜 함수
+2) 메서드
+3) 생성자
 
-
-생성패턴
-
-
-구조패턴
-객체들이 상호작용할 수 있는 간단한 방법
-디자인을 쉽게 해주는 패턴이다.
-- 적응자
-- 가교
-- 복합체
-- 장식자
-- 퍼사드
-
-
-## 적응자 패턴
-
-적응자 패턴은 객체를 생성하는게 목적이 아니라, 기존에 있던 구조를 새 구조로 전환하거나 새 구조에서 기존의 구조로 전환하는 데 사용하는 패턴입니다.
-[원문: https://www.zerocho.com/category/JavaScript/post/57babe9f5abe0c17006fe230](https://github.com/airbnb/javascript)
-
-"로마에 가면 로마 법을 따라야 한다" 라는 말을 생각해보세요.
-한국에 있으면 한국 법을 따라야 하지만, 다른 나라에 가면 다른나라 법을 따라야 하죠. 적응자(Adapter)를 사용하면 쉽게 구현 가능합니다. 
-
+진짜 함수는 많이 보셨죠?
 ```javascript
-var law = new law(romaAdapter); // 로마법
-var law = new law(koreaAdapter); // 한국법
+function eat() {
+}
 ```
-내부는 이렇게 구현되어 있어요.
+
+메서드 역할을 하는 함수는, 어떤 객체의 프로퍼티로 할당되어서 **객체를 통해 실행되는 함수**를 의미합니다.
 ```javascript
-var law = (function() {
-  function law(adapter) {
-    this.adapter = adapter;
+var soo = { // 객체 리터럴
+  breakfast: "apple",
+  eat: function() {
+    this.result = "Soo eats " + this.breakfast;
   }
-  law.prototype.vote = function() {
-    this.adapter.vote();
-  };
-  return law;
+};
+soo.eat();  // 메서드 호출
+soo.result; // "Soo eats apple"
+```
+soo 객체 안에 eat 프로퍼티로 할당되어서 호출되고 있어요. 이게 메서드 역할을 하는 함수랍니다. 메서드와 함수를 헷갈려하시는 분은 이제 구별 하실 수 있겠죠?
+
+마지막으로, 새로 생성된 객체를 초기화하는데 사용하는 함수는 생성자 함수라고 합니다.
+```javascript
+var obj = new Object(); // 생성자의 prototype 을 상속받은  새로운 빈 객체가 생성된다.
+```
+이 개념은 워낙 방대하기도 하고, 제가 아직 덜 공부했기 때문에 추후에 다루도록 하겠습니다.
+
+---
+
+# 자바스크립트 디자인 패턴
+
+자바스크립트 패턴이 필요한 이유는, 객체와 방금 배웠던 함수를 효율적으로 사용할 수 있기 때문입니다. 패턴(방법)을 크게 두가지로 나눠보면 
+**재사용이 쉽도록 객체를 생성하는 방법**과 **객체들이 상호작용하는 방법**으로 나눠볼 수 있는데요, 이 둘을 구분해서 패턴을 공부해보도록 하겠습니다.
+
+코드를 작성할 땐 의존성을 최소화 시켜서 분리 가능한 코드를 만드는 게 중요합니다. 같은 특징을 모으고 비슷한 것끼리 나눠서 캡슐화를 시켜줘야 하죠. 
+한 그룹(Class)에 **최소한의 의존성**을 갖게 만들어 서로 분리될 수 있게 하는 게 핵심입니다. 너무 밀접한 관계를 갖게 해도 하나의 변화가 전체 클래스의 변화를 초래하기 때문에 주의해야 합니다.
+
+프로젝트를 진행하다 보면, 변화는 늘어나고 객체간의 상호작용은 예상치 못한 방향으로 흘러가기 마련입니다.
+그러므로 객체를 생성할 때 다음 패턴들을 염두에 두어야 합니다.
+
+## 재사용이 쉽도록 객체를 생성하는 방법
+
+### 추상 팩토리
+
+아디다스와 나이키 신발 공장이 있습니다. 손님이 주문을 하면 해당 브랜드를 찍어서 신발을 만들어주면 됩니다. 
+공장은 그대로 있고 브랜드만 바꿔주면 되니! 매우 편하죠. 이렇게 **비슷한 구조**를 갖고 있지만 **대규모로 변경**하고 싶을 때 추상 팩토리 패턴이 유용합니다. 
+
+먼저, 필요한 클래스들을 만들어줍니다. 아디다스랑 나이키가 뭘 하는지 여기서 정하죠.
+
+```javascript
+var Adidas = (function() {
+  function Adidas() {
+  }
+  ...
+  Adidas.prototype.makeShoes = function(num) {
+    return "Adidas신발이 " + num + "개 만들어졌습니다.";
+  }
+  return Adidas;
+})();
+
+var Nike = (function() {
+  function Nike() {
+  }
+  ...
+  Nike.prototype.makeShoes = function(num) {
+    return "Nike신발이 " + num + "개 만들어졌습니다.";
+  }
+  return Nike;
 })();
 ```
+
+그다음, 공장을 만들어줍니다. 팩토리들은 서로 비슷하게 생겼지만 **다른 객체**를 갖고 있죠. `AdidasFactory` 에서는 `Adidas` 제품을 만들고, 
+`NikeFactory` 에서는 `Nike` 제품을 만드네요.
+
 ```javascript
-var romaAdapter = {
-  vote: function() {
-    console.log("로마에서 투표");
+var AdidasFactory = (function() {
+  function AdidasFactory() {
   }
-};
+  AdidasFactory.prototype.getRule = function() {
+    return new Adidas;
+  }
+  ...
+  return AdidasFactory;
+})();
+
+var NikeFactory = (function() {
+  function NikeFactory() {
+  }
+  NikeFactory.prototype.getRule = function() {
+    return new Nike;
+  }
+  ...
+  return NikeFactory;
+})();
 ```
+
+마지막으로, 이 공장을 한번에 구동시킬 수 있는 관리자 공장을 만들어줍시다.
+
 ```javascript
-var koreaAdapter = {
-  vote: function() {
-    console.log("에서 투표");
+var decisionFactory = (function() {
+  function decisionFactory(abstractFactory) {
+    this.abstractFactory = abstractFactory;
   }
-};
+  decisionFactory.prototype.makeShoes = function(num) {
+    this.abstractFactory.getRule().makeShoes(num);
+  };
+  return decisionFactory;
+})();
 ```
-이런식으로 두 가지 이상의 구조에서 유연하게 전환하고 싶을 때 **적응자**패턴을 사용합니다.
 
-## 추상 팩토리 패턴
-[출처: https://joshua1988.github.io/web-development/javascript/javascript-pattern-design/#%ED%8C%A9%ED%86%A0%EB%A6%AC-%ED%8C%A8%ED%84%B4] (https://joshua1988.github.io/web-development/javascript/javascript-pattern-design/#%ED%8C%A9%ED%86%A0%EB%A6%AC-%ED%8C%A8%ED%84%B4)
-비슷한 객체를 공장 찍어내듯이 반복적으로 생성할 수 있습니다.
-구체적인 유형을 몰라도 객체 생성이 가능하다는 특징이 있습니다.
-다양한 구현이 가능합니다.
+자... 이젠 `Adidas`에서 만들던지 `Nike`에서 만들던지 원하는 공장에서 쉽게 제품을 제작할 수 있을거에요.
 
+```javascript
+var adidasOrder = new decisionFactory(new AdidasFactory());
+adidasOrder.makeShoes(100); // "아디다스 신발이 100개 만들어졌습니다."
 
+var nikeOrder = new decisionFactory(new NikeFactory());
+nikeOrder.makeShoes(300); // "나이키 신발이 300개 만들어졌습니다."
+```
 
+처음엔 왜이렇게 꼬아놨나... 답답하고 이해하기 어려웠는데, 직접 코드 작성해보니 감을 잡은 것 같습니다!
 
-## 인터페이스
-코드를 짤 땐 세부사항들을 나눈 단순한 조각들을 만들어야 합니다. 이걸 인터페이스라 하죠.
-즉, 인터페이스는 객체가 어떠한 property 와 method 를 가지고 있다고 선언하는 것입니다.
-(여기선 선언만 하고 실제적인 구현은 클래스가 해줍니다.)
-이걸 분리해준다면 불필요한 메소드와 의존 관계를 갖지 않아, 객체 지향 설계 원칙인 **인터페이스 분리의 원칙**을 해결해줍니다.
-
-
+- 나중에 Factory들이 바껴도 쉽게 수정할 수 있다. 
+- 쉽게 객체를 찍어낼 수 있다.
+- 맨 처음 팩토리의 구체적인 유형을 모르더라도 객체를 생성할 수 있다.
 
 
+참고) 자바스크립트 디자인 패턴, 사이먼 팀스, PACKT
 
