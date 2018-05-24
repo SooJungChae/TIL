@@ -94,11 +94,14 @@ ___
 ```
 
 # 이미지 삽입
-- 이미지를 따로 저장 안하는 방법이 있다.
-- github issue 창으로 가서 새 issue 를 클릭하면 Write 부분에 내용을 적을 수 있는 곳이 생긴다.
-- 이 곳에 이미지 파일을 복사, 붙여넣기 하면 된다. (난 그림판에서 복붙했다.)
-<img src="https://user-images.githubusercontent.com/12723983/40458307-4e684246-5f36-11e8-9b60-9212a525ad52.png" alt="그림판에서 복사한 후" width="50%"><img src="https://user-images.githubusercontent.com/12723983/40457693-d417b07e-5f32-11e8-8931-bb91955f6c63.png" alt="issue write 에서 붙여넣기" width="50%">
+- 이미지를 따로 저장 안하고 업로드 하는 방법이 있다.
+1) 그림판 같은 이미지 편집 툴에서 이미지를 복사한 후(Ctrl+C),
+<img src="https://user-images.githubusercontent.com/12723983/40458307-4e684246-5f36-11e8-9b60-9212a525ad52.png" alt="그림판에서 복사한 후" width="50%">
 
+2) github issue 창으로 가서 새 issue 를 클릭하고 Write 부분에 이미지를 붙여넣는다(Ctrl+V). 그럼 다음과 같이 url 이 생기는데
+<img src="https://user-images.githubusercontent.com/12723983/40457693-d417b07e-5f32-11e8-8931-bb91955f6c63.png" alt="issue write 에서 붙여넣기" width="50%">
+
+3) 이걸 다음처럼 github 문서에서 사용하면 된다.
 ![해피](https://user-images.githubusercontent.com/12723983/40457831-aa587132-5f33-11e8-94e9-7e0b487e5259.png)
 
 ```
