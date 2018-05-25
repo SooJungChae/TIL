@@ -14,7 +14,7 @@
 
 ## 재사용이 쉽도록 객체를 생성하는 방법
 
-### 추상 팩토리
+### 1) 추상 팩토리
 
 아디다스와 나이키 신발 공장이 있습니다. 손님이 주문을 하면 해당 브랜드를 찍어서 신발을 만들어주면 됩니다. 
 공장은 그대로 있고 브랜드만 바꿔주면 되니! 매우 편하죠. 이렇게 **비슷한 구조**를 갖고 있지만 **대규모로 변경**하고 싶을 때 추상 팩토리 패턴이 유용합니다. 
@@ -98,6 +98,78 @@ nikeOrder.makeShoes(300); // "나이키 신발이 300개 만들어졌습니다."
 - 쉽게 객체를 찍어낼 수 있다.
 - 맨 처음 팩토리의 구체적인 유형을 모르더라도 객체를 생성할 수 있다.
 
+### 2) 빌더 패턴
+
+객체를 이곳저곳에서 생성하면 나중에 찾기도 어렵고 언제 바꾸고 있나~ 답답해지죠. 이걸 방지할 수 있는 방법입니다. 
+객체를 빌드할 때 필요한 로직을 **중앙집중화**해서요. (코드는 결과물에서부터 순차적으로 생성해나가면 만들기 쉽습니다. :D 여기선 처음부터 만들어볼꺼에요.)
+
+```javascript
+var Tournament = (function() {
+  this.Events = [];
+  this.Watchers = [];
+  function Tournament() {
+  }
+  return Tournament;
+})();
+
+var Event = (function() {
+  function Event(name) {
+    this.name = name;
+  }
+  return Event;
+})();
+
+var Watcher = (function() {
+  function Watcher(name) {
+    this.name = name;
+  }
+  return Watcher;
+})();
+
+var JamsilBuilder = (function() {
+  function JamsilBuilder() {
+  }
+  JamsilBuilder.prototype.build = function() {
+    var tournament = new Tournament();
+    // add event 
+    tournament.events.push(new Event("Tennis"));
+    tournament.events.push(new Event("Soccer"));
+    // add watcher
+    tournament.watchers.push(new Watcher("Soo"));
+  }
+  return JamsilBuilder;
+})();
+
+var SeongnamBuilder = (function() {
+  function SeongnamBuilder() {
+  }
+  SeongnamBuilder.prototype.build = function() {
+    var tournament = new Tournament();
+    // add event 
+    tournament.events.push(new Event("Swim"));
+    tournament.events.push(new Event("Soccer"));
+    // add watcher
+    tournament.watchers.push(new Watcher("Jun"));
+    tournament.watchers.push(new Watcher("Do"));
+  }
+  return SeongnamBuilder;
+})();
+
+var TournamentBuilder = (function() {
+  function TournamentBuilder() {
+  }
+  TournamentBuilder.prototype.build = function(builder) {
+    builder.build();
+  }
+  return TournamentBuilder;
+})();
+
+```
+이렇게 만들어진 빌더는, 아래 코드처럼 한 곳에서 실행시켜줄 수 있습니다.
+
+```javascript
+var seongnamTournament = TournamentBuilder.build(new SeongnamBuilder());
+```
 
 참고) 자바스크립트 디자인 패턴, 사이먼 팀스, PACKT
 
