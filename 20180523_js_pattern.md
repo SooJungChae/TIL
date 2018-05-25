@@ -171,5 +171,8 @@ var TournamentBuilder = (function() {
 var seongnamTournament = TournamentBuilder.build(new SeongnamBuilder());
 ```
 
+**추상팩토리 패턴**은 **관련성을 갖는 클래스들의 집합**을 생성했고, **빌더 패턴**은 **복합 객체**를 만들었다는 것에서 차이가 있습니다. 
+
+
 참고) 자바스크립트 디자인 패턴, 사이먼 팀스, PACKT
 
