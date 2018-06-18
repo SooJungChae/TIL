@@ -6,19 +6,18 @@ var $modemNo = $("#modemNo");
 $modemNo.on("keydown", function (e) {
   var evt = e || window.e;
   var keyCode = evt.keyCode || evt.which || evt.key;
-  var key = String.fromCharCode(e.keyCode);
+  var key = String.fromCharCode(e.keyCode); // Check Regex with String format
 
-  // Allow: Backspace, delete, tab, escape, enter, .
-  if ($.inArray(keyCode, [46, 8, 9, 27, 110, 190]) !== -1 ||
-    // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Command+A
-    ((keyCode == 65 || keyCode == 86 || keyCode == 67 ) && (evt.ctrlKey || evt.metaKey)) ||
-    // Allow: home, end, left, right, down, up
-    (keyCode >= 35 && keyCode <= 40)) {
-    return;
-  }
-
-  // Check Regex with String format
   if (!numberRegex.test(key)) {
+    // Allow: Backspace, delete, tab, escape, enter, .
+    if ($.inArray(keyCode, [46, 8, 9, 27, 110, 190]) !== -1 ||
+      // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Command+A
+      ((keyCode == 65 || keyCode == 86 || keyCode == 67) && (evt.ctrlKey || evt.metaKey)) ||
+      // Allow: home, end, left, right, down, up
+      (keyCode >= 35 && keyCode <= 40)) {
+      return;
+    }
+
     e.preventDefault();
   }
 });
