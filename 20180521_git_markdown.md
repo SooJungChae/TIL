@@ -93,6 +93,26 @@ ___
 ![continuousphp](https://img.shields.io/continuousphp/git-hub/doctrine/dbal/master.svg)
 ```
 
+# 외부 링크 걸기
+형식은 이렇다. `[링크텍스트](실제url)`<br/>
+[채라스틴 블로그](https://blog.naver.com/naan_ace)
+
+```
+[채라스틴 블로그](https://blog.naver.com/naan_ace)
+```
+
+# 본문 내에 링크 걸기
+일반 링크거는 것과 비슷하다. 본문에서는 헤더태그(#)가 있는 곳에서 참조가 가능하다. <br/>
+'#' 과 함께 헤더 텍스트를 넣어주면 된다.<br/>
+공백이 있다면 `-`로 넣어줘야 한다.
+
+[이미지정렬 링크로~](#이미지-정렬)
+
+```
+[이미지정렬 링크로~](#이미지-정렬)
+```
+
+
 # 이미지 삽입
 - 이미지를 따로 저장 안하고 업로드 하는 방법이 있다.
 1) 그림판 같은 이미지 편집 툴에서 이미지를 복사한 후(Ctrl+C),
@@ -156,3 +176,6 @@ ___
 ```
 <img align="right" src="https://user-images.githubusercontent.com/12723983/40458597-c2edd968-5f37-11e8-854d-9b4740747e1f.png" alt="오른쪽 정렬" width="100">
 ```
+
+---
+
