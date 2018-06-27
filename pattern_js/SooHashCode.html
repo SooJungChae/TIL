@@ -1,5 +1,3 @@
-index.html
-```html
 <!DOCTYPE html>
 <head>
   <title> Make Hash code </title>
@@ -12,33 +10,45 @@ index.html
   <script type="text/javascript">
   var SooHashCode = (function() {
     var sooHashCode = function() {
-      this.size = 11;
-      var hashTable = [this.size];
+      this.size = 10;
+      this.deleteWord = "DEL";
+      this.hashTable = new Array(this.size);
     };
 
     sooHashCode.prototype.Contains = function (key) {
+      var idx = key % this.size;
+      return this.hashTable[idx];
     };
 
     sooHashCode.prototype.RemoveKey = function (key) {
+      var idx = key % this.size;
+      this.hashTable[idx] = this.deleteWord;
     };
 
     sooHashCode.prototype.CollisionMaxCount = function () {
+      var count = 0;
+      return count;
     };
 
     sooHashCode.prototype.Put = function (key) {
       var idx = key % this.size;
-      this.hashTable[idx] = key;
-      console.log(this);
+
+      if (!this.Contains(key))
+        this.hashTable[idx] = key;
+
+      console.log(this.hashTable);
     };
 
     return sooHashCode;
   })();
 
-  console.log(SooHashCode.prototype.Put(10));
-  // 이렇게 하고싶은데?
-  // console.log(SooHashCode.Put(10));
-    
+  var sooHashCode = new SooHashCode();
+  sooHashCode.Put(97);
+  sooHashCode.Put(98);
+  sooHashCode.Put(99);
+
+  sooHashCode.RemoveKey(99);
+
   </script>
 </body>
 </html>
-```
