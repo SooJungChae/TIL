@@ -16,12 +16,11 @@
         if (!(this instanceof node)) {
           return new node(left, data, right);
         }
-        // this.left = left;
-        // this.data = data;
-        // this.right = right;
+        this.left = left;
+        this.data = data;
+        this.right = right;
       }
       node.prototype.Append = function() {
-
       };
       return node;
     })();
@@ -33,43 +32,40 @@
             }
 
             this.binaryTree = null;
-            //  = {
-            //   root: null,
-            //   leftTree: null,
-            //   rightTree: null
-            // };
         };
 
         binarySearchTree.prototype.Put = function (data) {
-          
           if (this.binaryTree === null) {
-            // this.binaryTree.root = new Node(null, data, null);
             this.binaryTree = Node(null, data, null);
-            console.log(this.binaryTree);
             return;
           }
 
-          // 기존의 트리의 노드 속 데이터에 집어넣어야 한다.
-          console.log(this.binaryTree); return;
           var currentNode = this.binaryTree;
           var currentData = this.binaryTree.data;
-          // var currentData = this.binaryTree.root.data;
+
           if (data < currentData) {
-            this.binaryTree.leftTree = Node(null, data, null);
-            console.log(this.binaryTree);
+            currentNode.left = Node(null, data, null);
           }
-          // else if ( data == currentData) {
-          //   new Node(null, data, null);
-          // }
-          // else {
-          //   new Node(null, data, null);
-          // }
-          //
-
-
-          console.log(data);
+          else if ( data == currentData) {
+            // new Node(null, data, null);
+          }
+          else {
+            currentNode.right = Node(null, data, null);
+          }
+          console.log(this.binaryTree);
         };
         binarySearchTree.prototype.Contains = function (data) {
+          var result = false;
+
+          if (this.binaryTree === null) {
+            this.binaryTree = Node(null, data, null);
+            return result;
+          }
+
+          var currentNode = this.binaryTree;
+          var currentData = this.binaryTree.data;
+          console.log(this.binaryTree);
+          return result;
         };
         binarySearchTree.prototype.GetParent = function (data) {
         };
@@ -91,8 +87,10 @@
     // })();
 
     var BST = BinarySearchTree();
-    BST.Put(23);
     BST.Put(5);
+    console.log(BST.Contains(23));
+
+    // BST.Put(25);
 
   </script>
 </body>
