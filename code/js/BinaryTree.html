@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <title> Make Hash code function</title>
+</head>
+<body>
+   <script type="text/javascript">
+    /* 참고 사이트
+    *
+    */
+    // hashTable : Array
+    // hashTable value : Linked List
+    var Node = (function() {
+      var node = function(left, data, right) {
+
+        if (!(this instanceof node)) {
+          return new node(left, data, right);
+        }
+        // this.left = left;
+        // this.data = data;
+        // this.right = right;
+      }
+      node.prototype.Append = function() {
+
+      };
+      return node;
+    })();
+
+    var BinarySearchTree = (function() {
+        var binarySearchTree = function() {
+            if (!(this instanceof binarySearchTree)) {
+                   return new binarySearchTree();
+            }
+
+            this.binaryTree = null;
+            //  = {
+            //   root: null,
+            //   leftTree: null,
+            //   rightTree: null
+            // };
+        };
+
+        binarySearchTree.prototype.Put = function (data) {
+          
+          if (this.binaryTree === null) {
+            // this.binaryTree.root = new Node(null, data, null);
+            this.binaryTree = Node(null, data, null);
+            console.log(this.binaryTree);
+            return;
+          }
+
+          // 기존의 트리의 노드 속 데이터에 집어넣어야 한다.
+          console.log(this.binaryTree); return;
+          var currentNode = this.binaryTree;
+          var currentData = this.binaryTree.data;
+          // var currentData = this.binaryTree.root.data;
+          if (data < currentData) {
+            this.binaryTree.leftTree = Node(null, data, null);
+            console.log(this.binaryTree);
+          }
+          // else if ( data == currentData) {
+          //   new Node(null, data, null);
+          // }
+          // else {
+          //   new Node(null, data, null);
+          // }
+          //
+
+
+          console.log(data);
+        };
+        binarySearchTree.prototype.Contains = function (data) {
+        };
+        binarySearchTree.prototype.GetParent = function (data) {
+        };
+        binarySearchTree.prototype.Remove = function (data) {
+        };
+        return binarySearchTree;
+    })();
+
+    // var SooLinkedList = (function() {
+    //     function Node(data) {
+    //         this.data = data;
+    //         this.next = null;
+    //     }
+    //     var sooLinkedList = function() {
+    //         this._length = 0;    // data length in linked-list
+    //         this._head = null;   // start point
+    //     }
+    //     return sooLinkedList;
+    // })();
+
+    var BST = BinarySearchTree();
+    BST.Put(23);
+    BST.Put(5);
+
+  </script>
+</body>
+</html>
