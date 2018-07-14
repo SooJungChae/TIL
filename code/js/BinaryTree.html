@@ -157,6 +157,7 @@
         binarySearchTree.prototype.PreOrder = function (node) {
             // root > left > right
             if (node !== null) {
+                console.log(node.data);
                 this.PreOrder(node.left);
                 this.PreOrder(node.right);
             }
@@ -166,6 +167,7 @@
             // left > root > right
             if (node !== null) {
                 this.InOrder(node.left);
+                console.log(node.data);
                 this.InOrder(node.right);
             }
         }
@@ -236,6 +238,20 @@
     BST.Put(11);
     BST.Put(9);
     BST.Put(12);
+    
+    // [6, 5, 7, 3, 2, 4, 1, 8, 10, 11, 9, 12];
+    
+    //         6
+    //        / \
+    //       5   7
+    //      /     \
+    //     3       8
+    //    / \       \
+    //   2   4      10
+    //  /          /  \
+    // 1          9    11
+    //                  \
+    //                   12
     
     // console.log(BST.Contains(12));  // true
     // console.log(BST.Contains(10));  // false
