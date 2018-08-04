@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>study - SelectionSort</title>
+</head>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    //인당 10600원
+    //총 42400원
+    //셀스 17000원
+    //-
+    //25400원
+    //-9000 더포도
+
+    //16400
+    //포인트8500
+    //5100 25일 셀스
+
+    //남은돈 11300
+</script>
+
+<body>
+    <div id='app'>
+        <div>{{arr}}</div>
+        <hr>
+        <div>SelectionSort : {{SelectionSort()}}</div>
+        
+        <div>bubbleSort : {{bubbleSort()}}</div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    var vm = new Vue({
+        el: app,
+        data: {
+            arr: [10000, 10000000, 3, 1, 6, 10, 3, 540, 30, 50, 999],
+
+        },
+        methods: {
+            SelectionSort() {
+
+                const length = this.arr.length;
+                let tmp;
+
+                for (let i = 0; i < length; i++) {
+                    for (let j = i + 1; j < length; j++) {
+
+                        if (this.arr[i] > this.arr[j]) {
+
+                            tmp = this.arr[j];
+                            this.arr[j] = this.arr[i];
+                            this.arr[i] = tmp;
+
+                        }
+                    }
+                }
+
+                console.log(this.arr);
+                return this.arr;
+            },
+            bubbleSort() {
+                let length = this.arr.length;//4
+                let temp;
+
+                for (let i = 0; i < length - 1; i++) {
+                    for (let j = 0; j < length - 1; j++) {
+                        if (this.arr[j] > this.arr[j + 1]) {
+                            temp = this.arr[j]
+                            this.arr[j] = this.arr[j + 1]
+                            this.arr[j + 1] = temp;
+                            console.log(this.arr)
+                        }
+                    }
+                }
+                return this.arr;
+            },
+
+        },
+    })
+
+</script>
