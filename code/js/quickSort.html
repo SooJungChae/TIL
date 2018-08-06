@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>퀵 정렬</title>
+</head>
+<script type="text/javascript">
+
+    let quickSort = (arr) => {
+
+        let arrLen = arr.length;
+        let pivot, left, right;
+
+        // pivot을 정한다.
+        pivot = arr[pivotPosition(arrLen)];
+
+        // 가장 맨 끝을 왼쪽(L)
+        // 가장 맨 오른쪽 끝을 오른쪽(R)으로 설정한다.
+        left = arr[0];
+        right = arr[arrLen - 1];
+
+        // pivot과 L, R 을 비교한다.
+        // 왼쪽에서 pivot 보다 큰 값을 찾아서.(L)
+        // L 하나만 찾으면 pivot 과 switch
+        if (pivot > len) {
+            // 어떻게 L, R 둘을 동시에 실행시키지?!!
+        }
+        // 오른쪽에선 pivot 보다 작은 값을 찾는다.(R)
+
+        // R 하나만 찾으면 pivot 과 switch
+        // L 과 R 의 값을 못찾으면 pivot 위치 확정
+        // L 과 R 의 값을 둘다 찾으면 L 과 R switch
+
+
+    }
+
+    // pivot을 정한다.
+    let pivotPosition = (len) => {
+        return parseInt(len / 2);
+    }
+
+
+
+
+    // 배열이 입력된다.
+    var testArr = [3, 5, 1, 8, 10, 2, 7, 11];
+    quickSort(testArr);
+</script>
+<body>
+</body>
+</html>
