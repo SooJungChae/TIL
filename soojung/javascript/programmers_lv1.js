@@ -94,3 +94,32 @@ function numPY(s) {
 function numPY(s){
     return s.toUpperCase().split("P").length === s.toUpperCase().split("Y").length;
 }
+
+
+/*---------------------------------
+        문자열 다루기 기본
+----------------------------------*/
+function solution(s) {
+    var answer = true;
+    var regex = /^[0-9]+$/;
+    var sLen =  s.length; 
+    if (regex.test(s) && (sLen == 4 || sLen == 6)) 
+        return answer;
+    else
+        return !answer;
+}
+
+// 모범답안
+function alpha_string46(s){
+  var regex = /^\d{6}$|^\d{4}$/;
+  return regex.test(s);
+}
+
+
+/*---------------------------------
+        문자열을 정수로 바꾸기 (해결못함)
+----------------------------------*/
+function solution(s) {
+    return (s * 1);
+}
+
