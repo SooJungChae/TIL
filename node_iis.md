@@ -19,7 +19,7 @@
 
 ### - 500.19
 Problem) Can't access page because wrong configuration data
-![500.19 error](https://user-images.githubusercontent.com/12723983/44257114-062fb380-a246-11e8-87e8-23c1b28c6a8f.png)
+![500.19 error](https://user-images.githubusercontent.com/12723983/44257114-062fb380-a246-11e8-87e8-23c1b28c6a8f.png)<br/>
 Resolve) I reset the delegation then it turns back to "Read only". Therefore I set it to "Read/Write" as mentioned [here](https://github.com/tjanczuk/iisnode/issues/52)
 
 ### - 403.14
@@ -27,3 +27,6 @@ Resolve) I reset the delegation then it turns back to "Read only". Therefore I s
 
 Resolve) **Directory Search -> Use**
 
+그런데 이게 답은 아닌 것 같은데... 다시 알아보기
+
+![image](https://user-images.githubusercontent.com/12723983/44257880-51e35c80-a248-11e8-8885-a8bd1ec60db2.png)
