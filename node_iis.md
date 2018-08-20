@@ -27,6 +27,10 @@ Resolve) I reset the delegation then it turns back to "Read only". Therefore I s
 
 Resolve) **Directory Search -> Use**
 
-그런데 이게 답은 아닌 것 같은데... 다시 알아보기
-
 ![image](https://user-images.githubusercontent.com/12723983/44257880-51e35c80-a248-11e8-8885-a8bd1ec60db2.png)
+
+그런데 이게 답은 아니다. 엄청 고민했었는데... Server 에 재접속했더니 정상적으로 됐다. (아니면 IIS 서비스를 껐다 켜서 그런거일수도?)
+
+![image](https://user-images.githubusercontent.com/12723983/44323873-99f3c080-a48e-11e8-95c6-0955204461a1.png)
+
+
