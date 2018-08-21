@@ -9,11 +9,14 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 ## Javascript
 
-### javascript basic
-[https://poiemaweb.com/](https://poiemaweb.com/)
+- [javascript basic link](https://poiemaweb.com/)
 
-### promise
-[http://programmingsummaries.tistory.com/325](http://programmingsummaries.tistory.com/325)
+-------
+
+## Javascript ES6
+
+- [ES6 import, exports, module exports](https://github.com/SooJungChae/TIL/blob/master/es6_import.md)
+- [promise](http://programmingsummaries.tistory.com/325)
 
 -------
 
@@ -26,5 +29,4 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 ## Node.js
 
-### IIS7 에 Node.js 배포하기
-[https://github.com/SooJungChae/TIL/blob/master/node_iis.md](https://github.com/SooJungChae/TIL/blob/master/node_iis.md)
+- [IIS7 에 Node.js 배포하기](https://github.com/SooJungChae/TIL/blob/master/node_iis.md)
