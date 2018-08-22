@@ -117,9 +117,109 @@ function alpha_string46(s){
 
 
 /*---------------------------------
-        문자열을 정수로 바꾸기 (해결못함)
+         가운데 글자 가져오기
 ----------------------------------*/
 function solution(s) {
-    return (s * 1);
+    var answer = '';
+    var arrS = s.split('');
+    var sLen = s.length;
+    var center = parseInt(sLen / 2);
+
+    if (sLen % 2 != 0) { 
+        return arrS[center];
+    };
+
+    answer = arrS[center - 1] + arrS[center];
+    return answer;
 }
 
+// 모범답안
+function solution(s) {
+    return s.substr(Math.ceil(s.length / 2) - 1, s.length % 2 === 0 ? 2 : 1);
+}
+
+
+/*---------------------------------
+        문자열을 정수로 바꾸기
+----------------------------------*/
+// 근데 이 방식으로 해결 못했는데 어쩌다보니 통과되었다...? 모범답안으로 사용하자!
+function solution(s) {
+    return s * 1;
+}
+
+// 모범답안 1
+function strToInt(str){
+  return str/1
+  }
+
+// 모범답안 2
+function strToInt(str){
+  return  +str;
+}
+
+// **참고**
+int to string => ""+int
+string to int => +string
+
+
+/*---------------------------------
+        약수의 합
+----------------------------------*/
+function solution(n) {
+    var answer = 0;
+    for(var i = 1; i <= n; i++) {
+        if(n%i==0) answer += i;
+    }
+    return answer;
+}
+
+
+/*---------------------------------
+        소수 찾기 (아직 해결 못 함)
+----------------------------------*/
+function isPrime(k) {
+    for (let j = 2; j <= k; j++) {
+        if (k % j == 0) {
+            if (k == j) {
+                continue;
+            }
+            return false;
+        }
+    }
+    return true;
+}
+
+function solution(n) {
+    var answer = 1;
+    
+    for (let i = 3; i <= n; i++) {
+        if (isPrime(i)) { 
+            answer++; 
+        }
+    }
+
+    return answer;
+}
+
+
+/*---------------------------------
+        자릿수 더하기
+----------------------------------*/
+function solution(n)
+{
+    var answer = 0;
+
+    var strN = n + "";
+    var arrN = strN.split('');
+    arrN.filter((item) => {
+       answer += +item;
+    });
+
+    return answer;
+}
+
+// 다른사람꺼...
+function solution(n){
+    // 쉬운방법
+    return (n+"").split("").reduce((acc, curr) => acc + parseInt(curr), 0)
+}
