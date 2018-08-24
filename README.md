@@ -15,8 +15,9 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 ## Javascript ES6
 
-- [ES6 import, exports, module exports](https://github.com/SooJungChae/TIL/blob/master/es6_import.md)
-- [promise](http://programmingsummaries.tistory.com/325)
+- [import, exports, module exports](https://github.com/SooJungChae/TIL/blob/master/es6_import.md)
+- [Promise](http://programmingsummaries.tistory.com/325)
+- [Array](https://github.com/SooJungChae/TIL/blob/master/javascript/es6/array.md)
 
 -------
 
