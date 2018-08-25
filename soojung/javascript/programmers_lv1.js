@@ -245,3 +245,46 @@ function findKim(seoul){
 }
 
 
+/*---------------------------------
+       문자열 내림차순으로 배치하기 
+----------------------------------*/
+function solution(s) {
+  let answer = '';
+  let charArr = [];
+  s.split("").filter((item) => {
+      charArr.push(item.charCodeAt());
+  });
+
+  bubbleSort(charArr, 0, charArr.length - 1);
+  charArr.forEach((item) => {
+      answer += String.fromCharCode(item);
+  });
+
+  return answer;
+}
+
+function bubbleSort(arr, start, end) {
+  let temp = "";
+
+  for (let i = start; i < end; i++) {
+      if (arr[i] < arr[i+1]) {
+          temp = arr[i];
+          arr[i] = arr[i+1];
+          arr[i+1] = temp;
+      }
+
+      if (end == 1) {
+          return arr;
+      }
+  }
+
+  bubbleSort(arr, 0, end - 1);
+}
+
+// 다른 답안
+function solution(s) {
+    var answer = ""
+    var str = s.split("");
+    return str.sort().reverse().join("");
+}
+
