@@ -223,3 +223,25 @@ function solution(n){
     // 쉬운방법
     return (n+"").split("").reduce((acc, curr) => acc + parseInt(curr), 0)
 }
+
+
+/*---------------------------------
+        서울에서 김서방 찾기 
+----------------------------------*/
+function solution(seoul) {
+    var answer = '';
+    seoul.filter((item, idx) => {
+        if (item == "Kim") {
+            return answer = '김서방은 ' + idx + '에 있다';
+        }
+    });
+    return answer;
+}
+
+// 모범답안1
+function findKim(seoul){
+  var idx = seoul.indexOf('Kim');
+  return "김서방은 " + idx + "에 있다";
+}
+
+
