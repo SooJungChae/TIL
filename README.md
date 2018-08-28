@@ -18,6 +18,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
 - [import, exports, module exports](https://github.com/SooJungChae/TIL/blob/master/es6_import.md)
 - [Promise](http://programmingsummaries.tistory.com/325)
 - [Array](https://github.com/SooJungChae/TIL/blob/master/javascript/es6/array.md)
+- [let](https://github.com/SooJungChae/TIL/blob/master/javascript/es6/let.md) (+ var 과 let 의 차이)
 
 -------
 
