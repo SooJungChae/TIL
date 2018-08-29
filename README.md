@@ -10,6 +10,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
 ## Javascript
 
 - [javascript basic link](https://poiemaweb.com/)
+- [event.target vs event.currentTarget](https://github.com/SooJungChae/TIL/blob/master/javascript/eventTarget.md)
 
 -------
 
