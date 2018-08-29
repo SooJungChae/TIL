@@ -11,6 +11,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 - [javascript basic link](https://poiemaweb.com/)
 - [event.target vs event.currentTarget](https://github.com/SooJungChae/TIL/blob/master/javascript/eventTarget.md)
+- [jquery 없이 여러태그에 이벤트 다는 방법](https://github.com/SooJungChae/TIL/blob/master/javascript/addEventHandlerToMultiControls.md)
 
 -------
 
