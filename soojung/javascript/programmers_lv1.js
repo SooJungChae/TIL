@@ -288,3 +288,56 @@ function solution(s) {
     return str.sort().reverse().join("");
 }
 
+function bubbleSort(arr, start, end) {
+    var temp;
+
+    if (end < 1) {
+        console.log("finish " + arr);
+        return arr;
+    }
+
+    for (var i = start; i < end; i++) {
+        // console.log(arr[i], arr[i+1]);
+        if (arr[i] > arr[i+1]) {
+            temp = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = temp;
+        }
+        //console.log(arr);
+    }
+
+    return bubbleSort(arr, 0, (end-1));
+}
+
+
+/*---------------------------------
+       나누어떨어지는숫자배열
+----------------------------------*/
+function solution(arr, divisor) {
+    var answer = [];
+    answer = arr.filter((item) => {
+        if (item % divisor == 0) {
+            return item;
+        }
+    });
+
+    // 오름차순 정렬 -> bubble sort
+    var answerLen = answer.length;
+    if (answerLen == 0) {
+        return [-1];
+    }
+
+    answer = bubbleSort(answer, 0, answerLen - 1);
+    return answer;
+}
+
+// 모범답안
+function solution(arr, divisor) {
+    var answer = [];
+    arr.map((o) => {
+        o % divisor === 0 && answer.push(o);
+    })
+    return answer.length ? answer.sort((a, b) => a - b) : [-1];
+
+}
+
