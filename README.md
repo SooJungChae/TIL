@@ -12,6 +12,8 @@ Any information or tips about programming will be uploaded. I hope this reposito
 - [javascript basic link](https://poiemaweb.com/)
 - [event.target vs event.currentTarget](https://github.com/SooJungChae/TIL/blob/master/javascript/eventTarget.md)
 - [jquery 없이 여러태그에 이벤트 다는 방법](https://github.com/SooJungChae/TIL/blob/master/javascript/addEventHandlerToMultiControls.md)
+- [Function method(apply, call, bind)](https://github.com/SooJungChae/TIL/blob/master/javascript/functionMethod.md)
+- [코드 tips](https://github.com/SooJungChae/TIL/blob/master/javascript/tips.md)
 
 -------
 
@@ -21,6 +23,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
 - [Promise](http://programmingsummaries.tistory.com/325)
 - [Array](https://github.com/SooJungChae/TIL/blob/master/javascript/es6/array.md)
 - [let](https://github.com/SooJungChae/TIL/blob/master/javascript/es6/let.md) (+ var 과 let 의 차이)
+- [Babel](https://github.com/SooJungChae/TIL/blob/master/javascript/babel.md)
 
 -------
 
