@@ -341,3 +341,23 @@ function solution(arr, divisor) {
 
 }
 
+
+/*---------------------------------
+       핸드폰 번호 가리기
+----------------------------------*/
+function solution(phone_number) {
+    var answer = '';
+
+    var stars = phone_number.length - 4;
+    for(var i = 0; i < stars; i++) {
+        answer += "*";
+    }
+
+    answer += phone_number.substr(phone_number.length - 4, 4);
+    return answer;
+}
+
+// 모범답안
+function hide_numbers(s) {
+  return s.replace(/\d(?=\d{4})/g, "*");
+}
