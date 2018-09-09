@@ -361,3 +361,49 @@ function solution(phone_number) {
 function hide_numbers(s) {
   return s.replace(/\d(?=\d{4})/g, "*");
 }
+
+
+function solution(s, n) {
+    var answer = '';
+    var charCode = s.substr(0, 1).charCodeAt();
+    var pushedChar = [];
+    var codeA = "A".charCodeAt();
+    var codea = "a".charCodeAt();
+    var codeZ = "Z".charCodeAt();
+    var codez = "z".charCodeAt();
+    var codeSpace = " ".charCodeAt();
+    
+    // A 65 / Z 90 / a 97 / z 122
+    //console.log(" ".charCodeAt());  
+    
+    s.split("").forEach((item, idx)=> {
+        // console.log(item);
+        var charCode = item.charCodeAt();
+        // Z -> A부터 다시 시작
+        // if (charCode == codeZ) {
+        //     charCode = codeA - 1;
+        // }
+        // // z -> a부터 다시 시작.
+        // else if (charCode == codez) {
+        //     charCode = codea - 1;
+        // }
+        // else if (charCode == codeSpace) {
+        //     answer += String.fromCharCode(charCode);
+        //     return;
+        // }
+        console.log(charCode + n);
+        if(charCode + n > codez) {
+            answer += String.fromCharCode(codea + (codez - (charCode + n)));
+        }
+        else if (charCode + n > codeZ) {
+            answer += String.fromCharCode(codeA + (codeZ - (charCode + n)));
+        }
+        else {
+            answer += String.fromCharCode(charCode + n);
+        }
+        
+        // console.log(answer);
+    });
+    
+    return answer;
+}
