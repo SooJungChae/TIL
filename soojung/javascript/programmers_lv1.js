@@ -362,7 +362,9 @@ function hide_numbers(s) {
   return s.replace(/\d(?=\d{4})/g, "*");
 }
 
-
+/*---------------------------------
+       시저 암호 (작업중)
+----------------------------------*/
 function solution(s, n) {
     var answer = '';
     var charCode = s.substr(0, 1).charCodeAt();
