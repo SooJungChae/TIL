@@ -409,3 +409,57 @@ function solution(s, n) {
     
     return answer;
 }
+
+/*---------------------------------
+       소수 찾기
+----------------------------------*/
+function solution(n) {
+    var answer = 0;
+    var primeArr = [];
+    var multipleCount = 1;
+    var calculatedNumber = 1;
+    
+    for (var i = 0; i < n; i++) {
+        primeArr.push(1);
+    }
+
+    for (var i = 2; i <= n; i++) {
+        multipleCount = 1;
+        calculatedNumber = i * multipleCount;
+        
+        while (calculatedNumber <= n) {
+
+            if (primeArr[calculatedNumber-1] == 0) {
+                multipleCount++;
+                calculatedNumber = i * multipleCount;
+                continue;
+            }
+            
+            // 맨 처음 숫자 가 아닐 때만!
+            if ( calculatedNumber != i) {
+                primeArr[calculatedNumber - 1] = 0;
+            }
+            
+            multipleCount++;
+            calculatedNumber = i * multipleCount;
+        }
+    }
+    
+    // 1은 약수가 아니다.
+    primeArr[0] = 0;
+    
+    primeArr.filter((item) => {
+        if (item == 1) {
+            answer++;
+        }
+    })
+    
+    return answer;
+}
+// 1, 2, 3, 4, 5
+// 1,1,1,1,1
+// 1,1,1,0,1
+// 1,1,1,0,1
+// 1,1,1,0,1    --> 0 이면 바로 다음 꺼로 넘어간다.
+// 1,1,1,0,1
+// 0,1,1,0,1    --> 최종적으로 0번째꺼는 0으로 바꿔준다.
