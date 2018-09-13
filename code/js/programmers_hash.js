@@ -3,16 +3,15 @@
 
 function solution(clothes) {
     var answer = 0;
-    // 매일 다른 옷. 서로 다른 옷의 조합의 수 return 하기
-    // 의상 이름, 의상 종류
-    // [[yellow_hat, headgear], 
-    // [blue_sunglasses, eyewear], 
-    // [green_turban, headgear]]
+    var result = [];
+    
+    // --- 한 종류당 하나의 물건만 착용할 수 있음.
+    // --- 의상 종류 :  의상 이름
     
     // headgear : yellow_hat, green_turban (2)
     // eyewear : blue_sunglasses (1)
-    var result = [];
-    // 한 종류당 하나의 물건만 착용할 수 있음.
+    // face: blue_sunglasses (1)
+    
     clothes.filter((item) => {
         if (!result[item[1]]) {
             result[item[1]] = [item[0]];
@@ -22,8 +21,8 @@ function solution(clothes) {
     })
     
     console.log(result);
+    
     for (var key in result) {
-        console.log(key, result[key].length);
         answer += result[key].length;
     }
     
