@@ -27,6 +27,13 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 -------
 
+## React
+
+- [Redux](https://github.com/SooJungChae/TIL/blob/master/javascript/react/redux.md)
+- [egghead.io 의 Redux 강의 정리](https://github.com/SooJungChae/TIL/blob/master/javascript/react/redux_egghead.md)
+
+-------
+
 ## CSS
 
 - [FlexBox](https://github.com/SooJungChae/TIL/blob/master/css/flexbox.md)
