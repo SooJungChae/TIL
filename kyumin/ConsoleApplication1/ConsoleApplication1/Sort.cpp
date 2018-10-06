@@ -56,3 +56,7 @@ int Sort::Divided(int* pArr, int left, int right)
 	Swap(pArr[left], pArr[high]);
 	return high;
 }
+
+void Sort::Insert()
+{
+}
