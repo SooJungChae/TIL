@@ -57,6 +57,37 @@ int Sort::Divided(int* pArr, int left, int right)
 	return high;
 }
 
-void Sort::Insert()
+void Sort::Insert(int * pArr, int arrCount)
 {
+	for (int i = 0; i + 1 < arrCount; ++i)
+	{
+		int next = i +1;
+		if (pArr[i] > pArr[next])
+		{
+			int j = next;
+			int minIdex = -1;
+			while (j-- > 0)
+			{
+				if (pArr[next] < pArr[j])
+				{
+					minIdex = j;
+				}
+			}
+			if (minIdex > -1)
+				PushArr(pArr, next, minIdex);
+			else
+				Swap(pArr[i], pArr[i + 1]);
+		}
+		
+	}
+}
+
+void Sort::PushArr(int * pArr, int start, int end)
+{
+	int temp = pArr[start];
+	for (int i = start; i > end; --i)
+	{
+		pArr[i] = pArr[i - 1];
+	}
+	pArr[end] = temp;
 }
