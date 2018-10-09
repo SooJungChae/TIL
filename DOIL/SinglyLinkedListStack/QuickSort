@@ -42,6 +42,7 @@ void Swap(int arr[], int a, int b) // a,b 스왑 함수
 	arr[b] = temp;
 }
 
+
 int Partition(int arr[], int left, int right)
 {
 	int pivot = arr[left]; // 피벗의 위치는 가장 왼쪽에서 시작
