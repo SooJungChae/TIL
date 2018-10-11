@@ -17,7 +17,9 @@ private:
 
 public:
 	/// »ğÀÔÁ¤·Ä
-	void Insert();
+	void Insert(int* pArr, int arrCount);
+	void PushArr(int *pArr, int start, int end);
+
 
 
 };
