@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>삽입 정렬</title>
+</head>
+<script type="text/javascript">
+
+    const insertSort = (arr) => {
+
+        // arrPointer 가 0 일 때 바로 비교
+        let arrPointer = 1;
+        let pointer = 0;
+
+        if (arr[pointer] > arr[arrPointer]) {
+            let temp = arr[pointer];
+            arr[pointer] = arr[arrPointer];
+            arr[arrPointer] = temp;
+        }
+
+        // arr 돌면서
+        for (let i = 2; i < arr.length; i++) {
+
+            // arrPointer 위치는 0 부터 시작.
+            // arr 을 돌며 arrPointer 를 매번 비교한다.
+            // pointer 는 arrPointer - 1.
+            let arrPointer = i;
+            let pointer = arrPointer - 1;
+
+            // pointer 값이 arrPointer 값보다 작은 것 나올 때까지 pointer 감소하면서 비교.
+            while(arr[pointer] > arr[arrPointer]) {
+                pointer --;
+            }
+
+            // 작은 것 나오면 pointer + 1 위치에 arrPointer 삽입. arrPointer 위치 값은 삭제
+            // pointer 가 0 으로 가면 마지막으로 비교.
+            arr.splice(pointer + 1, 0, arr[arrPointer]);
+            arr.splice(arrPointer + 1, 1);
+        }
+
+        return arr;
+    };
+
+    var testArr = [5, 3, 7, 6, 2, 1, 4];
+    let q = insertSort(testArr);
+
+    console.log(q);
+
+</script>
+<body>
+</body>
+</html>
