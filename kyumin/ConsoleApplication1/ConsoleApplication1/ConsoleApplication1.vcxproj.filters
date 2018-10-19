@@ -21,6 +21,9 @@
     <ClInclude Include="Sort.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Hashtable.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -32,5 +35,10 @@
     <ClCompile Include="Sort.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Hashtable.inl">
+      <Filter>소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>
