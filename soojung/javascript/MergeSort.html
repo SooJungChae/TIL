@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>병합 정렬</title>
+</head>
+<script type="text/javascript">
+
+    let divide = (arr) => {
+        return parseInt(arr.length / 2);
+    }
+
+
+    function mergeSort (arr) {
+
+        console.log(arr);
+
+        if (arr.length == 1) {
+            return arr;
+        }
+
+        let partition = divide(arr);
+        let left = arr.slice(0, partition);
+        let right = arr.slice(partition);
+
+        return merge(
+            mergeSort(left)
+            , mergeSort(right)
+        );
+
+    };
+
+    function merge (left, r) {
+        console.log(left, r,  "merge!");
+        // let partition = divide(arr);
+        //
+        // let left = arr.slice(0, partition);
+        // let right = arr.slice(partition, arr.length);
+        // let newArr = [];
+        //
+        // if (left > right) {
+        //     newArr.push(right[0]);
+        //     newArr.push(left[0]);
+        // }
+        // else {
+        //     newArr.push(left[0]);
+        //     newArr.push(right[0]);
+        // }
+        //
+        // // console.log(newArr);
+        // return newArr;
+    }
+
+    // const merge = (arr) => {
+    //     console.log(arr);
+    //     let partition = divide(arr);
+    //     let left = arr.slice(0, partition);
+    //     let right = arr.slice(partition, arr.length);
+    //     let newArr = [];
+    //
+    //     console.log(left, right);
+    //
+    //     if (left > right) {
+    //         newArr.push(right[0]);
+    //         newArr.push(left[0]);
+    //     }
+    //     console.log(newArr);
+    // }
+
+    var testArr = [6,5,3,1,8,7,2,4];
+    let q = mergeSort(testArr);
+
+</script>
+<body>
+</body>
+</html>
