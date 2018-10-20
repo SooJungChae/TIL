@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Hashtable.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Sort.h" />
   </ItemGroup>
@@ -163,6 +164,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Sort.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Hashtable.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
