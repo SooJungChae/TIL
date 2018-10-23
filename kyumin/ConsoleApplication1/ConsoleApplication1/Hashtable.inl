@@ -24,7 +24,6 @@ inline void Hashtable<T>::AddValue(char * name, T value)
 
 	//값을 가져올때는 먼저 해쉬화한 값으로 Node를 가져온다.
 	//그후 충돌로 인해 여러개가 생성 되었다면 이때부터는 값을 비교하여 가져온다.
-
 }
 
 template<typename T>
