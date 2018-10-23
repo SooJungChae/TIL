@@ -1,13 +1,2 @@
 ﻿  ConsoleApplication1.cpp
-c:\users\nop09\documents\github\algorithm\kyumin\consoleapplication1\consoleapplication1\consoleapplication1.cpp(59): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\nop09\documents\github\algorithm\kyumin\consoleapplication1\consoleapplication1\consoleapplication1.cpp(100): error C2039: 'pop': 'std::list<int,std::allocator<_Ty>>'의 멤버가 아닙니다.
-          with
-          [
-              _Ty=int
-          ]
-  c:\users\nop09\documents\github\algorithm\kyumin\consoleapplication1\consoleapplication1\consoleapplication1.cpp(60): note: 'std::list<int,std::allocator<_Ty>>' 선언을 참조하십시오.
-          with
-          [
-              _Ty=int
-          ]
-c:\users\nop09\documents\github\algorithm\kyumin\consoleapplication1\consoleapplication1\consoleapplication1.cpp(78): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+  ConsoleApplication1.vcxproj -> C:\Users\nop09\Documents\algorithm\algorithm\kyumin\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe

@@ -1,33 +1,46 @@
-#include "pch.h"
-#include "Hashtable.h"
+#include "HashTable.h"
 
 template<typename T>
-Hashtable<T>::Hashtable()
+HashTable<T>::HashTable()
+	: Capacity(1061), TableCount(0)
 {
+	tables = new Table *[Capacity];
+	memset(tables, 0, sizeof(Table) * Capacity);
 }
 
 template<typename T>
-Hashtable<T>::~Hashtable()
+HashTable<T>::~HashTable()
 {
+	delete tables;
 }
 
 template<typename T>
-inline void Hashtable<T>::AddValue(char * name, T value)
+inline void HashTable<T>::Add(T* value)
 {
-	//name 를 해쉬화 하여 키값을 구한다.
-	/*char[] arr = name;
-	int hash = 0;
-	for (int i = 0; i < arrCount; ++i)
+	//주소값을 해쉬화 한다?
+	// TableCount 총 공간의 80%가넘어 버릴경우 공간늘 늘리고 이동하는 작업을 한다.
+		// 지금은 필요없는 기능 최적화 기능으로 알고있음
+	Node* pnewNode = new Node();
+	pnewNode->key = Hash_Function(value);
+	pnewNode->value = value;
+	if (tables[pnewNode->key] == nullptr)
 	{
-		hash = hash * 31 + name[i];
-	}*/
-
-	//값을 가져올때는 먼저 해쉬화한 값으로 Node를 가져온다.
-	//그후 충돌로 인해 여러개가 생성 되었다면 이때부터는 값을 비교하여 가져온다.
+		tables[pnewNode->key] = new Table();
+		TableCount++;
+	}
+	tables[pnewNode->key]->AddNode(pnewNode);
 }
 
 template<typename T>
-int Hashtable<T>::HashFunction(char * name)
+inline T * HashTable<T>::Find(T* value)
 {
-	return 0;
+	int key = Hash_Function(value);
+	tables[key].Find(value);
+	return NULL;
+}
+
+template<typename T>
+int HashTable<T>::Hash_Function(const T* adrres)
+{
+	return reinterpret_cast<int>(*adrres) % Capacity;
 }

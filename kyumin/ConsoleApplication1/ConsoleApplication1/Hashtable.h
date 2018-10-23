@@ -1,24 +1,58 @@
 #pragma once
 
-template <typename T>
-class Hashtable
+#include <list>
+
+template<typename T>
+class HashTable
 {
-	template<typename T>
 	class Node
 	{
+	public:
+		Node() {}
+		~Node() {}
+	public:
 		int key;
-		T value;
+		T* value;
+	};
+	class Table
+	{
+	public:
+		Table() {}
+		~Table() {}
+	public:
+		void AddNode(Node* pNode) { chain.push_back(pNode); }
+		void Remove(Node* pNode) { chain.remove(pNode); }
+		T* Find(T* value)
+		{
+			size_t l = chain.size();
+			if (l > 0)
+			{
+				for (size_t i = 0; i < l; ++i)
+				{
+					if (chain[i]->value == value)
+						return chain[i]->value;
+				}
+			}
+			return nullptr;
+		}
+	private:
+		Node* pFirstData;
+		std::list<Node*> chain;
 	};
 public:
-	Hashtable();
-	~Hashtable();
-
-	void AddValue(char* name, T value);
+	HashTable();
+	~HashTable();
+public:
+	void Add(T* value);
+	void Remove(T* value);
+	T* Find(int index);
 private:
-	int HashFunction(char* name);
+	T* Find(T* value);
+	int Hash_Function(const T* adrres);
 private:
-	Node* nodes;
-	int capacity;
+	int TableCount;
+	int Capacity; ///공간할당
+	Table** tables;
 };
 
-#include "Hashtable.inl"
+ #include"HashTable.inl"
