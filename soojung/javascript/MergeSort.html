@@ -10,65 +10,48 @@
         return parseInt(arr.length / 2);
     }
 
-
     function mergeSort (arr) {
-
-        console.log(arr);
 
         if (arr.length == 1) {
             return arr;
         }
 
         let partition = divide(arr);
-        let left = arr.slice(0, partition);
-        let right = arr.slice(partition);
+        var left = arr.slice(0, partition);
+        var right = arr.slice(partition);
 
-        return merge(
+        let mergeResult = merge(
             mergeSort(left)
             , mergeSort(right)
         );
 
+        return mergeResult;
     };
 
-    function merge (left, r) {
-        console.log(left, r,  "merge!");
-        // let partition = divide(arr);
-        //
-        // let left = arr.slice(0, partition);
-        // let right = arr.slice(partition, arr.length);
-        // let newArr = [];
-        //
-        // if (left > right) {
-        //     newArr.push(right[0]);
-        //     newArr.push(left[0]);
-        // }
-        // else {
-        //     newArr.push(left[0]);
-        //     newArr.push(right[0]);
-        // }
-        //
-        // // console.log(newArr);
-        // return newArr;
-    }
+    function merge (left, right) {
+        let leftIdx = 0;
+        let rightIdx = 0;
+        let newArr = [];
 
-    // const merge = (arr) => {
-    //     console.log(arr);
-    //     let partition = divide(arr);
-    //     let left = arr.slice(0, partition);
-    //     let right = arr.slice(partition, arr.length);
-    //     let newArr = [];
-    //
-    //     console.log(left, right);
-    //
-    //     if (left > right) {
-    //         newArr.push(right[0]);
-    //         newArr.push(left[0]);
-    //     }
-    //     console.log(newArr);
-    // }
+        while(leftIdx < left.length && rightIdx < right.length) {
+
+            if (left[leftIdx] > right[rightIdx]) {
+                newArr.push(right[rightIdx]);
+                rightIdx++;
+            }
+            else {
+                newArr.push(left[leftIdx]);
+                leftIdx++;
+            }
+        }
+
+        let resultArr = [...newArr, ...left.slice(leftIdx), ...right.slice(rightIdx)];
+        return resultArr;
+    }
 
     var testArr = [6,5,3,1,8,7,2,4];
     let q = mergeSort(testArr);
+    console.log(q);
 
 </script>
 <body>
