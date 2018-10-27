@@ -13,4 +13,5 @@
 **2018-10-13** [삽입 정렬 구현](https://github.com/JeonSeonYoung/algorithm/blob/master/soojung/javascript/InsertSort.html) <br/>
 **2018-10-27** [프로그래머스 문제풀이 스택큐 - 탑](https://github.com/JeonSeonYoung/algorithm/blob/master/soojung/javascript/stackque_1.js) <br/>
 [프로그래머스 문제풀이 스택큐 - 기능개발](https://github.com/JeonSeonYoung/algorithm/blob/master/soojung/javascript/stackque_2.html) <br/>
-[프로그래머스 문제풀이 스택큐 - 기능개발](https://github.com/JeonSeonYoung/algorithm/blob/master/soojung/javascript/stackque_3.html) <br/>
+[프로그래머스 문제풀이 스택큐 - 주식가격](https://github.com/JeonSeonYoung/algorithm/blob/master/soojung/javascript/stackque_3.html) <br/>
+[병합정렬 수정](https://github.com/JeonSeonYoung/algorithm/blob/master/soojung/javascript/MergeSort.html) <br/>
