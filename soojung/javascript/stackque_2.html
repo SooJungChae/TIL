@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>기능개발 </title>
+</head>
+<script type="text/javascript">
+
+    function solution(progresses, speeds) {
+
+        let answer = [];
+        let finishDays = [];
+        let spendDays = 0;
+
+        progresses.forEach((progress, idx) => {
+            spendDays = Math.ceil((100 - progress) / speeds[idx]);
+            finishDays.push(spendDays);
+        });
+
+        // 100 - progresses = 남은 진행률
+
+        // 7 / 1 = 7일 작업
+
+        // [0] = 7, [1] = 3, [2] = 9
+
+        let totalDays = 0;
+        let count = 1;
+        // console.log(finishDays);
+
+        finishDays.forEach((finishDay, idx) => {
+
+            if (idx == 0) {
+                totalDays = finishDay;
+
+            } else {
+
+                if (finishDay < totalDays) {
+                    count ++;
+
+                } else {
+                    answer.push(count);
+                    count = 1;
+                }
+            }
+        })
+
+        answer.push(count);
+
+        /*
+
+        초기값 totalDays = progresses[0]; 카운트 + 1
+
+        totalDays 보다 작으면 바로 꺼낸다. (pop) 카운트 + 1
+        바로 꺼내는건 totalDays 에 추가 안한다.
+
+        totalDays 보다 크면
+        popItem 에 카운트 push 하고, 카운트 초기화 (1)
+
+        popItemCount = [카운트, 카운트 ...]
+
+        * */
+        return answer;
+    }
+
+    // 7% 1%작업 -> 7일
+    // 70% 30%작업 -> 3일
+    // 45% 5%작업 -> 9일
+    // solution([93, 30, 55], [1, 30, 5]); // [2, 1]
+
+    // 30% 1%작업 -> 30일
+    // 70% 30%작업 -> 3일
+    // 55% 5%작업 -> 11일
+    // console.log(solution([70, 30, 55], [1, 30, 5])); // [3]
+
+    // 1% 1% -> 1일
+    // 70% 30%작업 -> 3일
+    // 55% 5%작업 -> 11일
+    // console.log(solution([99, 30, 55], [1, 30, 5]));    // [1,1,1]
+
+    // 1% 1% -> 1일
+    // 70% 30%작업 -> 3일
+    // 55% 5%작업 -> 11일
+    // console.log(solution([55, 30, 99], [5, 30, 1]));    // [3]
+
+</script>
+<body>
+</body>
+</html>
