@@ -34,6 +34,22 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 -------
 
+## Vue
+
+- [Vue 공식문서 - 필수요소](https://github.com/SooJungChae/TIL/blob/master/javascript/vue/guide_1.md)
+  - 인스턴스
+  - Object.freeze()
+  - $ 접두어
+  - 템플릿 문법
+    - 이중 중괄호
+    - 디렉티브
+    - 약어
+    - v-html, v-bind, v-on
+    - computed, watch
+
+
+-------
+
 ## CSS
 
 - [FlexBox](https://github.com/SooJungChae/TIL/blob/master/css/flexbox.md)
