@@ -1,0 +1,43 @@
+## 파라미터가 있는 동적 라우트
+- 앞에 밑줄이 붙은 .vue 파일이나 폴더를 정의한다.
+```
+pages/
+--| _slug/
+-----| comments.vue
+-----| index.vue
+--| users/
+-----| _id.vue
+--| index.vue
+
+이렇게 생성된다.
+
+router: {
+  routes: [
+    {
+      name: 'index',
+      path: '/',
+      component: 'pages/index.vue'
+    },
+    {
+      name: 'users-id',
+      path: '/users/:id?',
+      component: 'pages/users/_id.vue'
+    },
+    {
+      name: 'slue',
+      path: '/:slug',
+      component: 'pages/_slug/index.vue'
+    },
+    {
+      name: 'slug-comments',
+      path: '/:slug/comments',
+      component: 'pages/_slug/comments.vue'
+    }
+  ]
+}
+
+- user-id 라우트는 :id? 라는 선택적 경로를 가진다.
+- 필수 경로로 만들려면 users/_id 안에 index.vue 파일을 만든다.
+
+### 라우트 유효성 체크
+
