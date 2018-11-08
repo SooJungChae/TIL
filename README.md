@@ -36,7 +36,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 ## Vue
 
-- [Vue 공식문서 - 필수요소](https://github.com/SooJungChae/TIL/blob/master/javascript/vue/guide_1.md)
+- [Vue 공식문서 - 필수요소](https://github.com/SooJungChae/TIL/blob/master/vue/guide_1.md)
   - 인스턴스
   - Object.freeze()
   - $ 접두어
@@ -46,7 +46,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
     - 약어
     - v-html, v-bind, v-on
     - computed, watch
-- [Vuex 공식문서](https://github.com/SooJungChae/TIL/blob/master/javascript/vue/vuex/guide_1.md)
+- [Vuex 공식문서](https://github.com/SooJungChae/TIL/blob/master/vue/vuex/guide_1.md)
 
 
 -------
