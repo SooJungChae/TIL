@@ -46,6 +46,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
     - 약어
     - v-html, v-bind, v-on
     - computed, watch
+- [Vuex 공식문서](https://github.com/SooJungChae/TIL/blob/master/javascript/vue/vuex/guide_1.md)
 
 
 -------
