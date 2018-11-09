@@ -54,6 +54,7 @@ Any information or tips about programming will be uploaded. I hope this reposito
 ## CSS
 
 - [FlexBox](https://github.com/SooJungChae/TIL/blob/master/css/flexbox.md)
+- [Scss](https://github.com/SooJungChae/TIL/blob/master/css/scss.md)
 
 
 -------
