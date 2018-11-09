@@ -192,3 +192,72 @@ Mutations
 
 ---------
 
+### Actions
+- Mutations 와 유사.
+- actions 으로 mutations 을 `commit` 하여 상태를 변화 시킨다.
+- 비동기 작업이 포함될 수 있다.
+
+```js
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  },
+  actions: {
+    increment (context) {
+      context.commit('increment')
+    }
+  }
+})
+```
+- 액션은 `store.dispatch` 메소드로 시작된다.
+- 액션 내에서 비동기 작업을 수행할 수 있다.
+ ```js
+actions: {
+  incrementAsync ({ commit }) {
+    setTimeout(() => {
+      commit('increment')
+    }, 1000)
+  }
+}
+
+// 이런식으로 호출 한다.
+
+// 페이로드와 함께 디스패치
+store.dispatch('incrementAsync', {
+    amount: 10
+})
+
+// 객체와 함께 디스패치
+store.dispatch({
+    type: 'incrementAsync',
+    amount: 10
+})
+```
+
+액션이 실용적으로 쓰이는 경우는, **비동기 API 호출** 을 하거나 **여러 개의 변이를 커밋**하는 경우다.
+```js
+actions: {
+  checkout ({ commit, state }, products) {
+    // 장바구니에 현재있는 항목을 저장하십시오.
+    const savedCartItems = [...state.cart.added]
+
+    // 결제 요청을 보낸 후 장바구니를 비웁니다.
+    commit(types.CHECKOUT_REQUEST)
+
+    // 상점 API는 성공 콜백 및 실패 콜백을 받습니다.
+    shop.buyProducts(
+      products,
+      // 요청 성공 핸들러
+      () => commit(types.CHECKOUT_SUCCESS),
+      // 요청 실패 핸들러
+      () => commit(types.CHECKOUT_FAILURE, savedCartItems)
+    )
+  }
+}
+```
+
