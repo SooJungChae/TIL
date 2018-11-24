@@ -365,6 +365,11 @@ div {
 @for $변수 from 시작 to 종료 {
   // 반복 내용
 }
+
+// 예제
+@for $i from 1 through 5{
+  .padding-right-#{$i} {padding-right: #{$i}em;}
+}
 ```
 
 ## @each
