@@ -5,7 +5,7 @@ public class App {
     public static void main(String[] args) {
         MyArray arr = new MyArray(5);
 
-        for(int i = 0; i<5; ++i){
+        for( int i = 0; i<5; ++i){
             arr.add("데이터_"+i);
         }
 
