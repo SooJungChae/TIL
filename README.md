@@ -28,6 +28,22 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 -------
 
+## Algorithm
+
+- [BinaryTree](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/BinaryTree.html)
+- [Hash](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/Hash.html)
+- [numberInput](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/numberInput.js)
+- [quickSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/quickSort.html)
+- [SelectionSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/selectionSort.html)
+
+### Programmers
+- [Hash](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/programmers_hash.js)
+
+### CodeWars
+- [20180525_codewars_Wholikesit](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/20180525_codewars_Wholikesit.js)
+
+-------
+
 ## React
 
 - [Redux](https://github.com/SooJungChae/TIL/blob/master/javascript/react/redux.md)
@@ -56,6 +72,8 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 - [FlexBox](https://github.com/SooJungChae/TIL/blob/master/css/flexbox.md)
 - [Scss](https://github.com/SooJungChae/TIL/blob/master/css/scss.md)
+- [Animation](https://github.com/SooJungChae/TIL/blob/master/css/CSSAnimation.md)
+- [Rendering](https://github.com/SooJungChae/TIL/blob/master/css/CSSRendering_01.md)
 
 
 -------
