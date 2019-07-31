@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DFS</title>
+</head>
+<body>
+    <script>
+
+        // 2018-12-16 DFS 그래프 설계
+        // 깊이 우선탐색
+        // - 연결형 리스트로 그래프 구현해오기
+        // - 구현모습은 아무거나 원하는걸로~
+        //     - 방향성 : 무방향성
+
+        // 그래프 구현
+        // stack
+        // linked list
+
+        let graph = {};
+
+        // 그래프를 만든다.
+        (function (){
+
+            function addVertex(vertexName) {
+                graph[vertexName] = [];
+                graph[vertexName].visit = false;
+            }
+
+            function addArch(vertexName, anotherVertexName) {
+                graph[vertexName].push({
+                    name: anotherVertexName
+                })
+            }
+
+            addVertex('0');
+            addVertex('1');
+            addVertex('2');
+            addVertex('3');
+            addVertex('4');
+
+            // vertex 를 edge 로 연결한다.
+
+            addArch('0', '1')
+            addArch('0', '2')
+            addArch('0', '4')
+            addArch('1', '0')
+            addArch('1', '2')
+            addArch('2', '0')
+            addArch('2', '1')
+            addArch('2', '3')
+            addArch('2', '4')
+            addArch('3', '2')
+            addArch('3', '4')
+            addArch('4', '0')
+            addArch('4', '3')
+            addArch('4', '2')
+
+        }());
+
+        let stack = [];
+        let result = [];
+
+        function addStack (vertexName) {
+            stack.push(vertexName);
+            graph[vertexName].visit = true;
+        }
+
+        function popStack () {
+            const picVertex = stack.pop();
+            result.push(picVertex);
+            return picVertex;
+        }
+
+        addStack('0');
+
+        // 전체가 전부 visit 될 때까지 계속한다. -> stack 을 전부 비울 때까지
+        while(stack.length > 0) {
+
+            const picVertex = popStack();
+
+            // 노드를 돌면서 인접한 노드를 stack 에 넣는데 visit 하지 않은 값만 stack 에 넣는다.
+            graph[picVertex].map(({name}) => {
+                if (!graph[name].visit) {
+                    addStack(name);
+                }
+            });
+        }
+
+        console.log(result);
+
+    </script>
+</body>
+</html>

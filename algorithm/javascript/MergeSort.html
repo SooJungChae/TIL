@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>병합 정렬</title>
+</head>
+<script type="text/javascript">
+
+    let divide = (arr) => {
+        return parseInt(arr.length / 2);
+    }
+
+    function mergeSort (arr) {
+
+        if (arr.length == 1) {
+            return arr;
+        }
+
+        let partition = divide(arr);
+        var left = arr.slice(0, partition);
+        var right = arr.slice(partition);
+
+        let mergeResult = merge(
+            mergeSort(left)
+            , mergeSort(right)
+        );
+
+        return mergeResult;
+    };
+
+    function merge (left, right) {
+        let leftIdx = 0;
+        let rightIdx = 0;
+        let newArr = [];
+
+        while(leftIdx < left.length && rightIdx < right.length) {
+
+            if (left[leftIdx] > right[rightIdx]) {
+                newArr.push(right[rightIdx]);
+                rightIdx++;
+            }
+            else {
+                newArr.push(left[leftIdx]);
+                leftIdx++;
+            }
+        }
+
+        let resultArr = [...newArr, ...left.slice(leftIdx), ...right.slice(rightIdx)];
+        return resultArr;
+    }
+
+    var testArr = [6,5,3,1,8,7,2,4];
+    let q = mergeSort(testArr);
+    console.log(q);
+
+</script>
+<body>
+</body>
+</html>

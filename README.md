@@ -15,6 +15,9 @@ Any information or tips about programming will be uploaded. I hope this reposito
 - [Function method(apply, call, bind)](https://github.com/SooJungChae/TIL/blob/master/javascript/functionMethod.md)
 - [코드 tips](https://github.com/SooJungChae/TIL/blob/master/javascript/tips.md)
 
+### Code
+- [NumberInput](https://github.com/SooJungChae/TIL/blob/master/javascript/numberInput.js)
+
 -------
 
 ## Javascript ES6
@@ -28,16 +31,28 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 -------
 
-## Algorithm
-
+## Data Structure
 - [BinaryTree](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/BinaryTree.html)
 - [Hash](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/Hash.html)
-- [numberInput](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/numberInput.js)
-- [quickSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/quickSort.html)
+- [Heap](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/Heap.html)
+- [Stack Que v1](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/stackque_1.js)
+- [Stack Que v2](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/stackque_2.html)
+- [Stack Que v3](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/stackque_3.html)
+
+## Algorithm
+
 - [SelectionSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/selectionSort.html)
+- [QuickSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/quickSort.html)
+- [InsertSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/InsertSort.html)
+- [MergeSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/MergeSort.html)
+- [BubbleSort](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/bubbleSort.html)
+- [Dijkstra_1](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/dijkstra_1.html)
+- [BFS](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/BFS.html)
+- [DFS](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/DFS.html)
 
 ### Programmers
 - [Hash](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/programmers_hash.js)
+- [lv1](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/programmers_lv1.js)
 
 ### CodeWars
 - [20180525_codewars_Wholikesit](https://github.com/SooJungChae/TIL/blob/master/algorithm/javascript/20180525_codewars_Wholikesit.js)

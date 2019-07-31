@@ -6,45 +6,57 @@
 </head>
 <script type="text/javascript">
 
-    let quickSort = (arr) => {
+    const quickSort = (arr, left, right) => {
 
-        let arrLen = arr.length;
-        let pivot, left, right;
-
-        // pivot을 정한다.
-        pivot = arr[pivotPosition(arrLen)];
-
-        // 가장 맨 끝을 왼쪽(L)
-        // 가장 맨 오른쪽 끝을 오른쪽(R)으로 설정한다.
-        left = arr[0];
-        right = arr[arrLen - 1];
-
-        // pivot과 L, R 을 비교한다.
-        // 왼쪽에서 pivot 보다 큰 값을 찾아서.(L)
-        // L 하나만 찾으면 pivot 과 switch
-        if (pivot > len) {
-            // 어떻게 L, R 둘을 동시에 실행시키지?!!
+        if (right - left == 1) {
+            if (arr[left] > arr[right]) {
+                let temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+            }
+            return arr;
         }
-        // 오른쪽에선 pivot 보다 작은 값을 찾는다.(R)
 
-        // R 하나만 찾으면 pivot 과 switch
-        // L 과 R 의 값을 못찾으면 pivot 위치 확정
-        // L 과 R 의 값을 둘다 찾으면 L 과 R switch
+        if (left < right) {
+            let pivotPosition = position(arr, left, right);
+            quickSort(arr, left, pivotPosition - 1);
+            quickSort(arr, pivotPosition + 1, right);
+        }
 
+        return arr;
+    };
 
+    const position = (arr, left, right) => {
+
+        let pivot = arr[left];
+
+        let i = left + 1;
+        let j = right;
+
+        while(i < j) {
+            while(arr[i] < pivot) i++;
+            while(i < j && arr[j] > pivot) j--;
+
+            if (i == j) {
+                break;
+            }
+
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+        arr[left] = arr[j-1];
+        arr[j-1] = pivot;
+
+        return j-1;
     }
 
-    // pivot을 정한다.
-    let pivotPosition = (len) => {
-        return parseInt(len / 2);
-    }
+    var testArr = [5, 3, 7, 6, 2, 1, 4];
 
+    let q = quickSort(testArr, 0, testArr.length - 1);
+    console.log(q);
 
-
-
-    // 배열이 입력된다.
-    var testArr = [3, 5, 1, 8, 10, 2, 7, 11];
-    quickSort(testArr);
 </script>
 <body>
 </body>
