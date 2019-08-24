@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>hash hide</title>
+</head>
+<body>
+<script type="text/javascript">
+	function solution(clothes) {
+	  // 종류별로 나눈다.
+		// 테이블 별 갯수 팩토리얼.
+		// 전부합하기
+		let group = [];
+		let answer = 1;
+		
+	  clothes.forEach(c => {
+      group[c[1]] = group[c[1]] ? group[c[1]] + 1 : 1;
+	  });
+		
+    for (let g in group) {
+      answer *= group[g];
+	  }
+
+    console.log(group);
+    // for (let member in group) {
+    //   answer += group[member];
+    // }
+	  
+		console.log(answer);
+  }
+  solution([["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"]]);
+  // solution([["yellow_hat", "face"], ["blue_sunglasses", "face"], ["green_turban", "face"]]);
+</script>
+</body>
+</html>
