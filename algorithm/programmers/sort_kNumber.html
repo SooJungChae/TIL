@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sort Kth Number</title>
+</head>
+<body>
+<script type="text/javascript">
+// 12:40 ~
+	function solution(array, commands) {
+	 
+		let answer = commands.map(command => {
+      // command [시작위치, 마지막위치, 정렬 후 리턴할 위치]
+      let newArray = array.slice(command[0] - 1, command[1] - 1 + 1).sort((a, b) => {
+        return a - b;
+      });
+      return newArray[command[2] - 1];
+		});
+
+    console.log(answer);
+    return answer;
+  }
+  solution([1,5,2,6,3,7,4], [[2,5,3], [4,4,1], [1,7,3]]);
+</script>
+</body>
+</html>

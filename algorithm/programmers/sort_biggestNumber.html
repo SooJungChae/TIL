@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sort biggest number</title>
+</head>
+<body>
+<script type="text/javascript">
+// 19:10 ~ ...
+	function solution(numbers) {
+    let answer = numbers.map(number => number + "")
+		    .sort((a, b) => (b + a) * 1 - (a + b) * 1)
+		    .join('');
+
+    return answer[0] === '0' ? '0' : answer;
+  }
+  // solution([6, 10, 2, 27, 23, 50]);
+solution([0, 0, 0, 0]);
+</script>
+</body>
+</html>
