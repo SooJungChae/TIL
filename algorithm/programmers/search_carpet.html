@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>카펫</title>
+</head>
+<body>
+<script type="text/javascript">
+// https://programmers.co.kr/learn/courses/30/lessons/42842?language=javascript
+
+// 모범답안
+// 어떻게 이렇게 나온걸까 ㅠㅠ
+// function solution(brown, red) {
+//   var answer = [];
+//   for (var i = 3; i <= (brown+red)/i; i++) {
+//     var x = Math.floor((brown+red)/i);
+//     if( (x-2)*(i-2)=== red) {
+//       break;
+//     }
+//   }
+//
+//   return [x,i];
+// }
+
+// 테스트케이스 에러나옴
+function solution(brown, red) {
+  let answer = [];
+  const tot = brown + red;
+  const factors = factor(tot);
+  if ((factors.length % 2) !== 0) {
+    const value = factors[Math.floor(factors.length / 2)];
+    answer = [value, value];
+  } else {
+    factors.slice().reduce((acc, cur, idx, arr) => {
+      if ((acc * cur) === tot) {
+        answer = [cur, acc];
+        // eject early
+        arr.slice();
+      }
+      return cur;
+    }, 1);
+
+  }
+  return answer;
+}
+
+function factor (num) {
+  const factors = [];
+  for (let i = 1; i <= num; i++) {
+	  if ((num % i) === 0) {
+	    factors.push(i);
+	  }
+  }
+  return factors;
+}
+solution(10, 2);
+solution(8, 1);
+solution(24, 24);
+</script>
+</body>
+</html>
