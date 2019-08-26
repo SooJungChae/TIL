@@ -9,3 +9,9 @@
 ```js
 (b + a) * 1 - (a + b) * 1
 ```
+
+### 탐색
+- 최대값 구할 때 sort 도 있지만 Math.max() 함수도 있다.
+- 소수 판별할 땐 제곱근을 사용한다. Math.sqrt()
+- for...in 객체의 key 에 접근
+- for...of iterable 속성의 value 에 접근

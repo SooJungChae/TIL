@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>search exam</title>
+</head>
+<body>
+<script type="text/javascript">
+// 19:40 ~ ...
+// https://programmers.co.kr/learn/courses/30/lessons/42840
+	function solution(answers) {
+    let answer = [];
+
+    let p1 = [1,2,3,4,5];
+    let p2 = [2,1,2,3,2,4,2,5]; // 2, [1,3,4,5]
+    let p3 = [3,3,1,1,2,2,4,4,5,5];
+		
+    // 맞춘 갯수
+		let totCount = [0, 0, 0];
+    
+    for (let i = 0; i < answers.length; i++) {
+      if (p1[i % p1.length] === answers[i]) {
+        totCount[0] += 1;
+      }
+
+	    if (p2[i % p2.length] === answers[i]) {
+        totCount[1] += 1;
+	    }
+	    
+      if (p3[i % p3.length] === answers[i]) {
+        totCount[2] += 1;
+      }
+    }
+
+    let max = Math.max(...totCount);
+
+    answer = totCount.map((count, idx) => {
+      if (count === max) {
+        return (idx + 1);
+      }
+    }).filter(n => n);
+		
+    return answer;
+  }
+
+  solution([1,3,2,4,2]);
+	solution([1, 1]);
+</script>
+</body>
+</html>
