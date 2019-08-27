@@ -9,9 +9,15 @@
 ```js
 (b + a) * 1 - (a + b) * 1
 ```
+- 문자열 sort 할 땐 부등호를 사용한다. [여행 경로](./programmers/dfsbfs_travelRoute.html.html)
+```js
+return +(b.arrive < a.arrive) || +(b.arrive < a.arrive) - 1;
+```
 
 ### 탐색
 - 최대값 구할 때 sort 도 있지만 Math.max() 함수도 있다.
 - 소수 판별할 땐 제곱근을 사용한다. Math.sqrt()
 - for...in 객체의 key 에 접근
 - for...of iterable 속성의 value 에 접근
+
+### DFS/BFS
