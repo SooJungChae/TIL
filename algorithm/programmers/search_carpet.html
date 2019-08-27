@@ -10,17 +10,17 @@
 
 // 모범답안
 // 어떻게 이렇게 나온걸까 ㅠㅠ
-// function solution(brown, red) {
-//   var answer = [];
-//   for (var i = 3; i <= (brown+red)/i; i++) {
-//     var x = Math.floor((brown+red)/i);
-//     if( (x-2)*(i-2)=== red) {
-//       break;
-//     }
-//   }
-//
-//   return [x,i];
-// }
+function solution(brown, red) {
+  var answer = [];
+  for (var i = 3; i <= (brown+red)/i; i++) {
+    var x = Math.floor((brown+red)/i);
+    if( (x-2)*(i-2)=== red) {
+      break;
+    }
+  }
+
+  return [x,i];
+}
 
 // 테스트케이스 에러나옴
 function solution(brown, red) {
