@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>네트워크</title>
+</head>
+<body>
+<script type="text/javascript">
+function solution(n, computers) {
+  let answer = 0;
+  let networks = {};
+  
+  for (let i = 0; i < n; i++) {
+    networks[i] = {
+      next: [],
+      visit: false
+    };
+  }
+
+	computers.map((computer, computerIdx) => {
+	  computer.forEach((network, networkIdx) => {
+      // 자기가 아닌, 연결되어있는 컴퓨터를 찾는다.
+	    if (computerIdx !== networkIdx && network === 1) {
+        networks[computerIdx].next.push(networkIdx);
+	    }
+	  })
+	});
+
+  console.log(networks);
+
+  for(let key in networks) {
+    if (!networks[key].visit) {
+      checkVisit(networks[key]);
+      answer++;
+    }
+  }
+
+  function checkVisit(network) {
+    network.visit = true;
+
+    const nexts = network.next;
+    
+    nexts.forEach(nextMember => {
+      if (!networks[nextMember].visit) {
+        networks[nextMember].visit = true;
+        checkVisit(networks[nextMember]);
+      }
+    });
+	  
+  }
+  console.log(answer);
+  return answer;
+}
+
+solution(3, [[1, 1, 0], [1, 1, 0], [0, 0, 1]]);
+// solution(3, [[1, 1, 0], [1, 1, 1], [0, 1, 1]]);
+</script>
+</body>
+</html>

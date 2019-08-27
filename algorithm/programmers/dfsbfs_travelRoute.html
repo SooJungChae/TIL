@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>여행 경로</title>
+</head>
+<body>
+<script type="text/javascript">
+// 10:28 ~ 11:00
+function solution(tickets) {
+  let route = {};
+  let answer = [];
+  
+  // 한 번에 모두 이을 수 있어야 한다.
+	// 도착 때 마다 answer 에 추가할 건데, (티켓 갯수 + 1) 같지 않으면 실패. 다른 경로 알아봐야 함.
+	// 가능한 경로가 2개 이상일 경우, 알파벳 순서가 앞서는 경로를 return 한다.
+  
+  // [출발지, 도착지]
+  tickets.forEach(ticket => {
+    let depart = ticket[0];
+    let arrive = ticket[1];
+    
+    if (!route[depart]) {
+      route[depart] = {
+        arrives: [],
+	      count: 0
+      };
+    }
+    route[depart].arrives.push(arrive);
+    route[depart].count++;
+  });
+  
+  // route 출발지별 목적지 sort 정렬
+	for (let key in route) {
+    route[key].arrives.sort((a, b) => {
+	    return +(b < a) || +(b < a) - 1;
+    });
+  }
+  
+  addRoute(answer, route, 'ICN');
+
+  console.log(route);
+  console.log(answer);
+  return answer;
+}
+
+function addRoute(answer, route, depart) {
+  // 출발할 때마다 route 에 추가한다.
+  answer.push(depart);
+
+  // 다음 경로가 없으면 (마지막 목적지) 리턴
+  if (!route[depart]) {
+    return;
+  }
+
+  // count 가 0 이면 다시 방문할 수 없다는 뜻임.
+  if (!route[depart].count) {
+    return;
+  }
+
+  route[depart].arrives.forEach((d, idx) => {
+    route[depart].arrives.splice(idx, 1);
+    addRoute(answer, route, d);
+    // 다시 출발할 수 있는 횟수 차감.
+    route[depart].count--;
+  });
+}
+
+solution([["ICN", "COO"], ["ICN", "BOO"], ["COO", "ICN"]]);
+// solution([["ICN", "JFK"], ["HND", "IAD"], ["JFK", "HND"]]);
+// solution([["ICN", "JFK"], ["ICN", "JFK"], ["JFK", "ICN"], ["JFK", "ICN"]]);
+// solution([["ICN", "BOO"], ["ICN", "COO"], ["COO", "DOO"],
+// 	["DOO", "COO"], ["BOO", "DOO"], ["DOO", "BOO"],
+// 	["BOO", "ICN"], ["COO", "BOO"]]);
+// solution([["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]);
+</script>
+</body>
+</html>
