@@ -1,6 +1,13 @@
 # 목차
 - [DocType](#doctype)
 - [Meta tag](#meta-tag)
+- [스탠더드 모드와 관용(쿼크) 모드간의 차이](#스탠더드-모드-vs-관용쿼크-모드)
+- [XHTML 페이지의 제약사항](#xhtml-페이지의-제약사항)
+- [다국어 페이지 제공방식](#다국어-페이지-제공방식)
+- [HTML5 에서 XHTML 문법 사용하는 방법](#html5-에서-xhtml-문법-사용하는-방법)
+- [data-*](#data-)
+- [HTML5 특징](#html5-의-특징)
+- [Cookie, sessionStorage, localStorage](#cookie-sessionstorage-localstorage)
 - [이벤트 버블링, 캡쳐링](#이벤트-버블링-이벤트-캡쳐링)
 - [실행 컨텍스트](#실행-컨텍스트)
 - [이벤트 루프](#이벤트-루프)
@@ -25,6 +32,19 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 - 만약 XHTML 1.1 버전을 사용한다고 하면 이렇게 표현해야 한다.
 - `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">`
 
+## 스탠더드 모드 vs 관용(쿼크) 모드
+
+> 하위 호환성을 배제하고 현재 표준 형식만을 인정하는가? <br>
+> 하위 호환성을 유지하기 위해 현재 표준에 어긋나는 형식을 지원할 것인가?
+
+## XHTML 페이지의 제약사항
+
+> 단독 선언 태그 뒤에는 "/" 를 사용해야 한다. <br>
+> 인라인 요소가 블록 요소를 감싸면 안된다.
+> & 는 반드시 &amp; 로 대체해야 한다.
+> 태그 이름이나 속성에 대문자를 사용하면 안된다.
+> attribute 선언시 shortcut 을 사용하면 안된다.
+
 ## Meta tag
 
 > 문서가 어떤 내용을 담고 있고 있는지 알려주는 태그.
@@ -33,6 +53,33 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 - `<meta name="viewport" conten"width=device-width, initial-scale=1>`
 - 주로 subject, keywords, title, author 키 를 사용한다.
 
+## 다국어 페이지 제공방식
+
+> html 선언시 주요 사용언어를 기입해준다. <html lang="ko">
+
+## HTML5 에서 XHTML 문법 사용하는 방법
+
+> - MIME 타입을 `application/xhtml-html` 로 지정한다.
+> - 파일 최상단에 인코딩을 지정해준다. <?xml version="1.0" encoding="UTF-8"?>`
+> - 네임스페이스를 명시해준다. `<html xmlns="http://www.w3c.org/1999/xhtml">`
+
+## data-*
+
+> 사용자가 임의 설정하고 선언할 수 있는 데이터의 정의.
+
+## HTML5 의 특징
+
+> - 시멘틱 마크업
+> - 미디어 핸들링을 위한 내장 플랫폼
+> - application API
+> - 오프라인 핸들러
+
+## Cookie, sessionStorage, localStorage
+
+> - cookie 는 클라이언트 컴퓨터에 텍스트 기반 파일로 저장된다.
+> - sessionStorage 는 브라우저의 window 에 저장되어서 윈도우 닫히면 저장된 데이터 사라진다.
+> - localStorage 브라우저 자체에 저장되며 윈도우 닫혀도 내용을 유지할 수 있다.
+
 ## 이벤트 버블링, 이벤트 캡쳐링
 
 > 상위 노드에 이벤트를 전달하는 것, 하위 노드에 이벤트를 전달하는 것
@@ -40,7 +87,7 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 ## 실행 컨텍스트
 Execution context
 
-> 실행가능한 코드를 형상화하고 구분하는 추상적인 개념
+> 실행 가능한 코드가 실행되기 위해 필요한 환경
 
 ### 실행 컨텍스트가 생성되어 코드가 실행되는 과정
 
@@ -236,5 +283,5 @@ parseResponse({"Name": "Foo", "Id": 1234, "Rank": 7});
 
 
 출처 :
-https://velog.io/@tmmoond8/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%ED%9B%84%EA%B8%B0-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8-%EC%A0%95%EB%A6%AC-%EC%9E%91%EC%84%B1-%EC%A4%91
-
+- https://velog.io/@tmmoond8/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%ED%9B%84%EA%B8%B0-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8-%EC%A0%95%EB%A6%AC-%EC%9E%91%EC%84%B1-%EC%A4%91
+- http://insanehong.kr/post/front-end-developer-interview-html/
