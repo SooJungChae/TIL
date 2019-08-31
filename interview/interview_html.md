@@ -33,11 +33,11 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 
 ## XHTML 페이지의 제약사항
 
-> 단독 선언 태그 뒤에는 "/" 를 사용해야 한다. <br>
-> 인라인 요소가 블록 요소를 감싸면 안된다.
-> & 는 반드시 &amp; 로 대체해야 한다.
-> 태그 이름이나 속성에 대문자를 사용하면 안된다.
-> attribute 선언시 shortcut 을 사용하면 안된다.
+> - 단독 선언 태그 뒤에는 "/" 를 사용해야 한다. <br>
+> - 인라인 요소가 블록 요소를 감싸면 안된다.
+> - & 는 반드시 &amp; 로 대체해야 한다.
+> - 태그 이름이나 속성에 대문자를 사용하면 안된다.
+> - attribute 선언시 shortcut 을 사용하면 안된다.
 
 ## Meta tag
 
@@ -54,7 +54,7 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 ## HTML5 에서 XHTML 문법 사용하는 방법
 
 > - MIME 타입을 `application/xhtml-html` 로 지정한다.
-> - 파일 최상단에 인코딩을 지정해준다. <?xml version="1.0" encoding="UTF-8"?>`
+> - 파일 최상단에 인코딩을 지정해준다. `<?xml version="1.0" encoding="UTF-8"?>`
 > - 네임스페이스를 명시해준다. `<html xmlns="http://www.w3c.org/1999/xhtml">`
 
 ## data-*

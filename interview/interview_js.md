@@ -1,11 +1,112 @@
 # 목차
+- [객체](#객체)
+- [객체 지향 프로그래밍](#객체-지향-프로그래밍)
+- [함수형 프로그래밍](#함수형-프로그래밍)
+- [명령형과 선언형의 프로그래밍 비교](#명령형과-선언형의-프로그래밍-비교)
 - [이벤트 버블링, 캡쳐링](#이벤트-버블링-이벤트-캡쳐링)
 - [실행 컨텍스트](#실행-컨텍스트)
 - [이벤트 루프](#이벤트-루프)
 - [체이닝](#체이닝)
+- [클로저](#클로저)
+- [일급객체](#일급객체)
+- [람다함수](#람다함수)
 - [JSON](#json)
 - [JSONP](#jsonp)
 - [Debouncing](#debouncing)
+- [타입스크립트](#타입스크립트)
+
+## 객체
+
+> 관련된 데이터와 함수의 집합.
+
+## 객체 지향 프로그래밍
+
+> 관련 있는 객체들이 집합이라는 관점으로 접근하는 소프트웨어 디자인
+
+## 함수형 프로그래밍
+
+> 함수로 프로그래밍하는 사고를 배우는 것. <br>
+> [순수 함수](#순수-함수)를 조합해서 소프트웨어를 만드는 프로세스다.
+
+- [1급 객체](#1급-객체)
+- [고차 함수](#고차-함수)
+- 불변성
+
+- 명령형이 아닌 선언형이다.
+
+출처: https://velog.io/@kyusung/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9A%94%EC%95%BD
+
+### 순수 함수
+
+> - 동일한 입력에는 같은 값을 반환한다.
+> - 함수의 실행은 프로그램의 실행에 영향을 미치지 않아야 한다.
+
+```js
+// 순수하지 않은 함수, DOM을 변경하는 부수효과를 발생시킴
+function Header(text) {
+  let h1 = document.createElement('h1');
+  h1.innerText = text;
+  document.body.appendChild(h1);
+}
+
+// 순수한 함수, 부수효과를 발생시키지 않음
+// DOM을 변경하는 책임은 애플리케이션의 다른 부분이 담당하도록 한다.
+const Header = (props) => <h1>{props.title}</h1>
+```
+
+### 고차 함수
+
+> - 함수에 함수를 파라미터로 전달 할 수 있다.
+> - 함수의 반환값으로 함수를 사용할 수 있다.
+
+### 1급 객체
+
+> - 변수나 데이터 구조안에 담을 수 있다.
+> - 파라미터로 전달 할 수 있다.
+> - 반환값으로 사용할 수 있다.
+> - 동적으로 프로퍼티 할당이 가능하다.
+
+## 명령형과 선언형의 프로그래밍 비교
+
+> - 명령형 : 어떤 방식으로 상태를 변경시키는 구문의 관점에서 연산을 설명하는 방식. (How)
+> - 선언형 : 무엇과 같은지를 설명하는 방식 (What)
+
+- 명령형 : 절차지향 프로그래밍, 객체지향 프로그래밍
+- 선언형 : 함수형 프로그래밍
+
+```js
+// 명령형
+function double (arr) {
+  let results = []
+  for (let i = 0; i < arr.length; i++){
+    results.push(arr[i] * 2)
+  }
+  return results
+}
+
+$("#btn").click(function() {
+  $(this).toggleClass("highlight")
+  $(this).text() === 'Add Highlight'
+    ? $(this).text('Remove Highlight')
+    : $(this).text('Add Highlight')
+})
+
+
+// 선언형
+function double (arr) {
+  return arr.map((item) => item * 2)
+}
+
+function add (arr) {
+  return arr.reduce((prev, current) => prev + current, 0)
+}
+
+<Btn
+  onToggleHighlight={this.handleToggleHighlight}
+  highlight={this.state.highlight}>
+    {this.state.buttonText}
+</Btn>
+```
 
 ## 이벤트 버블링, 이벤트 캡쳐링
 
@@ -58,6 +159,48 @@ element.setX(1).setY(2).setZ(3);
 
 > 코드를 간결하게 하지만, 디버깅이 어렵다.
 
+## 클로저
+
+> 이너 함수가 스코프 밖에 있는 객체, 변수에 접근하는 것.
+
+```js
+function makeAdd(x) {
+    return function(z) {
+        y = 100;
+        return x + y + z;
+    }
+}
+let add5 = makeAdd(5);  // 함수만 리턴. (실행은 안함)
+let add10 = makeAdd(10); // 함수만 리턴. (실행은 안함)
+
+console.log(add5(3));    // 108 (x: 5, y: 100, z:3)
+console.log(add10(3)); // 113 (x: 10, y: 100, z:3)
+```
+
+- 같은 함수를 공유하지만, 서로 다른 맥락(어휘)적 환경을 저장한다.
+- 세가지 스코프가 있다. local, global, outer function 스코프
+
+- 참고 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures
+
+## 익명함수
+
+> 다른 함수에 인자로 넘기거나 함수의 결과 값으로 리턴할 용도로 사용된다.
+
+- 흔한 예: 콜백, 클로저.
+
+## 람다함수
+
+> 익명 함수.
+
+### 람다대수
+
+> 수학용어. 함수를 보다 단순하게 표현하는 방법
+
+- 이름을 가질 필요가 없다. (익명 함수)
+- 두 개 이상 입력이 있는 함수는 1개의 입력만 받는 람다 대수로 단순화 될 수 있다. (커링)
+
+출처 : https://hyunseob.github.io/2016/09/17/lambda-anonymous-function-closure/
+
 ## JSONP
 
 > JSON with padding <br>
@@ -90,5 +233,10 @@ parseResponse({"Name": "Foo", "Id": 1234, "Rank": 7});
 ## Debouncing
 
 [Debouncing 코드](../javascript/pattern/debounce.html)
+
+## 타입스크립트
+
+> javascript 에 [OOP](#객체-지향-프로그래밍) 특징을 더해준 언어.
+
 
 쓰로틀링!!!
