@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>debounce</title>
+	<title>throttle</title>
 	<style>
 	/*html, body {*/
-		/*height: 100%;*/
+	/*height: 100%;*/
 	/*}*/
 	
 	#container {
-		height: 100px;
+		height: 250px;
 		overflow: scroll;
 	}
 	
@@ -29,34 +29,31 @@
 	<div class="box"></div>
 	<div class="box"></div>
 	<div class="box"></div>
-	<div class="box"></div>
-	<div class="box"></div>
-	<div class="box"></div>
-	<div class="box"></div>
 </div>
 <script type="text/javascript">
-function debounce (fn, delay) {
-  let timer = null;
+function throttle (delay) {
+  let timer;
 
   return function () {
-    // let context = this;
-    // let args = arguments;
     // 이벤트 호출되면 타이머를 초기화하고 다시 시작한다.
-    console.log(timer);
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      foo();
-      // fn.apply(context, args);
-    }, delay);
+    // clearTimeout(timer);
+    if (!timer) {
+      timer = setTimeout(function () {
+        timer = null;
+        foo();
+      }, delay);
+    }
+    
   }
 }
+
+let elem = document.getElementById('container');
 
 function foo () {
   console.log('You are scrolling');
 }
 
-let elem = document.getElementById('container');
-elem.addEventListener('scroll', debounce(foo, 2000));
+elem.addEventListener('scroll', throttle(300));
 	</script>
 </body>
 </html>

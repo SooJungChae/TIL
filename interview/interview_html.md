@@ -23,15 +23,33 @@
 - [Web worker](#web-worker)
 - [CSS3](#css3)
 
-## 브라우저가 동작하는 순서
+## 브라우저의 주요 구성 요소
+
+> - 사용자 인터페이스
+> - 브라우저 엔진
+> - 렌더링 엔진
+> - 통신
+> - UI 백엔드
+> - 자바스크립트 해석기
+> - 자료 저장
+
+- [](https://d2.naver.com/helloworld/59361)
+
+## 브라우저 렌더링 엔진이 동작하는 순서
 [맨 위로](#목차)
 
-> 1) HTML파싱과 DOM 트리 구성
-> 2) 렌더 트리 구성 (DOM + 스타일 규칙)
+> 1) HTML파싱해서 DOM 트리 구축
+> 2) 렌더 트리 구축 (DOM + 스타일 규칙)
 > 3) 렌더 트리 배치
 > 4) 렌더 트리 그리기
 
 - [기본적인 웹 사이트 최적화 방법](https://12bme.tistory.com/128)
+
+## DOM
+
+> 도큐먼트 객체와 관련된 객체의 집합.
+
+- 웹 브라우저가 HTML 페이지를 인식하는 방식
 
 ## 웹 페이지 속도 개선 방안
 [맨 위로](#목차)
@@ -55,6 +73,9 @@
 
 - [Best Practices for a Faster Web App with HTML5](https://www.html5rocks.com/en/tutorials/speed/quick/)
 - [기본적인 웹 사이트 최적화 방법](https://12bme.tistory.com/128)
+
+## RESTful 아키텍쳐
+
 
 ## HTML
 [맨 위로](#목차)
@@ -94,7 +115,7 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 [맨 위로](#목차)
 > - 단독 선언 태그 뒤에는 "/" 를 사용해야 한다. <br>
 > - 인라인 요소가 블록 요소를 감싸면 안된다.
-> - & 는 반드시 &amp; 로 대체해야 한다.
+> - & 는 반드시 `&amp;` 로 대체해야 한다.
 > - 태그 이름이나 속성에 대문자를 사용하면 안된다.
 > - attribute 선언시 shortcut 을 사용하면 안된다.
 
@@ -107,6 +128,10 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 > - MIME 타입을 `application/xhtml-html` 로 지정한다.
 > - 파일 최상단에 인코딩을 지정해준다. `<?xml version="1.0" encoding="UTF-8"?>`
 > - 네임스페이스를 명시해준다. `<html xmlns="http://www.w3c.org/1999/xhtml">`
+
+## 마크업
+
+> 웹 페이지를 만들기 위해서 내용과, 구조를 만드는 언어다.
 
 ## data-*
 [맨 위로](#목차)

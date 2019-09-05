@@ -5,6 +5,7 @@
 - [명령형과 선언형의 프로그래밍 비교](#명령형과-선언형의-프로그래밍-비교)
 - [이벤트 버블링, 캡쳐링](#이벤트-버블링-이벤트-캡쳐링)
 - [실행 컨텍스트](#실행-컨텍스트)
+- [모듈 패턴](#모듈-패턴)
 - [이벤트 루프](#이벤트-루프)
 - [체이닝](#체이닝)
 - [클로저](#클로저)
@@ -15,27 +16,123 @@
 - [Debouncing](#debouncing)
 - [타입스크립트](#타입스크립트)
 
+## 자바스크립트의 특징
+
+- 단일 스레드 기반
+- [함수형 프로그래밍](#함수형-프로그래밍) + [객체지향 프로그래밍](#객체-지향-프로그래밍) 함께 사용하곤 한다.
+- 프로토타입 기반의 언어로 객체를 상속하는 언어다.
+
+## 표현식과 문의 차이
+
+> 표현식은 무언가를 요청하는 것. 결과가 나올 수 있다.<br>
+> 문은 무언가를 지시하는 것.
+
+```js
+lex x;  // 선언문
+x = 3 * 5;  // 표현식
+```
+
+- [러닝 자바스크립트: ES6로 제대로 입문하는 모던 자바스크립트 웹 개발](https://books.google.co.kr/books?id=iAQrDwAAQBAJ&pg=PA139&lpg=PA139&dq=%EB%AC%B8%EA%B3%BC+%ED%91%9C%ED%98%84%EC%8B%9D+%EC%B0%A8%EC%9D%B4&source=bl&ots=uka496awdX&sig=ACfU3U1k2tWCUFlIxcUPrdiJHmNV9sWnfw&hl=ko&sa=X&ved=2ahUKEwiJ5eev9q7kAhXKIqYKHX8mBkUQ6AEwAnoECAkQAQ#v=onepage&q=%EB%AC%B8%EA%B3%BC%20%ED%91%9C%ED%98%84%EC%8B%9D%20%EC%B0%A8%EC%9D%B4&f=false)
+
+## 자료형
+
+> 원시값 : string, number, 값 아닌 값(null, undefined), boolean
+> 이외의 것 : object
+> ES6 에 Symbol 이 추가됨
+> - 객체의 유일한 property key 를 만들기 위해 사용된다.
+
+## 원시값과 객체를 비교하는 방법
+
+> 원시값 비교엔 typeof
+> 객체 비교엔 instanceof
+
+## undefined 와 undeclared 변수
+
+> undefined 는 선언만 되어지고 특정 값 할당되지 않은 경우.
+> undeclared 는 선언하지 않고도 사용가능한 변수.
+
+- [](http://insanehong.kr/post/front-end-developer-interview-javascript/)
+
 ## 객체
 
 > 관련된 데이터와 함수의 집합.
 
+- 모든 객체는 Object 의 prototype 으로부터 메서드와 속성을 상속받는다. (+constructor)
+
+### 일급객체
+
+- 변수나 데이터 구조안에 담을 수 있다.
+- 파라미터로 전달할 수 있다.
+- 반환값으로 사용할 수 있다.
+
+## 모듈, 인터페이스
+
+> 인터페이스 : 표준, 약속, 규칙.
+
+## var, let, const 의 차이
+
+> 1) 할당 : var/let 은 재할당이 되지만 const 는 아니다.
+> 2) 호이스팅 : 모두 자신의 스코프의 가장 맨 위로 호이스팅 되는데, let/const 는 할당 되지 않으면 아예 접근할 수 없다.
+> 3) 스코프 : var 는 함수스코프, let/const 는 블록 스코프
+
+- let/const 는 어휘적 바인딩이 실행되기 전까지 액세스 할 수 없다. (TDZ)
+
+## call, apply, bind
+
+> 함수를 호출해서 실행해
+
+> - call() 인수 리스트를 받아서 함수를 호출한다.
+> - apply() 인수 배열을 받아서 함수를 호출한다.
+> - bind() 새로운 바인딩한 함수를 만든다. bound 함수 리턴.
+
+- [](https://wooooooak.github.io/javascript/2018/12/08/call,apply,bind/)
+
+## 객체 지향 프로그래밍과 함수형 프로그래밍의 차이
+
+> 객체지향은 프로그래밍을 상호작용하는 객체들의 집합으로 보고,
+> 함수형은 상태 값을 지니지 않는 함수 값들의 연속으로 생각할 수 있다.
+
+- 캡슐화 : 관련 속성과 메소드를 하나의 객체로 묶어 포함할 수 있다.
+
+- [](https://madplay.github.io/post/functional-programming-object-oriented-programming)
+- [](https://webclub.tistory.com/94?category=501058)
+
 ## 객체 지향 프로그래밍
 
 > 관련 있는 객체들이 집합이라는 관점으로 접근하는 소프트웨어 디자인
+> 프로퍼티와 메서드를 포함하는 데이터 구조들.
+
+- prototype
+- class
+
+```js
+const num = {
+  val: 1
+};
+const add5 = () => num.val += 5;
+const multiply5 = () => num.val *= 5;
+```
 
 ## 함수형 프로그래밍
 
-> 함수로 프로그래밍하는 사고를 배우는 것. <br>
 > [순수 함수](#순수-함수)를 조합해서 소프트웨어를 만드는 프로세스다.
 
 - [1급 객체](#1급-객체)
 - [고차 함수](#고차-함수)
 - 불변성
-
 - 명령형이 아닌 선언형이다.
 
-출처: https://velog.io/@kyusung/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9A%94%EC%95%BD
+```js
+const num = {
+  val: 1
+};
+const add5 = () => Object.assign({}, num, {val: num.val + 5});
+const multiply5 = () => Object.assign({}, num, {val: num.val * 5});
+```
 
+- https://velog.io/@kyusung/%ED%95%A8%EC%88%98%ED%98%95-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9A%94%EC%95%BD
+- [](https://futurecreator.github.io/2018/10/05/why-functional-programming/)
+- [](https://medium.com/@bretcameron/9-javascript-interview-questions-48416366852b)
 ### 순수 함수
 
 > - 동일한 입력에는 같은 값을 반환한다.
@@ -76,37 +173,57 @@ const Header = (props) => <h1>{props.title}</h1>
 
 ```js
 // 명령형
-function double (arr) {
-  let results = []
-  for (let i = 0; i < arr.length; i++){
-    results.push(arr[i] * 2)
-  }
-  return results
+const sumArray = array => {
+  let result = 0;
+  for (let i = 0; i < array.length; i++) {
+    result += array[i]
+  };
+  return result;
 }
-
-$("#btn").click(function() {
-  $(this).toggleClass("highlight")
-  $(this).text() === 'Add Highlight'
-    ? $(this).text('Remove Highlight')
-    : $(this).text('Add Highlight')
-})
-
 
 // 선언형
-function double (arr) {
-  return arr.map((item) => item * 2)
-}
-
-function add (arr) {
-  return arr.reduce((prev, current) => prev + current, 0)
-}
-
-<Btn
-  onToggleHighlight={this.handleToggleHighlight}
-  highlight={this.state.highlight}>
-    {this.state.buttonText}
-</Btn>
+const sumArray = array => { return array.reduce((x, y) => x + y) };
 ```
+
+- [](https://medium.com/@bretcameron/9-javascript-interview-questions-48416366852b)
+
+## 커링
+
+> 다중인자를 받는 함수를 단일 인자 함수열로 만드는 것을 말한다.
+
+```js
+function curry (fn) {
+    // 인자의 갯수를 알기 전까지 새로운 함수 반환하고,
+    // 다 끝나면 함수 대신 값을 반환해야 한다.
+    let fnCall = fn.length;
+
+    return (function resolver() {
+    // 지금까지 입력받은 모든 인자를 복사.
+        let memory = Array.prototype.slice.call(arguments);
+        return function() {
+            let local = memory.slice();
+            Array.prototype.push.apply(local, arguments);
+            next = local.length >= fnCall ? fn : resolver;
+            return next.apply(null, local);
+        };
+    }());
+}
+function volume ( l, w, h ) {
+  return l * w * h;
+}
+
+var curried = curry( volume );
+
+curried( 1 )( 2 )( 3 ); // 6
+```
+
+- [](https://edykim.com/ko/post/writing-a-curling-currying-function-in-javascript/)
+- [함수로 함수 만들기2 커링](http://jeonghwan-kim.github.io/js/2017/04/17/curry.html)
+
+## 오버라이딩, 오버로딩
+
+> 오버라이딩 : 상속된 객체의 속성을 재정의 하는 것. <br>
+> 오버로딩 : 같은 이름이더라도 매개변수 다르면 중복으로 선언 가능.
 
 ## 이벤트 버블링, 이벤트 캡쳐링
 
@@ -131,6 +248,14 @@ Execution context
 7) 활성 객체 생성되면 코드 실행할 준비를 마침, 코드를 실행시킨다.
 - 변수에 값이 할당된다.
 8) 코드를 실행한 후 실행 컨텍스트를 파기한다.
+
+## 모듈 패턴
+
+> 네임스페이스 캡슐화를 사용하는 방법
+
+## prototype
+
+- [](https://webclub.tistory.com/559?category=501058)
 
 ## 이벤트 루프
 
@@ -180,13 +305,30 @@ console.log(add10(3)); // 113 (x: 10, y: 100, z:3)
 - 같은 함수를 공유하지만, 서로 다른 맥락(어휘)적 환경을 저장한다.
 - 세가지 스코프가 있다. local, global, outer function 스코프
 
-- 참고 : https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures
+- [](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures)
+- [](https://aljjabaegi.tistory.com/294)
+- [](https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%81%B4%EB%A1%9C%EC%A0%80Closure)
+
+## 스코프
+
+> 변수의 유효범위
+
+### 동적 스코프
+
+> 함수를 **어디서 호출**했는지에 따라 상위 스코프를 결정하는 것
+
+### 렉시컬 스코프
+
+> 함수를 **어디에 선언**했는지에 따라 상위 스코프를 결정하는 것
+
+- [스코프](https://poiemaweb.com/js-scope#7-%EB%A0%89%EC%8B%9C%EC%BB%AC-%EC%8A%A4%EC%BD%94%ED%94%84)
 
 ## 익명함수
 
-> 다른 함수에 인자로 넘기거나 함수의 결과 값으로 리턴할 용도로 사용된다.
+> 이름이 없는 함수. 다른 함수에 인자로 넘기거나 함수의 결과 값으로 리턴할 용도로 사용된다. (함수 [표현식](#표현식과-문의-차이) 이용)
 
-- 흔한 예: 콜백, 클로저.
+- 즉시실행함수
+- 콜백, 클로저
 
 ## 람다함수
 
@@ -200,6 +342,147 @@ console.log(add10(3)); // 113 (x: 10, y: 100, z:3)
 - 두 개 이상 입력이 있는 함수는 1개의 입력만 받는 람다 대수로 단순화 될 수 있다. (커링)
 
 출처 : https://hyunseob.github.io/2016/09/17/lambda-anonymous-function-closure/
+
+## 화살표 함수
+
+> function 키워드 대신 화살표를 사용해서 보다 간략한 방법으로 함수를 선언하는 방법
+
+- 함수 표현식을 사용한다.
+- Lexical this 를 지원해서 콜백 함수로 사용하기 편리하다.
+- call, apply, bind 메소드로 this 변경 불가.
+- prototype 프로퍼티 없음.
+
+### 화살표 함수 사용하면 안되는 경우
+
+> - 화살표 함수로 메소드를 정의하는 경우.
+> - 화살표 함수로 정의된 메소드를 prototype 에 할당하는 경우.
+> - 생성자 함수로 사용할 수 없다.
+
+- [화살표 함수](https://poiemaweb.com/es6-arrow-function)
+
+## 클래스
+
+> prototype 기반의 상속 보다 명료하게 사용하는 함수.
+
+- 호이스팅 안 일어남.
+
+## 생성자 함수
+
+> 같은 값과 같은 동작을 공유하는 객체를 여러 개 만드는 함수.
+
+- 생성자 함수에서 return 값이 없으면 this 를 반환한다.
+- 객체 인스턴스를 생성하고 반환한다.
+- class 로 생성된 객체를 생성하고, 초기화하기 위한 특수한 메소드다.
+
+### 생성자 함수가 호출되면
+
+> 빈 객체가 생성되고, 해당 함수의 프로토타입을 상속받는다.
+> this 로 참조되는 객체에 프로퍼티와 메소드가 추가된다.
+> 다른 객체가 명시적으로 반환되지 않을 경우, this 로 참조된 이 객체가 반환된다.
+
+- prototype 프로퍼티를 가지며, prototype 프로퍼티가 가리키는 프로토타입 객체의 constructor 를 사용한다.
+
+- [](https://webclub.tistory.com/239?category=501058)
+- [](https://webclub.tistory.com/309)
+
+## 인스턴스
+
+> 생성자 함수가 반환한 새로운 객체.
+
+## constructor
+
+> 인스턴스를 생성하는데 사용하는 함수
+> class 로 생성된 객체를 생성하고 초기화하기 위한 특수한 메소드.
+
+## this
+
+> - 객체 안의 this --> 객체
+> - 메소드 안의 this --> window
+> - 화살표 함수의 this --> 상위 스코프의 this ([렉시컬 스코프](#렉시컬-스코프))
+> - 메소드 안의 화살표 함수의 this --> window (화살표 함수로 메소드 정의하는 것은 바람직하지 않다.)
+
+### 메소드 안의 this 가 메소드를 호출한 객체를 가리키게 하는 방법
+
+> 1) var that = this
+> 2) map(func, this)
+> 3) bind(this)
+
+```js
+// Function.prototype.bind()
+if (!Function.prototype.bind) {
+    Function.prototype.bind = function() {
+        var funcObj = this;
+        var original = funcObj;
+        var extraArgs = Array.prototype.slice.call(arguments);
+        var thisObj = extraArgs.shift();
+        var func = function() {
+            var thatObj = thisObj;
+            return original.apply(thatObj, extraArgs.concat(
+                Array.prototype.slice.call(
+                    arguments, extraArgs.length
+                )
+            ));
+        };
+        func.bind = function() {
+            var args = Array.prototype.slice.call(arguments);
+            return Function.prototype.bind.apply(funcObj, args);
+        }
+        return func;
+    };
+}
+```
+
+- [](https://poiemaweb.com/es6-arrow-function)
+
+### async, await 가 promise 보다 좋은 점
+> - 간결함. `.then` 을 추가할 필요가 없으며 그 속에서 변수를 선언하고 사용할 필요가 없다.
+> - 코드의 nesting 을 피할 수 있다.
+> - `try/catch` 구문에서 에러를 처리할 수 있다.
+> - promise 는 에러가 나면 `.catch`를 호출해야 한다.
+> - 디버깅이 편리하다.
+
+```js
+// promise
+const makeRequest = () => {
+  return promise1()
+    .then(value1 => {
+      // do something
+      return Promise.all([value1, promise2(value1)])
+    })
+    .then(([value1, value2]) => {
+      // do something
+      return promise3(value1, value2)
+    })
+}
+
+// async, await
+const makeRequest = async () => {
+  const value1 = await promise1()
+  const value2 = await promise2(value1)
+  return promise3(value1, value2)
+}
+
+```
+- [](https://medium.com/@constell99/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98-async-await-%EA%B0%80-promises%EB%A5%BC-%EC%82%AC%EB%9D%BC%EC%A7%80%EA%B2%8C-%EB%A7%8C%EB%93%A4-%EC%88%98-%EC%9E%88%EB%8A%94-6%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0-c5fe0add656c)
+
+## fetch
+
+> Header, Request, Response 인터페이스를 갖고 있어서
+XHR 보다 강력하고 유연한 조작이 가능한 비동기 통신 API.
+
+```js
+const obj = {
+  body: ...,
+  headers: {},
+  method: 'POST'
+}
+fetch(URL, obj)
+.then(res => res => res.json())
+.then(json => console.log(json))
+.catch(err => console.log(err));
+```
+
+- [fetch api 사용하기](https://justmakeyourself.tistory.com/entry/fetch-api)
 
 ## JSONP
 
@@ -230,13 +513,43 @@ parseResponse({"Name": "Foo", "Id": 1234, "Rank": 7});
 > '키-값' 으로 이루어진 데이터 오브젝트를 전달하기 위해 인간이 읽을 수 있는 텍스트를 사용하는 개방형 표준 포맷이다. <br>
 > 인터넷에서 데이터를 주고받을 때 자료를 표현하는 방법.
 
-## Debouncing
+## Trottle, Debounce
 
-[Debouncing 코드](../javascript/pattern/debounce.html)
+> 이벤트 핸들러가 많은 연산을 수행하는 경우 제약을 걸어 제어할 수 있는 수준으로 이벤트를 발생시키는 것
+
+### Throttle
+
+> 마지막 함수가 호출된 후 일정 시간이 지나기 전에 다시 호출되지 않도록 하는 것.
+
+### Debounce
+
+> 연이어 호출된 함수들 중 마지막 함수만 호출하도록 하는 것.
+
+- [Debouncing 코드](../javascript/pattern/debounce.html)
+- [Throttling 코드](../javascript/pattern/throttle.html)
+
+- [Debounce, throttle 참고](https://webclub.tistory.com/607)
+
+- 무한 스크롤링 페이지 : 디바운싱은 사용자가 스크롤을 멈출 때만 이벤트를 발생시키므로 디바운싱보다는 스로틀이 적합하다.
+- 사용자가 footer 에 도달하기 전에 콘텐츠를 가져와야 하기 때문.
 
 ## 타입스크립트
 
 > javascript 에 [OOP](#객체-지향-프로그래밍) 특징을 더해준 언어.
 
+## Anuglar.js
+
+> MVC 웹 프레임워크로 SPA 형태의 웹 어플리케이션을 빠르게 개발할 수 있도록 도와준다.
+
+
+
+## XHR
+
+> XMLHttpRequest <br>
+> 비동기 요청을 생성하는 javascript API (AJAX)
 
 쓰로틀링!!!
+
+## 기타 출처
+- https://velog.io/@tmmoond8/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%ED%9B%84%EA%B8%B0-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8-%EC%A0%95%EB%A6%AC-%EC%9E%91%EC%84%B1-%EC%A4%91
+- http://insanehong.kr/post/front-end-developer-interview-html/
