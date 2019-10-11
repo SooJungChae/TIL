@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+    react-web:
+        container_name: react-web
+        build: .
+        ports:
+            - '3003:80'
