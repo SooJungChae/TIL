@@ -34,7 +34,10 @@ git push origin --tags
 ```
 지우고 싶은 파일/폴더 입력
 vi .git/info/exclude
+```
+![이렇게](https://user-images.githubusercontent.com/12723983/79211940-d8b76500-7e81-11ea-98fc-dd98c14968bd.png)
 
+```
 그래도 사라지지 않는다면 다음 입력
 git update-index --asume-unchanged [<file>...]
 ```
