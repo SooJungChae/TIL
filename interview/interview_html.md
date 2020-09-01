@@ -1,10 +1,12 @@
 # 목차
+- [브라우저의 주요 구성 요소](#브라우저의-주요-구성-요소)
 - [브라우저가 동작하는 순서](#브라우저가-동작하는-순서)
 - [웹 페이지 속도 개선 방안](#웹-페이지-속도-개선-방안)
 - [HTML](#html)
 - [스키마](#스키마)
 - [DocType](#doctype)
 - [Meta tag](#meta-tag)
+- [Attribute 와 props의 차이](#Attribute-와-props의-차이)
 - [스탠더드 모드와 관용(쿼크) 모드간의 차이](#스탠더드-모드-vs-관용쿼크-모드)
 - [XHTML 페이지의 제약사항](#xhtml-페이지의-제약사항)
 - [다국어 페이지 제공방식](#다국어-페이지-제공방식)
@@ -24,7 +26,7 @@
 - [CSS3](#css3)
 
 ## 브라우저의 주요 구성 요소
-
+[맨 위로](#목차)
 > - 사용자 인터페이스
 > - 브라우저 엔진
 > - 렌더링 엔진
@@ -105,6 +107,11 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 - 이렇게 표현.
 - `<meta name="viewport" conten"width=device-width, initial-scale=1>`
 - 주로 subject, keywords, title, author 키 를 사용한다.
+
+## Attribute 와 props의 차이
+[맨 위로](#목차)
+> attribute 는 html 문서에서 element 에 추가적인 정보를 넣을 때 사용되는 요소.
+> property 는 DOM 안에서 attribute 를 가리키는(혹은 대신하는) 표현.
 
 ## 스탠더드 모드 vs 관용(쿼크) 모드
 [맨 위로](#목차)
