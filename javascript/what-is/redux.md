@@ -1,9 +1,7 @@
 # Redux 
 
 리덕스는 `action` 이벤트를 호출하면서 상태를 관리하고 업데이트하는 패턴이며, 라이브러리다.
-프로젝트 전체에 사용되는 상태를 중앙집중형 스토어가 전달하면서 상태를 업데이트한다.
-
-즉, 공통으로 사용되는 상태를 업데이트 할 때 좋다는 얘기다.
+프로젝트 전체에 사용되는 상태를 중앙집중형 스토어가 전달하면서 상태를 업데이트한다. 즉, 공통으로 사용되는 상태를 업데이트 할 때 좋다.
 
 ## 기본개념
 ### action
@@ -88,6 +86,9 @@ export default connect(state => ({ todos: state.todos }))(TodoListContainer)
 
 ### reducer
 현재 `state` 와 `action` 오브젝트를 받아서 새로운 상태를 리턴하는 함수. `(state, action) => newState`
+- 한 reducer 에 한 state 를 갖고 있다.
+- 프로젝트가 커질수록 독립적인 reducer 들이 모인다.
+- reducer 들은 같은 action type 이라도 독립적으로 응답할 수 있다. (extraReducers 참고)
 
 ```js
 const initialState = { value: 0 }
@@ -137,6 +138,143 @@ console.log(currentValue)
 // 2
 ```
 
+----
+
+## API
+### configureStore
+### createReducer
+### createAction
+### createSlice
+"slice name", initial state, reducer 함수를 갖고 있는 함수다. 
+- 매번 action 객체, type, action creator 를 만드는 것은 번거로운 일이다. 
+- createSlice 는 자동으로 action creator 와 action types 를 생성해준다.
+- createSlice 는 createAction 과 createReducer 메서드를 갖고있다.
+    > reducer 함수는 createSlice 의 createReducer 를 사용해 만들어진다.
+```js
+import { createSlice } from '@reduxjs/toolkit'
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: 0,
+  reducers: {
+    increment: (state) => state + 1,
+    decrement: state => {
+      state.value -= 1
+    },
+    incrementByAmount: (state, action) => {
+      state.value += action.payload
+    }
+  },
+})
+// Will handle the action type `'counter/increment'`
+export const { increment, decrement } = counterSlice.actions
+
+export default counterSlice.reducer
+```
+
+```js
+console.log(counterSlice.actions.increment())
+// {type: "counter/increment"}
+```
+
+```js
+const newState = counterSlice.reducer(
+  { value: 10 },
+  counterSlice.actions.increment()
+)
+console.log(newState)
+// {value: 11}
+```
+
+- createReducer, createSlice 에서만 mutating 할 수 있다.
+```js
+function handwrittenReducer(state, action) {
+  return {
+    ...state,
+    first: {
+      ...state.first,
+      second: {
+        ...state.first.second,
+        [action.someId]: {
+          ...state.first.second[action.someId],
+          fourth: action.someValue
+        }
+      }
+    }
+  }
+}
+```
+
+```js
+function reducerWithImmer(state, action) {
+  state.first.second[action.someId].fourth = action.someValue
+}
+```
+**extraReducers**
+"외부" action 을 의미한다. `slice.actions` 엔 포함되지 않는다.
+많은 reducer 들이 같은 action type 에라도 독립적으로 응답할 수 있게 해준다.
+createSlice 가 다른 action types 에 응답하게 해주고, types 을 생성하게 해준다. 
+`reducers` 와 `extraReducers` 가 같은 action type 을 받는다면 `reducers` 의 액션이 실행된다.
+
+```js
+import { createAction, createSlice } from '@reduxjs/toolkit'
+const incrementBy = createAction('incrementBy')
+const decrement = createAction('decrement')
+
+function isRejectedAction(action) {
+  return action.type.endsWith('rejected')
+}
+
+createSlice({
+  name: 'counter',
+  initialState: 0,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(incrementBy, (state, action) => {
+        // action is inferred correctly here if using TS
+      })
+      // You can chain calls, or have separate `builder.addCase()` lines each time
+      .addCase(decrement, (state, action) => {})
+      // You can match a range of action types
+      .addMatcher(
+        isRejectedAction,
+        // `action` will be inferred as a RejectedAction due to isRejectedAction being defined as a type guard
+        (state, action) => {}
+      )
+      // and provide a default case if no other handlers matched
+      .addDefaultCase((state, action) => {})
+  },
+})
+```
+### createSelector
+
+-----
+## Hooks
+### useSelector
+useSelector 를 사용하면 아무곳에서나 Redux store 에서 state 를 가져올 수 있다.
+```js
+// feature/counter/counterSlice.js
+...
+export const selectCount = state => state.counter.value
+
+// Redux store 를 import 한다면
+import store from '../app/store'
+import { selectCount } from './counterSlice';
+const count = selectCount(store.getState())
+
+// useSelector 를 사용한다면
+// feature/counter/Counter.js
+import { useSelector } from 'react-redux'
+import { selectCount } from './counterSlice';
+const count = useSelector(selectCount)
+```
+selector function 을 그때그때 만들어서 쓸수도 있다.
+```js
+const countPlusTwo = useSelector((state) => state.counter.value + 2);
+``` 
+-----
+
 ## Data Flow
 
 ### Initial setup
@@ -148,6 +286,9 @@ subscribe 도 해두기 때문에 나중에 상태 변경되어도 감지할 수
 ### Updates 
 이벤트가 발생하면 > 상태가 변하고 > UI 가 변한다.
 
+------
  
 ## 참고
-[redux 공식문서](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
+- [redux 공식문서](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
+- https://redux.js.org/tutorials/essentials/part-2-app-structure#creating-slice-reducers-and-actions
+
