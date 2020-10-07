@@ -4,7 +4,7 @@ mutable 은 변경이 되는 것, immutable 변경할 수 없는 것을 의미�
 
 immutable 하게 만들기 위해선 **object/arrays 를 복사하고 복사된 것을 수정**해야 한다.
 - spread 연산자를 사용한다.
-```
+```js
 // https://redux.js.org/tutorials/essentials/part-1-overview-concepts
 
 const obj = {

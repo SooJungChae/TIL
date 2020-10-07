@@ -8,7 +8,7 @@
 ## 기본개념
 ### action
 `action` 은 type 필드를 가진 object.
-```
+```js
 // action 의 이름은 "카테고리/일어나는 구체적인 행동" 형식으로 작성한다.
 
 const addTodoAction = {
@@ -17,7 +17,7 @@ const addTodoAction = {
 ``` 
 
 어떤 일이 일어날지에 대한 다른 정보를 추가할 수도 있다.  
-```
+```js
 const addTodoAction = {
   type: 'todos/todoAdded',
   payload: 'Buy milk'
@@ -27,7 +27,7 @@ const addTodoAction = {
 ### action creator
 `action` 오브젝트를 만들어서 리턴하는 함수. 이게 있기 때문에 매번 `action` 오브젝트를 만들 필요가 없다. 
 
-```
+```js
 const addTodo = text => {
   return {
     type: 'todos/todoAdded',
@@ -39,7 +39,7 @@ const addTodo = text => {
 ### reducer
 현재 `state` 와 `action` 오브젝트를 받아서 새로운 상태를 리턴하는 함수. `(state, action) => newState`
 
-```
+```js
 const initialState = { value: 0 }
 
 function counterReducer(state = initialState, action) {
@@ -57,7 +57,7 @@ function counterReducer(state = initialState, action) {
 ### store
 현재의 redux 에서 존재하는 state 오브젝트를 `store` 라고 한다. 
 `store` 는 리듀서로 인해 생겨난 것이고, getState 메소드를 가지고 있다. 이 메소드는 현재 state 를 리턴한다.
-```
+```js
 import { configureStore } from '@reduxjs/toolkit'
 
 const store = configureStore({ reducer: counterReducer })
@@ -68,7 +68,7 @@ console.log(store.getState())
 
 ### dispatch
 `store`는 `dispatch` 메서드도 갖고 있다. state 를 업데이트 하는 유일한 방법이 `dispatch`를 사용하는 것이다.
-```
+```js
 store.dispatch({ type: 'counter/increment' })
 
 console.log(store.getState())
@@ -79,7 +79,7 @@ console.log(store.getState())
 
 ### selectors
 store state 값에서 특정 정보만 빼오는 함수다. 같은 데이터를 중복해서 읽어오는 로직을 피할 수 있어서 프로젝트가 커질수록 유용하다.
-```
+```js
 const selectCounterValue = state => state.value
 
 const currentValue = selectCounterValue(store.getState())
