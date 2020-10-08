@@ -7,6 +7,12 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 ------
 
+## Book
+- [HTTP 완벽 가이드 책 읽기](book/HTTP/README.md)
+- [You don't know JS 타입과 문법, 스코프와 클로저](book/you-dont-know-js-type-scope-closure.md)
+
+-------
+
 ## Javascript
 
 - [javascript basic link](https://poiemaweb.com/)
@@ -97,8 +103,3 @@ Any information or tips about programming will be uploaded. I hope this reposito
 
 - [IIS7 에 Node.js 배포하기](https://github.com/SooJungChae/TIL/blob/master/node_iis.md)
 
--------
-
-## HTTP
-
-- [HTTP 완벽 가이드 책 읽기](./HTTP/README.md)
