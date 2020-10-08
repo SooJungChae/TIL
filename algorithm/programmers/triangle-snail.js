@@ -25,7 +25,11 @@ function solution (n) {
   const rLen = roomLength(n);
   const answer = new Array(rLen);
   
-  let c = 1;
+  let c = 0;
+  let num = 1;
+  let idx = 0;
+  let lastIdx = idx;
+  
   let startFloorIndex = 0;
   let endFloorIndex = n - 1;
   
@@ -37,46 +41,55 @@ function solution (n) {
   // searchR();
   // searchL();
   
-  while (c <= rLen) {
+  while (num <= rLen) {
+    searchD();
     searchR();
-    searchL();
+    searchU();
   }
   
-  console.log(answer);
-  
-  function searchR () {
-    for(let i = startFloorIndex; i <= endFloorIndex; i++) {
-      answer[floorIndexes[i] + writeStartIndex] = c++;
-  
-      // draw floor
-      if (i === endFloorIndex) {
-        for (let inc = 1; inc < n; inc++) {
-          answer[floorIndexes[i] + inc] = c++;
-          console.log(answer);
-        }
-        
-        endFloorIndex--;
-        // writeEndIndex--;
-      }
-    }
-    
-    writeStartIndex++;
-    startFloorIndex++;
-  }
-  
-  function searchL () {
-    if (c > rLen) {
+  function searchD() {
+    if (num > rLen) {
       return;
     }
     
-    for(let i = endFloorIndex; i >= startFloorIndex; i--) {
-      writeEndIndex--;
-      
-      answer[floorIndexes[i] + writeEndIndex] = c++;
-      console.log(answer);
+    c++;
+    
+    while (idx < rLen && !answer[idx]) {
+      answer[idx] = num++;
+      lastIdx = idx;
+      idx += c++;
+    }
+    
+    idx = lastIdx + 1;
+  }
+  
+  function searchR () {
+    if (num > rLen) {
+      return;
     }
   
-    writeEndIndex = endFloorIndex;
+    while (idx < rLen && !answer[idx]) {
+      answer[idx] = num++;
+      lastIdx = idx;
+      idx++;
+    }
+  
+    // idx = lastIdx;
+  }
+  
+  function searchU () {
+    if (num > rLen) {
+      return;
+    }
+  
+    idx -= c--;
+    
+    while (idx > 0 && !answer[idx]) {
+      answer[idx] = num++;
+      lastIdx = idx;
+      c--;
+      idx -= c;
+    }
   }
 }
 
