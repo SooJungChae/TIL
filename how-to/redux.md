@@ -28,6 +28,10 @@ export const slice = createSlice({
   },
 });
 
+export const { increment, decrement, incrementByAmount } = slice.actions;
+
+export const selectCount = state => state.counter.value;
+
 export default slice.reducer;
 ```
 
@@ -44,42 +48,78 @@ export default configureStore({
 })
 ```
 
+createSlice 사용법 example
 ```js
-// features/counter/counterSlice.js
+// https://redux-toolkit.js.org/api/createSlice
+import { createSlice, createAction } from '@reduxjs/toolkit'
+import { createStore, combineReducers } from 'redux'
 
-import { createSlice } from '@reduxjs/toolkit';
+const incrementBy = createAction('incrementBy')
+const decrementBy = createAction('decrementBy')
 
-export const slice = createSlice({
+const counter = createSlice({
   name: 'counter',
-  initialState: {
-    value: 0,
-  },
+  initialState: 0,
   reducers: {
-    increment: state => {
-      state.value += 1;
-    },
-    decrement: state => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    increment: (state) => state + 1,
+    decrement: (state) => state - 1,
+    multiply: {
+      reducer: (state, action) => state * action.payload,
+      prepare: (value) => ({ payload: value || 2 }), // fallback if the payload is a falsy value
     },
   },
-});
+  // "builder callback API", recommended for TypeScript users
+  extraReducers: (builder) => {
+    builder.addCase(incrementBy, (state, action) => {
+      return state + action.payload
+    })
+    builder.addCase(decrementBy, (state, action) => {
+      return state - action.payload
+    })
+  },
+})
 
-export const { increment, decrement, incrementByAmount } = slice.actions;
+const user = createSlice({
+  name: 'user',
+  initialState: { name: '', age: 20 },
+  reducers: {
+    setUserName: (state, action) => {
+      state.name = action.payload // mutate the state all you want with immer
+    },
+  },
+  // "map object API"
+  extraReducers: {
+    [counter.actions.increment]: (
+      state,
+      action /* action will be inferred as "any", as the map notation does not contain type information */
+    ) => {
+      state.age += 1
+    },
+  },
+})
 
-export const incrementAsync = amount => dispatch => {
-  setTimeout(() => {
-    dispatch(incrementByAmount(amount));
-  }, 1000);
-};
+const reducer = combineReducers({
+  counter: counter.reducer,
+  user: user.reducer,
+})
 
-export const selectCount = state => state.counter.value;
+const store = createStore(reducer)
 
-export default slice.reducer;
+store.dispatch(counter.actions.increment())
+// -> { counter: 1, user: {name : '', age: 21} }
+store.dispatch(counter.actions.increment())
+// -> { counter: 2, user: {name: '', age: 22} }
+store.dispatch(counter.actions.multiply(3))
+// -> { counter: 6, user: {name: '', age: 22} }
+store.dispatch(counter.actions.multiply())
+// -> { counter: 12, user: {name: '', age: 22} }
+console.log(`${counter.actions.decrement}`)
+// -> "counter/decrement"
+store.dispatch(user.actions.setUserName('eric'))
+// -> { counter: 6, user: { name: 'eric', age: 22} }
 ```
 
  
 ## 참고
-[redux 공식문서](https://redux.js.org/tutorials/essentials/part-2-app-structure)
+- [redux 공식문서](https://redux.js.org/tutorials/essentials/part-2-app-structure)
+- [redux 공식문서 - Performance 높이기 위해선?](https://redux.js.org/tutorials/essentials/part-6-performance-normalization)

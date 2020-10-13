@@ -49,7 +49,7 @@ redux 에서는 두 번째 방식처럼 액션들을 바인딩할 수 있게 도
 
 action creators 를 전달해주면 하위 컴포넌트에서는 Redux 를 알 필요가 없다. 액션을 바인딩한 후 전달해주면 된다. 다음을 참고하자.
 ```js
-import { Component } from 'react'
+import { Component } from 'javascript/what-is/react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -142,6 +142,9 @@ console.log(currentValue)
 
 ## API
 ### configureStore
+`createStore` 처럼 store 를 생성해주는 축약방식이다.
+slice reducers 들이 파라미터로 들어온다면 `combineReducers` 를 하는 루트 리듀서를 생성한다.
+ 
 ### createReducer
 ### createAction
 ### createSlice
@@ -163,6 +166,22 @@ const counterSlice = createSlice({
     },
     incrementByAmount: (state, action) => {
       state.value += action.payload
+    },
+    // prepare 를 사용해 받은 payload 를 재구조화 시킬 수 있다.
+    // 그럼 payload object 가 어떻게 생겼는지를 고민할 필요가 없다. action creator 가 자동으로 넣어주기 때문.
+    postAdded: {
+      reducer(state, action) {
+        state.push(action.payload)
+      },
+      prepare(title, content) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            content
+          }
+        }
+      }
     }
   },
 })
@@ -249,10 +268,70 @@ createSlice({
 ```
 ### createSelector
 
+selector 는 효율적이다. argument 가 하나라도 변경되었을 때에만 계산한다.
+
+```js
+import { createSelector } from 'reselect'
+
+const shopItemsSelector = state => state.shop.items
+const taxPercentSelector = state => state.shop.taxPercent
+
+const subtotalSelector = createSelector(
+  shopItemsSelector,
+  items => items.reduce((acc, item) => acc + item.value, 0)
+)
+
+const taxSelector = createSelector(
+  subtotalSelector,
+  taxPercentSelector,
+  (subtotal, taxPercent) => subtotal * (taxPercent / 100)
+)
+
+export const totalSelector = createSelector(
+  subtotalSelector,
+  taxSelector,
+  (subtotal, tax) => ({ total: subtotal + tax })
+)
+
+let exampleState = {
+  shop: {
+    taxPercent: 8,
+    items: [
+      { name: 'apple', value: 1.20 },
+      { name: 'orange', value: 0.95 },
+    ]
+  }
+}
+
+console.log(subtotalSelector(exampleState)) // 2.15
+console.log(taxSelector(exampleState))      // 0.172
+console.log(totalSelector(exampleState))    // { total: 2.322 }
+``` 
+
+### Provider
+앱 전체에서 store 를 연결하려면 맨 상단에 Provider 로 감싸줘야 한다.
+```js
+import { ReactReduxContext } from 'react-redux'
+
+// in your connected component
+render() {
+  return (
+    <ReactReduxContext.Consumer>
+      {({ store }) => {
+        // do something with the store here
+      }}
+    </ReactReduxContext.Consumer>
+  )
+}
+``` 
+
+React의 Component자체는 Redux의 흐름에 타는 것이 불가능 합니다. 흐름에 타기 위해서는 ReactRedux에 의해 제공 되는 connect라고 불리는 함수를 이용하여 아래와 같이 씁니다.
+
 -----
 ## Hooks
 ### useSelector
 useSelector 를 사용하면 아무곳에서나 Redux store 에서 state 를 가져올 수 있다.
+**useSelector 값이 변할 때마다 component 는 re-render 된다.** 그래서 작은 데이터를 선택하도록 하자.
 ```js
 // feature/counter/counterSlice.js
 ...
@@ -291,4 +370,6 @@ subscribe 도 해두기 때문에 나중에 상태 변경되어도 감지할 수
 ## 참고
 - [redux 공식문서](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
 - https://redux.js.org/tutorials/essentials/part-2-app-structure#creating-slice-reducers-and-actions
+- [redux 구조 프로젝트 예시](https://redux.js.org/tutorials/essentials/part-2-app-structure)
+- [아마 이게 제일 이해하기 쉬울껄요 - react redux 플로우의 이해](https://medium.com/@ca3rot/%EC%95%84%EB%A7%88-%EC%9D%B4%EA%B2%8C-%EC%A0%9C%EC%9D%BC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-%EC%89%AC%EC%9A%B8%EA%B1%B8%EC%9A%94-react-redux-%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%9D%98-%EC%9D%B4%ED%95%B4-1585e911a0a6)
 
