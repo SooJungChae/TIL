@@ -307,6 +307,51 @@ console.log(subtotalSelector(exampleState)) // 2.15
 console.log(taxSelector(exampleState))      // 0.172
 console.log(totalSelector(exampleState))    // { total: 2.322 }
 ``` 
+### CreateEntityAdapter
+```js
+const usersAdapter = createEntityAdapter()
+```
+slice 에 있는 데이터를 `ids:[], entities: {}` 구조로 다룰 수 있게 해준다. 
+이때 선언한 데이터 구조를 통해 reducer 와 selector 를 만들어준다.
+다음과 같이 일반적인 경우를 다룰 수 있다. (데이터 핸들링을 ID 로 데이터를 다루기 때문이다.)   
+
+- 전체 아이템 업데이트
+- 아이템들 중 특정한 것만 업데이트
+- 전부 삭제
+
+> **[내장 함수들]**
+>
+> **sortComapre**
+> `Array.sort()`와 같은 정렬이 가능하다.
+>
+> **getSelectors**
+> 특정 slice를 리턴하는 selector 를 사용할 수 있고, `selectAll`, `selectByID` 와 같은 selector 를 생성한다.
+```js
+ // features/posts/postsSlice.js
+export const selectAllPosts = state => state.posts.posts
+
+export const selectPostById = (state, postId) =>
+  state.posts.posts.find(post => post.id === postId)
+
+// getSelectors 를 사용하면 이렇게 바뀐다. 
+// getSelectors 에서 리턴한 값을 selectAllPosts, selectPostsById 로 rename 됐다. 
+export const {
+  selectAll: selectAllPosts,
+  selectById: selectPostById,
+  selectIds: selectPostIds
+    // Pass in a selector that returns the posts slice of state
+} = postsAdapter.getSelectors(state => state.posts)
+```
+>
+>**getInitialState**
+>`{idx:[], entities:{}}` 오브젝트를 생성한다. 
+```js
+// features/posts/postsSlice.js
+const initialState = postsAdapter.getInitialState({
+  status: 'idle',
+  error: null
+})
+```
 
 ### Provider
 앱 전체에서 store 를 연결하려면 맨 상단에 Provider 로 감싸줘야 한다.
