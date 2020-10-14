@@ -268,7 +268,7 @@ createSlice({
 ```
 ### createSelector
 
-selector 는 효율적이다. argument 가 하나라도 변경되었을 때에만 계산한다.
+memorized-selector 를 반환한다. argument 가 하나라도 변경되었을 때에만 계산한다.
 
 ```js
 import { createSelector } from 'reselect'
