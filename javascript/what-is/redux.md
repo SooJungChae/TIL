@@ -353,6 +353,35 @@ const initialState = postsAdapter.getInitialState({
 })
 ```
 
+### createAsyncThunk
+API 호출 상태를 따라다니며 자동으로 업데이트 시켜준다.
+`promise`를 반환하는 `payload creator` callback을 받는다. 그리고 이 callback 은 `pending/fullfield/reject` 액션 타입을 자동으로 생성한다.
+slice 안의`extraReducers` 부분에 선언하면 된다. 
+```js
+export const fetchNotifications = createAsyncThunk(
+  'notifications/fetchNotifications',
+  async (_, { getState }) => {
+    const allNotifications = selectAllNotifications(getState())
+    const [latestNotification] = allNotifications
+    const latestTimestamp = latestNotification ? latestNotification.date : ''
+    const response = await client.get(
+      `/fakeApi/notifications?since=${latestTimestamp}`
+    )
+    return response.notifications
+  }
+);
+// ...
+extraReducers: {
+    [fetchNotifications.fulfilled]: (state, action) => {
+      Object.values(state.entities).forEach((notification) => {
+        // Any notifications we've read are no longer new
+        notification.isNew = !notification.read
+      })
+      notificationsAdapter.upsertMany(state, action.payload)
+    },
+  },
+```
+
 ### Provider
 앱 전체에서 store 를 연결하려면 맨 상단에 Provider 로 감싸줘야 한다.
 ```js
