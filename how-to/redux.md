@@ -119,6 +119,18 @@ store.dispatch(user.actions.setUserName('eric'))
 // -> { counter: 6, user: { name: 'eric', age: 22} }
 ```
 
+## Async Logic and Data Fetching
+API 서버가 개발되지 않았을 때 클라이언트에서 테스트용으로 데이터를 전송하는 걸 만들어보자.
+
+**Server**
+- `src/api/server.js` 파일에 `fakeApi`를 만든다.
+- `fakeApi` 는 `/fakeApi/posts`, `fakeApi/users`, `fakeApi/notifications` 요청에 대한 `GET, POST, PUT, DELETE` 메서드를 지원한다.
+- 페이지 호출할 때마다 랜덤 시간이 걸리게 된다. 지우고 싶으면 브라우저의 localStorage 에서 `randomTimestampSeed` 값을 지우던가 `src/api/server.js` 에서 `useSeededRNG` 값을 `false` 로 변경한다.
+
+**Client**
+- `src/api/client.js` 파일에 요청 호출 코드를 작성한다.
+- `client.get()`, `client.post()` 메서드를 갖고 있는 `client object` 를 만들 것이다.
+
  
 ## 참고
 - [redux 공식문서](https://redux.js.org/tutorials/essentials/part-2-app-structure)
