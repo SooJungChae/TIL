@@ -354,6 +354,7 @@ const initialState = postsAdapter.getInitialState({
 ```
 
 ### createAsyncThunk
+``
 API 호출 상태를 따라다니며 자동으로 업데이트 시켜준다.
 `promise`를 반환하는 `payload creator` callback을 받는다. 그리고 이 callback 은 `pending/fullfield/reject` 액션 타입을 자동으로 생성한다.
 slice 안의`extraReducers` 부분에 선언하면 된다. 
@@ -401,6 +402,30 @@ render() {
 
 React의 Component자체는 Redux의 흐름에 타는 것이 불가능 합니다. 흐름에 타기 위해서는 ReactRedux에 의해 제공 되는 connect라고 불리는 함수를 이용하여 아래와 같이 씁니다.
 
+----
+
+## Thunks
+**Redux middleware**
+- 비동기 로직을 store 와 상호작용할 수 있게 하기 위해 사용한다.
+- action 이 dispatch 될 때 추가적인 로직을 수행할 수 있다. (로깅)
+- dispatch 된 action 을 멈추거나, 수정, 지연, 대체, 멈출 수 있다.
+- `dispatch`, `getState` 에 접근할 수 있는 코드를 작성할 수 있다.
+- **redux-thunk** 가 가장 일반적이다. (공식문서에서 비동기 로직을 쓸 때 thunks 를 사용하는걸 추천한다. ex) `configureStore`)
+
+thunk 미들웨어가 Redux store 에 추가되면 `store.dispatch` 에 **(dispatch, getState) 구조** 로 된 thunk functions 을 추가할 수 있다.
+```js
+const store = configureStore({ reducer: counterReducer })
+
+const exampleThunkFunction = (dispatch, getState) => {
+  const stateBefore = getState()
+  console.log(`Counter before: ${stateBefore.counter}`)
+  dispatch(increment())
+  const stateAfter = getState()
+  console.log(`Counter after: ${stateAfter.counter}`)
+}
+
+store.dispatch(exampleThunkFunction)
+```
 -----
 ## Hooks
 ### useSelector
