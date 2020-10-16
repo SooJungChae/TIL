@@ -407,6 +407,7 @@ React의 Component자체는 Redux의 흐름에 타는 것이 불가능 합니다
 ## Thunks
 **Redux middleware**
 - 비동기 로직을 store 와 상호작용할 수 있게 하기 위해 사용한다.
+- `setTimeout`, `Promise`, `async/await`, server API 호출 요청을 작성하기에 좋다. Redux Toolkit 이 생성과 액션 호출을 수행하는 `createAsyncThunk` API 를 지원한다.
 - action 이 dispatch 될 때 추가적인 로직을 수행할 수 있다. (로깅)
 - dispatch 된 action 을 멈추거나, 수정, 지연, 대체, 멈출 수 있다.
 - `dispatch`, `getState` 에 접근할 수 있는 코드를 작성할 수 있다.
@@ -426,6 +427,9 @@ const exampleThunkFunction = (dispatch, getState) => {
 
 store.dispatch(exampleThunkFunction)
 ```
+`createSlice`에서는 `thunks` 정의하는 걸 지원하지 않으니까 따로 추가해야 한다.
+ 
+
 -----
 ## Hooks
 ### useSelector
