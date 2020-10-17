@@ -238,7 +238,8 @@ export const PostsList = () => {
 }
 ```
 
-### Notification createAsyncThunk example
+### Notification example
+- [features/notifications/nofiticationsSlice.js](https://github.com/reduxjs/redux-essentials-example-app/blob/tutorial-steps/src/features/notifications/notificationsSlice.js)
 ```js
 export const fetchNotifications = createAsyncThunk(
   'notifications/fetchNotifications',
@@ -263,7 +264,7 @@ extraReducers: {
   },
 ```
 
-## Tip
+## Tips
 사용자 정보 받아오는 등 페이지 로드시점에서 필요한 작업이 있다면 `index.js` 에 작성하면 된다.
 ```js
 // omit imports
@@ -284,7 +285,63 @@ ReactDOM.render(
 )
 ```
 
- 
+### 렌더링 중복 막기 - React.memo()
+1. React 에서는 부모 component 가 렌더링 되면 자식 component 들도 전부 렌더링한다. `React.memo`로 컴포넌트의 props 가 변경될 때만 렌더링 시킨다.
+```js
+let PostExcerpt = ({ post }) => {
+  // omit logic
+}
+
+PostExcerpt = React.memo(PostExcerpt)
+```
+2. `post` 가 아니라 `postId` 처럼 key 값을 props 로 받는다. 하지만 정렬이 필요하다면..? 이 방법은 조금 위험하다.
+3. `useSelector(selectPostIds, shallowEqual)` 사용한다. [(TODO: 해석)](https://react-redux.js.org/api/hooks#equality-comparisons-and-updates)
+4. `createEntityAdapter` 함수를 사용한다. 모든 post 들을 ID 로 나눠놓고, 추가, 삭제 될때 특정한 것만 수정한다. `<PostsList>`, `<PostExcerpt>` 에 똑같이 적용해서 ID 배열이 바뀔 때만 렌더링 되게 만든다. 
+
+### 렌더링 중복 막기 - memoization
+```js
+// <UserPosts />
+export const UserPage = ({ match }) => {
+  const postsForUser = useSelector(state => {
+      const allPosts = selectAllPosts(state)
+      return allPosts.filter(post => post.user === userId)
+    })
+  // ...
+}
+``` 
+useSelector 안에 filter 메서드를 사용해서 해당사용자가 작성한 글이 바꼈을 때만 리턴하고 싶었지만, posts 데이터가 바뀔 때만이 아니라 모든배열을 select 하고 있기 때문에 
+**항상** 새로운 배열 참조가 리턴되기 때문에 컴포넌트가 re-render 된다.
+
+`state.posts` 나 `userId` 가 변경됐을 때만 새로 filter 하면 된다.
+
+```js
+// postSlice.js
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
+
+// omit slice logic
+
+export const selectAllPosts = state => state.posts.posts
+
+export const selectPostById = (state, postId) =>
+  state.posts.posts.find(post => post.id === postId)
+
+export const selectPostsByUser = createSelector(
+  [selectAllPosts, (state, userId) => userId],
+  (posts, userId) => posts.filter(post => post.user === userId)
+)
+```
+
+```js
+// <UserPosts />
+export const UserPage = ({ match }) => {
+  const postsForUser = useSelector(state => selectPostsByUser(state, userId))
+  // ...
+}
+```
+
+
+-----
+
 ## 참고
 - [redux 공식문서](https://redux.js.org/tutorials/essentials/part-2-app-structure)
 - [redux 공식문서 - Performance 높이기 위해선?](https://redux.js.org/tutorials/essentials/part-6-performance-normalization)

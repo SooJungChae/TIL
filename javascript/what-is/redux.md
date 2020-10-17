@@ -328,10 +328,29 @@ createSlice({
 ```
 ### createSelector
 
-memorized-selector 를 반환한다. argument 가 하나라도 변경되었을 때에만 계산한다.
+**memorized-selector** 를 반환한다. argument 가 하나라도 변경되었을 때에만 계산한다.
+- 1개 이상의 input selector 을 받고, 리턴값을 다시 output selector 에게 argument 로 넘긴다. 
 
 ```js
-import { createSelector } from 'reselect'
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit'
+
+export const selectAllPosts = state => state.posts.posts
+
+export const selectPostById = (state, postId) =>
+  state.posts.posts.find(post => post.id === postId)
+
+export const selectPostsByUser = createSelector(
+  [selectAllPosts, (state, userId) => userId],
+  (posts, userId) => posts.filter(post => post.user === userId)
+)
+``` 
+> input selector : selectAllPosts & (state, userId) => userId (작은 selector) <br/>
+> output selector : (posts, userId) => posts.filter(post => post.user === userId)
+
+
+```js
+// import { createSelector } from 'reselect'
+import { createSelector } from '@reduxjs/toolkit'
 
 const shopItemsSelector = state => state.shop.items
 const taxPercentSelector = state => state.shop.taxPercent
@@ -489,6 +508,49 @@ const postsSlice = createSlice({
   }
 ```
 
+## Performance and Normalizing Data
+[redux 공식문서 part6 - performance normalization](https://redux.js.org/tutorials/essentials/part-6-performance-normalization)
+
+어떤 어플리케이션에서든 알림이 오면 알림이 왔다는 표시가 경우를 쉽게 볼수있다. 이건 서버랑 게속 연결을 해두고, 서버에서 알림을 보냈을 때 클라이언트 화면에서 업데이트를 하는 방법이다.
+규모가 작은 어플리케이션은 상관없지만, 큰 경우는 알림을 모두 변경해줘야 하기 때문에 React 에서는
+
+```js
+// features/notifications/notificationsSlice.js
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+
+import { client } from '../../api/client'
+
+export const fetchNotifications = createAsyncThunk(
+  'notifications/fetchNotifications',
+  async (_, { getState }) => {
+    const allNotifications = selectAllNotifications(getState())
+    const [latestNotification] = allNotifications
+    const latestTimestamp = latestNotification ? latestNotification.date : ''
+    const response = await client.get(
+      `/fakeApi/notifications?since=${latestTimestamp}`
+    )
+    return response.notifications
+  }
+)
+
+const notificationsSlice = createSlice({
+  name: 'notifications',
+  initialState: [],
+  reducers: {},
+  extraReducers: {
+    [fetchNotifications.fulfilled]: (state, action) => {
+      state.push(...action.payload)
+      // Sort with newest first
+      state.sort((a, b) => b.date.localeCompare(a.date))
+    }
+  }
+})
+
+export default notificationsSlice.reducer
+
+export const selectAllNotifications = state => state.notifications
+```
+
 ### Provider
 앱 전체에서 store 를 연결하려면 맨 상단에 Provider 로 감싸줘야 한다.
 ```js
@@ -561,6 +623,14 @@ selector function 을 그때그때 만들어서 쓸수도 있다.
 ```js
 const countPlusTwo = useSelector((state) => state.counter.value + 2);
 ``` 
+-----
+
+## Libraries
+
+### Reselect
+
+memorized selector 함수를 생성하는 라이브러리다. Redux Toolkit 에서 `createSelector`가 그 역할을 하고 있기 때문에 따로 설치안해도 사용할 수 있다.
+
 -----
 
 ## Data Flow
