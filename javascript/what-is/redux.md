@@ -188,6 +188,10 @@ const counterSlice = createSlice({
 // Will handle the action type `'counter/increment'`
 export const { increment, decrement } = counterSlice.actions
 
+// 모든 state 를 select 함수로 만들 필요는 없다.
+// 여러 컴퍼넌트에서 중복으로 사용되는 경우가 있을 때 한번에 사용할 때 유용하다. 
+// 나중에 추가해도 되는 옵션이다. 
+
 export default counterSlice.reducer
 ```
 
@@ -230,7 +234,63 @@ function reducerWithImmer(state, action) {
 }
 ```
 **extraReducers**
-"외부" action 을 의미한다. `slice.actions` 엔 포함되지 않는다.
+reducer 가 slice 에 정의되어 있지 않은 다른 action 에 응답해야 하는 경우가 종종 있다.
+그때 사용하는 필드가 extraReducers 필드이다.
+
+즉, "외부" action 을 의미한다. `slice.actions` 엔 포함되지 않는다.
+
+```js
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    // slice-specific reducers here
+  },
+  extraReducers: {
+    'counter/increment': (state, action) => {
+      // normal reducer logic to update the posts slice
+    }
+  }
+})
+```
+
+Redux toolkit 에서 action type 을 자동으로 생성해주기 때문에 
+다음처럼 오브젝트의 키 형태로도 사용 가능하다.
+```js
+import { increment } from '../features/counter/counterSlice'
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    // slice-specific reducers here
+  },
+  extraReducers: {
+    [increment]: (state, action) => {
+      // normal reducer logic to update the posts slice
+    }
+  }
+})
+```
+
+개별적인 상황에 대해서 `builder` 케이스를 작성할 수도 있다는데, 정확히 어떤 경우인지는 모르겠다. (ps. TypeScript 에서는 extraReducers 대신 무조건 이걸 써야한다.)
+
+```js
+import { increment } from '../features/counter/counterSlice'
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    // slice-specific reducers here
+  },
+  extraReducers: builder => {
+    builder.addCase('counter/decrement', (state, action) => {})
+    builder.addCase(increment, (state, action) => {})
+  }
+})
+```
+
 많은 reducer 들이 같은 action type 에라도 독립적으로 응답할 수 있게 해준다.
 createSlice 가 다른 action types 에 응답하게 해주고, types 을 생성하게 해준다. 
 `reducers` 와 `extraReducers` 가 같은 action type 을 받는다면 `reducers` 의 액션이 실행된다.
@@ -353,34 +413,80 @@ const initialState = postsAdapter.getInitialState({
 })
 ```
 
+## Async Logic and Data Fetching
+[redux 공식문서 part5 - async logic](https://redux.js.org/tutorials/essentials/part-5-async-logic)
+
 ### createAsyncThunk
-``
-API 호출 상태를 따라다니며 자동으로 업데이트 시켜준다.
-`promise`를 반환하는 `payload creator` callback을 받는다. 그리고 이 callback 은 `pending/fullfield/reject` 액션 타입을 자동으로 생성한다.
-slice 안의`extraReducers` 부분에 선언하면 된다. 
+
+API 호출 상태를 자동으로 업데이트 시켜준다.
 ```js
-export const fetchNotifications = createAsyncThunk(
-  'notifications/fetchNotifications',
-  async (_, { getState }) => {
-    const allNotifications = selectAllNotifications(getState())
-    const [latestNotification] = allNotifications
-    const latestTimestamp = latestNotification ? latestNotification.date : ''
-    const response = await client.get(
-      `/fakeApi/notifications?since=${latestTimestamp}`
-    )
-    return response.notifications
-  }
-);
-// ...
-extraReducers: {
-    [fetchNotifications.fulfilled]: (state, action) => {
-      Object.values(state.entities).forEach((notification) => {
-        // Any notifications we've read are no longer new
-        notification.isNew = !notification.read
-      })
-      notificationsAdapter.upsertMany(state, action.payload)
-    },
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await client.get('/fakeApi/posts')
+  return response.posts
+})
+```
+- 첫번째 arg : action type
+- 두번째 arg : Promise 를 반환하는 콜백
+
+`createAsyncThunk` 를 통해서 `pending/fullfilled/rejected` action type 과 action creator 가 자동으로 생성되어 `fetchPosts` 함수에 추가된다.
+`posts/fetchPosts/fultilled` action type 과 action creators 가 
+
+그래서 thunk 를 호출하면 현재 상황에 맞게 `pending/fullfilled/rejected` 선택되어 해당하는 액션이 호출된다.
+```js
+dispatch(fetchPosts())
+``` 
+- 먼저 `posts/fetchPosts/pending`액션을 dispatch 한다.
+- `Promise` 가 resolve 되면 `response.posts` 를 받고 `posts/fetchPosts/fultilled` 액션을 dispatch 한다.
+- `Promise` 가 reject 되면 `posts/fetchPosts/reject` 액션을 dispatch 한다.
+
+이 상태만으로는 postsSlice 에서 액션이 호출되었다는 걸 들을 수 없다. `extraReducers` 에서 액션들을 들을 수 있도록 작성해줘야 한다.
+```js
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await client.get('/fakeApi/posts')
+  return response.posts
+})
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    // omit existing reducers here
   },
+  extraReducers: {
+    [fetchPosts.pending]: (state, action) => {
+      state.status = 'loading'
+    },
+    [fetchPosts.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+      // Add any fetched posts to the array
+      state.posts = state.posts.concat(action.payload)
+    },
+    [fetchPosts.rejected]: (state, action) => {
+      state.status = 'failed'
+      state.error = action.error.message
+    }
+  }
+})
+```
+
+`createAsyncThunk`는 에러를 내부적으로 처리한다. 그래서 reject 되면 로그에 `rejected Promises` 라는 것밖에 못본다. 
+그래서 따로 에러핸들링을 하려면 `unwrapResult` 를 사용해야 된다. 에러를 리턴하기 때문에 `try/catch` 를 사용해서 직접 핸들링할 수 있다.
+```js
+ const onSavePostClicked = async () => {
+    if (canSave) {
+      try {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(
+          addNewPost({ title, content, user: userId })
+        )
+        unwrapResult(resultAction)
+      } catch (err) {
+        console.error('Failed to save the post: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+      }
+    }
+  }
 ```
 
 ### Provider

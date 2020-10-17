@@ -133,6 +133,156 @@ API 서버가 개발되지 않았을 때 클라이언트에서 테스트용으�
 
 API 요청할 때 현재 상태를 지속적으로 트랙킹 하도록 slice 코드를 바꿔야 한다.
 
+### createAsyncThunk example
+- [api/server.js](https://github.com/reduxjs/redux-essentials-example-app/blob/tutorial-steps/src/api/server.js)
+- [api/client.js](https://github.com/reduxjs/redux-essentials-example-app/blob/tutorial-steps/src/api/client.js)
+  - fake server, client 
+- [features/posts/AddPostForm.js](https://github.com/reduxjs/redux-essentials-example-app/blob/tutorial-steps/src/features/posts/AddPostForm.js)
+  - save 버튼 두번 클릭 방지 `canSave` 참
+```js
+// features/posts/postsSlice.js
+import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit'
+import { client } from '../../api/client'
+
+const initialState = {
+  posts: [],
+  status: 'idle',
+  error: null
+}
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await client.get('/fakeApi/posts')
+  return response.posts
+})
+
+export const addNewPost = createAsyncThunk(
+  'posts/addNewPost',
+  // The payload creator receives the partial `{title, content, user}` object
+  async initialPost => {
+    // We send the initial data to the fake API server
+    const response = await client.post('/fakeApi/posts', { post: initialPost })
+    // The response includes the complete post object, including unique ID
+    return response.post
+  }
+)
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    // omit existing reducers here
+  },
+  extraReducers: {
+    [fetchPosts.pending]: (state, action) => {
+      state.status = 'loading'
+    },
+    [fetchPosts.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+      // Add any fetched posts to the array
+      state.posts = state.posts.concat(action.payload)
+    },
+    [fetchPosts.rejected]: (state, action) => {
+      state.status = 'failed'
+      state.error = action.error.message
+    },
+    [addNewPost.fulfilled]: (state, action) => {
+      state.posts.push(action.payload)
+    }
+  }
+})
+```
+
+```js
+// features/posts/PostsList.js
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+// omit other imports
+import { selectAllPosts, fetchPosts } from './postsSlice'
+
+export const PostsList = () => {
+  const dispatch = useDispatch()
+  const posts = useSelector(selectAllPosts)
+
+  const postStatus = useSelector(state => state.posts.status)
+  const error = useSelector(state => state.posts.error)
+
+  useEffect(() => {
+    if (postStatus === 'idle') {
+      dispatch(fetchPosts())
+    }
+  }, [postStatus, dispatch])
+
+  let content
+
+  if (postStatus === 'loading') {
+    content = <div className="loader">Loading...</div>
+  } else if (postStatus === 'succeeded') {
+    // Sort posts in reverse chronological order by datetime string
+    const orderedPosts = posts
+      .slice()
+      .sort((a, b) => b.date.localeCompare(a.date))
+
+    content = orderedPosts.map(post => (
+      <PostExcerpt key={post.id} post={post} />
+    ))
+  } else if (postStatus === 'failed') {
+    content = <div>{error}</div>
+  }
+
+  return (
+    <section className="posts-list">
+      <h2>Posts</h2>
+      {content}
+    </section>
+  )
+}
+```
+
+### Notification createAsyncThunk example
+```js
+export const fetchNotifications = createAsyncThunk(
+  'notifications/fetchNotifications',
+  async (_, { getState }) => {
+    const allNotifications = selectAllNotifications(getState())
+    const [latestNotification] = allNotifications
+    const latestTimestamp = latestNotification ? latestNotification.date : ''
+    const response = await client.get(
+      `/fakeApi/notifications?since=${latestTimestamp}`
+    )
+    return response.notifications
+  }
+);
+extraReducers: {
+    [fetchNotifications.fulfilled]: (state, action) => {
+      Object.values(state.entities).forEach((notification) => {
+        // Any notifications we've read are no longer new
+        notification.isNew = !notification.read
+      })
+      notificationsAdapter.upsertMany(state, action.payload)
+    },
+  },
+```
+
+## Tip
+사용자 정보 받아오는 등 페이지 로드시점에서 필요한 작업이 있다면 `index.js` 에 작성하면 된다.
+```js
+// omit imports
+
+import { fetchUsers } from './features/users/usersSlice'
+
+import './api/server'
+
+store.dispatch(fetchUsers())
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+```
 
  
 ## 참고
