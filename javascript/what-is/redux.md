@@ -386,51 +386,6 @@ console.log(subtotalSelector(exampleState)) // 2.15
 console.log(taxSelector(exampleState))      // 0.172
 console.log(totalSelector(exampleState))    // { total: 2.322 }
 ``` 
-### CreateEntityAdapter
-```js
-const usersAdapter = createEntityAdapter()
-```
-slice 에 있는 데이터를 `ids:[], entities: {}` 구조로 다룰 수 있게 해준다. 
-이때 선언한 데이터 구조를 통해 reducer 와 selector 를 만들어준다.
-다음과 같이 일반적인 경우를 다룰 수 있다. (데이터 핸들링을 ID 로 데이터를 다루기 때문이다.)   
-
-- 전체 아이템 업데이트
-- 아이템들 중 특정한 것만 업데이트
-- 전부 삭제
-
-> **[내장 함수들]**
->
-> **sortComapre**
-> `Array.sort()`와 같은 정렬이 가능하다.
->
-> **getSelectors**
-> 특정 slice를 리턴하는 selector 를 사용할 수 있고, `selectAll`, `selectByID` 와 같은 selector 를 생성한다.
-```js
- // features/posts/postsSlice.js
-export const selectAllPosts = state => state.posts.posts
-
-export const selectPostById = (state, postId) =>
-  state.posts.posts.find(post => post.id === postId)
-
-// getSelectors 를 사용하면 이렇게 바뀐다. 
-// getSelectors 에서 리턴한 값을 selectAllPosts, selectPostsById 로 rename 됐다. 
-export const {
-  selectAll: selectAllPosts,
-  selectById: selectPostById,
-  selectIds: selectPostIds
-    // Pass in a selector that returns the posts slice of state
-} = postsAdapter.getSelectors(state => state.posts)
-```
->
->**getInitialState**
->`{idx:[], entities:{}}` 오브젝트를 생성한다. 
-```js
-// features/posts/postsSlice.js
-const initialState = postsAdapter.getInitialState({
-  status: 'idle',
-  error: null
-})
-```
 
 ## Async Logic and Data Fetching
 [redux 공식문서 part5 - async logic](https://redux.js.org/tutorials/essentials/part-5-async-logic)
@@ -549,6 +504,158 @@ const notificationsSlice = createSlice({
 export default notificationsSlice.reducer
 
 export const selectAllNotifications = state => state.notifications
+```
+
+데이터를 찾을 땐 ID(key) 값을 기준으로 찾는 경우가 많다. 
+```js
+const users = [
+    {id: "user1", firstName, lastName},
+    {id: "user2", firstName, lastName},
+    {id: "user3", firstName, lastName}
+]
+```
+이 ID 가 위에 처럼 다른 정보들이 같이 있다면 `array.find()` 를 통해서 arrays 를 돌면서 id 가 들어있는 object 를 찾게 된다는걸 의미한다. 
+수백, 수천개 아이템이 안에 있다면 한 아이템을 찾기 위해 object 를 포함한 전체 배열을 둘러보는건 비효율적이다.
+```js
+{
+  users: {
+    ids: ["user1", "user2", "user3"],
+    entities: {
+      "user1": {id: "user1", firstName, lastName},
+      "user2": {id: "user2", firstName, lastName},
+      "user3": {id: "user3", firstName, lastName},
+    }
+  }
+}
+```
+firstName, lastName 까지 둘러볼 필요없이 ID 만 있는 배열로 ID 하나만을 찾는걸 "normalization" 이라 한다.
+Redux toolkit 의 `CreateEntityAdapter` API 가 자동으로 만들어주는 역할을 한다.
+
+**CreateEntityAdapter**
+
+slice 에 선언한 데이터를 `ids:[], entities: {}` 구조로 만들어주고, 
+만든걸 사용할 수 있도록 reducer 와 selector 도 자동으로 만들어준다.
+다음과 같이 일반적인 경우를 다룬다. (데이터 핸들링을 ID 로 데이터를 다루기 때문이다.)   
+
+- 전체 아이템 업데이트
+- 한 아이템만 업데이트
+- 여러개 삭제
+
+```js
+const usersAdapter = createEntityAdapter()
+```
+- `내장 함수` : getSelectors, getInitialState, upsertMany, addOne (,setAll,addMany,upsertOne)
+    > `getSelectors` 함수로 `selectAll`, `selectById` 같은 selector 를 생성한다. <br>
+    `getInitialState` 함수로 `ids:[], entities: {}` 구조를 만든다.<br>
+    `upsertMany` 함수는 action.payload 에 온 데이터를 state 에 전부 더한다. (같은 ID 가 있으면 병합한다.)<br>
+    `addOne` 함수는 action.payload 에 온 데이터를 state 에 더한다.
+- `return` : reducer object
+    > add, update, remove 기능을 하는 reducer function
+
+```js
+// features/posts/postsSlice.js
+import {
+  createEntityAdapter
+  // omit other imports
+} from '@reduxjs/toolkit'
+
+const postsAdapter = createEntityAdapter({
+  sortComparer: (a, b) => b.date.localeCompare(a.date)
+});
+
+// { ids:[], entities: {}, status: 'idle', error: null } 구조로 만든다.
+const initialState = postsAdapter.getInitialState({
+  status: 'idle',
+  error: null
+})
+
+// omit thunks
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    reactionAdded(state, action) {
+      const { postId, reaction } = action.payload
+      const existingPost = state.entities[postId]
+      if (existingPost) {
+        existingPost.reactions[reaction]++
+      }
+    },
+    postUpdated(state, action) {
+      const { id, title, content } = action.payload
+      const existingPost = state.entities[id]
+      if (existingPost) {
+        existingPost.title = title
+        existingPost.content = content
+      }
+    }
+  },
+  extraReducers: {
+    // omit other reducers
+
+    [fetchPosts.fulfilled]: (state, action) => {
+      state.status = 'succeeded'
+      // Add any fetched posts to the array
+      // `upsertMany` reducer as a mutating update utility
+      // action.payload 에 온 데이터를 state 에 전부 더한다. (같은 ID 가 있으면 병합한다.)
+      postsAdapter.upsertMany(state, action.payload)
+    },
+    // Use the `addOne` reducer for the fulfilled case
+    [addNewPost.fulfilled]: postsAdapter.addOne
+  }
+})
+
+export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
+
+export default postsSlice.reducer
+
+// Export the customized selectors for this adapter using `getSelectors`
+export const {
+  selectAll: selectAllPosts,
+  selectById: selectPostById,
+  selectIds: selectPostIds
+  // Pass in a selector that returns the posts slice of state
+} = postsAdapter.getSelectors(state => state.posts)
+
+export const selectPostsByUser = createSelector(
+  [selectAllPosts, (state, userId) => userId],
+  (posts, userId) => posts.filter(post => post.user === userId)
+)
+```
+
+> **[내장 함수들]**
+>
+> **sortComapre**
+> `Array.sort()`와 같은 정렬이 가능하다.
+>
+> **getSelectors**
+> 특정 slice를 리턴하는 selector 를 사용할 수 있고, `selectAll`, `selectByID` 와 같은 selector 를 생성한다.
+```js
+ // features/posts/postsSlice.js
+export const selectAllPosts = state => state.posts.posts
+
+export const selectPostById = (state, postId) =>
+  state.posts.posts.find(post => post.id === postId)
+
+// getSelectors 를 사용하면 이렇게 바뀐다. 
+// getSelectors 에서 리턴한 값을 selectAllPosts, selectPostsById 로 rename 됐다. 
+export const {
+  selectAll: selectAllPosts,
+  selectById: selectPostById,
+  selectIds: selectPostIds
+    // Pass in a selector that returns the posts slice of state
+} = postsAdapter.getSelectors(state => state.posts)
+```
+>
+>**getInitialState**
+>`{idx:[], entities:{}}` 오브젝트를 생성한다. 
+```js
+// features/posts/postsSlice.js
+const initialState = postsAdapter.getInitialState({
+  status: 'idle',
+  error: null
+})
 ```
 
 ### Provider

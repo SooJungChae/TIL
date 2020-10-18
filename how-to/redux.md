@@ -1,5 +1,8 @@
 redux 개념은 [이곳](../javascript/what-is/redux.md)에서 확인할 수 있다.
 
+## Example link
+- [Redux essentials Tutorial Example](https://github.com/reduxjs/redux-essentials-example-app/tree/tutorial-steps)
+
 ## 개발 순서
 
 1. Redux store 를 만든다.
@@ -296,7 +299,44 @@ PostExcerpt = React.memo(PostExcerpt)
 ```
 2. `post` 가 아니라 `postId` 처럼 key 값을 props 로 받는다. 하지만 정렬이 필요하다면..? 이 방법은 조금 위험하다.
 3. `useSelector(selectPostIds, shallowEqual)` 사용한다. [(TODO: 해석)](https://react-redux.js.org/api/hooks#equality-comparisons-and-updates)
-4. `createEntityAdapter` 함수를 사용한다. 모든 post 들을 ID 로 나눠놓고, 추가, 삭제 될때 특정한 것만 수정한다. `<PostsList>`, `<PostExcerpt>` 에 똑같이 적용해서 ID 배열이 바뀔 때만 렌더링 되게 만든다. 
+4. `createEntityAdapter` 함수를 사용한다. 모든 post 들을 ID 로 나눠놓고, 추가, 삭제 될때 특정한 것만 수정한다. `<PostsList>`, `<PostExcerpt>` 에 똑같이 적용해서 ID 배열이 바뀔 때만 렌더링 되게 만든다.
+```js
+// PostsSlice.js
+const postsAdapter = createEntityAdapter({
+  sortComparer: (a, b) => b.date.localeCompare(a.date)
+})
+
+// omit other codes
+
+export const {
+  selectIds: selectPostIds
+} = postsAdapter.getSelectors(state => state.posts)
+``` 
+```js
+// features/posts/PostsList.js
+
+// omit other imports
+import {
+  selectPostIds,
+} from './postsSlice'
+
+let PostExcerpt = ({ postId }) => {
+  const post = useSelector(state => selectPostById(state, postId))
+  // omit rendering logic
+}
+
+export const PostsList = () => {
+  const orderedPostIds = useSelector(selectPostIds)
+
+  // omit other selections and effects
+
+  content = orderedPostIds.map(postId => (
+    <PostExcerpt key={postId} postId={postId} />
+  ))
+
+  // omit other rendering
+}
+```
 
 ### 렌더링 중복 막기 - memoization
 ```js
