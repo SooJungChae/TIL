@@ -2,6 +2,7 @@ redux 개념은 [이곳](../javascript/what-is/redux.md)에서 확인할 수 있
 
 ## Example link
 - [Redux essentials Tutorial Example](https://github.com/reduxjs/redux-essentials-example-app/tree/tutorial-steps)
+- [Redux Test code Example](https://github.com/reduxjs/rtk-convert-todos-example) 
 
 ## 개발 순서
 
