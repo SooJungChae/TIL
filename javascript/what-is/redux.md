@@ -551,6 +551,7 @@ const usersAdapter = createEntityAdapter()
     `addOne` 함수는 action.payload 에 온 데이터를 state 에 더한다.
 - `return` : reducer object
     > add, update, remove 기능을 하는 reducer function
+- id 를 customize 하고 싶다면 `selectId: (location: Location) => location.locationid` 이런식으로.
 
 ```js
 // features/posts/postsSlice.js
