@@ -354,6 +354,14 @@ const enum ConstEnum {
 ```
 색인 시그니처
 
+## CRA 프로젝트에 ts 적용하기
+```
+npm install --save typescript @types/node @types/react @types/react-dom @types/jest
+```
+
+yarn start 를 했을 때 dependency 에러가 나면 해당 패키지를 따로 추가해주면 된다.
+난 추가적으로 개발용 패키지에 `@types/react-redux`, `@types/react-router-dom` 를 설치했다.
+
 
 
 ## 참고
