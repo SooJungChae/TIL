@@ -25,3 +25,4 @@ function MyComponent() {
 ## 참고
 - [Effect Hook 사용하기 - React 공식 문서](https://ko.reactjs.org/docs/hooks-effect.html)
 - [React 최상위 API - React 공식 문서](https://ko.reactjs.org/docs/react-api.html#reactsuspense)
+- [useAsync 커스텀 Hook 만들어서 사용하기](https://react.vlpt.us/integrate-api/03-useAsync.html)
