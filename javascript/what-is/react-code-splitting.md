@@ -46,3 +46,5 @@ const OtherComponent = React.lazy(() => import('./OtherComponent'));
 ## 참고
 - [코드 분할 - react 공식 문서](https://ko.reactjs.org/docs/code-splitting.html)
 - [Lazy Loading 이란? - scarlett-dev](https://scarlett-dev.gitbook.io/all/it/lazy-loading)
+- [Building a Universal Higher-Order Component Page Loader for your React App - Paige Niedringhaus](https://blog.bitsrc.io/building-a-universal-higher-order-component-page-loader-for-your-react-app-46d74f7a6958)
+- [Creating an image lazy loading component with React - Antoine Caron](https://slashgear.github.io/creating-an-image-lazy-loading-component-with-react/)
