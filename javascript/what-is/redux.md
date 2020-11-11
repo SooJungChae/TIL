@@ -393,33 +393,36 @@ console.log(totalSelector(exampleState))    // { total: 2.322 }
 ### createAsyncThunk
 
 API 호출 상태를 자동으로 업데이트 시켜준다.
+
+**작동 순서**
+
 ```js
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await client.get('/fakeApi/posts')
   return response.posts
 })
 ```
+`createAsyncThunk`를 사용하면 `pending/fullfilled/rejected` 의 3가지 action type 과 action creator 가 자동으로 생성되어 `thunk` 가 만들어진다. (여기에서 `thunk` 는 `fetchPosts` 다.)
+상황에 따라 셋 중 하나가 선택되어 dispatch 된다. 밑에서 추가로 설명한다.
+
 - 첫번째 arg : action type
-- 두번째 arg : Promise 를 반환하는 콜백
+- 두번째 arg : Promise 를 반환하는 콜백 
+- return : thunk action creator
 
-`createAsyncThunk` 를 통해서 `pending/fullfilled/rejected` action type 과 action creator 가 자동으로 생성되어 `fetchPosts` 함수에 추가된다.
-`posts/fetchPosts/fultilled` action type 과 action creators 가 
-
-그래서 thunk 를 호출하면 현재 상황에 맞게 `pending/fullfilled/rejected` 선택되어 해당하는 액션이 호출된다.
 ```js
 dispatch(fetchPosts())
-``` 
-- 먼저 `posts/fetchPosts/pending`액션을 dispatch 한다.
-- `Promise` 가 resolve 되면 `response.posts` 를 받고 `posts/fetchPosts/fultilled` 액션을 dispatch 한다.
-- `Promise` 가 reject 되면 `posts/fetchPosts/reject` 액션을 dispatch 한다.
+```
+이 thunk 를 dispatch 하게되면 `payloadCreator`라는 callback 함수를 호출해서 promise 의 결과값을 비동기 적으로 기다린다.
+가장 먼저 `posts/fetchPosts/pending`액션을 dispatch 한다. 
 
-이 상태만으로는 postsSlice 에서 액션이 호출되었다는 걸 들을 수 없다. `extraReducers` 에서 액션들을 들을 수 있도록 작성해줘야 한다.
+결과를 받으면 상황에 맞게 `pending/fullfilled/rejected` 액션이 선택되어 dispatched action 과 action object 를 담아 다시 dispatch 한다.
+> `Promise` resolve : `posts/fetchPosts/fultilled` 액션 dispatch (이 때, `response.posts` 가 action object 에 담겨있다.) <br>
+> `Promise` reject : `posts/fetchPosts/reject` 액션 dispatch
+
+결국 dispatched action 과 action object 가 담긴 fulfilled promise 가 리턴된다.  
+하지만 이 상태만으로는 slice 에서 액션이 호출되었다는 걸 들을 수 없다. `extraReducers` 에서 액션들을 들을 수 있도록 작성해줘야 한다.
+
 ```js
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await client.get('/fakeApi/posts')
-  return response.posts
-})
-
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
@@ -759,4 +762,5 @@ subscribe 도 해두기 때문에 나중에 상태 변경되어도 감지할 수
 - https://redux.js.org/tutorials/essentials/part-2-app-structure#creating-slice-reducers-and-actions
 - [redux 구조 프로젝트 예시](https://redux.js.org/tutorials/essentials/part-2-app-structure)
 - [아마 이게 제일 이해하기 쉬울껄요 - react redux 플로우의 이해](https://medium.com/@ca3rot/%EC%95%84%EB%A7%88-%EC%9D%B4%EA%B2%8C-%EC%A0%9C%EC%9D%BC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-%EC%89%AC%EC%9A%B8%EA%B1%B8%EC%9A%94-react-redux-%ED%94%8C%EB%A1%9C%EC%9A%B0%EC%9D%98-%EC%9D%B4%ED%95%B4-1585e911a0a6)
+- [createAsyncThunk return value](https://redux-toolkit.js.org/api/createAsyncThunk#return-value)
 
