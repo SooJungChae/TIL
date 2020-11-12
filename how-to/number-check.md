@@ -46,6 +46,7 @@ parseFloat("true")  // NaN
 parseFloat("") // NaN
 parseFloat("123") // 123
 parseFloat('3.14와 숫자가 아닌 문자들'); // 3.14
+parseFloat('숫자가 아닌 문자들과 3.14'); // NaN
 ```
 기호(+, -), 숫자(0,9), 소수점 또는 지수 이외의 문자를 발견하면, 그 전까지의 결과만 반환하고 
 문제의 문자와 그 이후는 모두 무시합니다.
@@ -87,39 +88,4 @@ NaN, Infinity, -Infinity 도 number 로 체크하고 있다. 처리해줘야 하
 **isFinite 는 true, false 만 리턴한다.**
  
 ## 결론 : typeof x === number && isFinite(x) 
-
-
-
-```js
-$scope.ratioCalc = function() {
-        // validate
-        if($scope.deal._ratioSum){
-            // 소수점 두자리까지 입력 가능
-            var regexp = /^\d*(\.\d{0,2})?$/;
-            if($scope.deal._ratioSum.search(regexp) < 0){
-                $scope.deal._ratioSum = Number.parseFloat($scope.deal._ratioSum).toFixed(2);
-            }
-
-            // NaN일때 체크
-            if(isNaN($scope.deal._ratioSum)){
-                $scope.deal._ratioSum = '';
-            }
-
-            // 100 보다 작은 수
-            if($scope.deal._ratioSum > 100){
-                $scope.deal._ratioSum =  $scope.deal._ratioSum.slice(0,-1);
-            }
-
-            var commission = '';
-            var vat = '';
-            if ( !isNaN(parseFloat($scope.deal._ratioSum)) && isFinite($scope.deal._ratioSum) ) {
-                commission = ($scope.deal._ratioSum/11*10).toFixed(1);
-                vat = ($scope.deal._ratioSum - commission).toFixed(1);
-                $scope.deal.vatRatio = vat;
-                $scope.deal.commissionRatio = commission;
-            }
-
-        }
-        
-    };
-```
+- `!isNaN(parseFloat($scope.deal._ratioSum)) && isFinite($scope.deal._ratioSum)` 이 경우도 있겠군
