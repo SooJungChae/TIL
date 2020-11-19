@@ -1,4 +1,9 @@
 ## npm publish
+**public**
+```js
+npm publish --access public
+```
+
 커스텀 npm 패키지를 만들고 있던 중, 매번 `npm publish` 할 필요없이 로컬에 테스트용 코드를 작성해두면 된다는 것을 알았다.
 루트 경로에서 `npx create-react-app demo` 를 하면 `/demo` 폴더 밑에 기본 리액트 프로젝트가 생성된다.
 
