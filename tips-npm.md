@@ -1,5 +1,10 @@
 ## npm publish
-**public**
+1. 배포하기 전에 npm 에 로그인 한다.
+```
+npm login
+```
+
+2. **public** publish
 ```js
 npm publish --access public
 ```
