@@ -354,6 +354,33 @@ const enum ConstEnum {
 ```
 색인 시그니처
 
+### Type Guarding
+여러개의 타입을 사용중일 때, 특정한 타입에서만 코드를 실행시키고 싶다면 `in` 이나 `is` 체크를 사용한다.
+
+```typescript
+interface Admin {
+  role: string;
+}
+interface User {
+  email: string;
+}
+
+// Method 1: use `in` keyword
+function redirect(user: Admin | User) {
+  if ("role" in user) {
+    // use the `in` operator for typeguards since TS 2.7+
+    routeToAdminPage(user.role);
+  } else {
+    routeToHomePage(user.email);
+  }
+}
+
+// Method 2: custom type guard, does the same thing in older TS versions or where `in` isnt enough
+function isAdmin(user: Admin | User): user is Admin {
+  return (user as any).role !== undefined;
+}
+```
+
 ## CRA 프로젝트에 ts 적용하기
 ```
 npm install --save typescript @types/node @types/react @types/react-dom @types/jest
