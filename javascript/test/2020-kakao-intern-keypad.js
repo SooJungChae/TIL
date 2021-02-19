@@ -1,4 +1,4 @@
-// 문제 한번 풀었었음. 20:45 ~
+// 문제 한번 풀었었음. 20:45 ~ 21:18 (33분)
 function solution (numbers, hand) {
   const STAR = 10;
   const SHARP = 12;
