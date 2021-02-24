@@ -41,7 +41,8 @@
 [맨 위로](#목차)
 
 > 1) HTML파싱해서 DOM 트리 구축
-> 2) 렌더 트리 구축 (DOM + 스타일 규칙)
+> 2) CSS 있으면 파싱해서 CSSDOM 트리 구축
+> 2) DOM 트리 + CSSDOM 트리 = 렌더 트리 구축
 > 3) 렌더 트리 배치
 > 4) 렌더 트리 그리기
 
@@ -102,11 +103,13 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 
 ## Meta tag
 [맨 위로](#목차)
-> 문서가 어떤 내용을 담고 있고 있는지 알려주는 태그.
-
-- 이렇게 표현.
-- `<meta name="viewport" conten"width=device-width, initial-scale=1>`
-- 주로 subject, keywords, title, author 키 를 사용한다.
+> 문서의 정보를 담고 있는 태그
+```html
+<meta name="keywords" content="interview, 인터뷰, 프론트엔드" />
+<meta name="description" content="이 문서는 프론트엔드 인터뷰를 위한 문서입니다." />
+<meta name="viewport" conten"width=device-width, initial-scale=1>
+```
+- 주로 subject, keywords, description, title, author 키 를 사용한다.
 
 ## Attribute 와 props의 차이
 [맨 위로](#목차)
@@ -150,6 +153,29 @@ HTML5 에서는 `<!DOCTYPE html>` 이런 식으로 문서 타입을 지정한다
 > - 미디어 핸들링을 위한 내장 플랫폼
 > - application API
 > - 오프라인 핸들러
+
+### 하위 브라우저에서 HTML5 표현하기
+```html
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+     <meta charset="UTF-8">
+     <title>HTML5</title>
+     <link rel="stylesheet" href="./css/style.css"> 
+     // 웹에서 사용하는 경우 
+     <!--[if IE]> 
+       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+     <![endif]--> 
+    
+     // 관련 자바스크립트 파일을 다운로드하여 사용하는 경우 
+     <!--[if IE]>
+        <script src="../js/html5.js"></script>
+     <![endif]--> 
+  </head>
+</html>
+
+출처: https://webclub.tistory.com/491 [Web Club]
+```
 
 ## Cookie, sessionStorage, localStorage
 [맨 위로](#목차)
