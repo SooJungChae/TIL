@@ -38,6 +38,19 @@ Host github.com
   Port 443
 ```
  
+ssh 접속이 잘 되는지 확인 (이건 안해도 될것같은)
+```
+ > ssh -T git@github.com
+
+The authenticity of host '[ssh.github.com]:443 ([x.xx.xx.xx]:443)' can't be established.
+RSA key fingerprint is SHA256:xxxxxxxxxxxxx.
+Are you sure you want to continue connecting (yes/no)? yes
+
+Warning: Permanently added '[ssh.github.com]:443,[x.xx.xx.xx]:443' (RSA) to the list of known hosts.
+Hi SooJungChae! You've successfully authe데nticated, but GitHub does not provide shell access.
+```
+된다. 
+
 ## 참고
 - [GitHub 메시지 Key is already in use, ZETAWIKI](https://zetawiki.com/wiki/GitHub_%EB%A9%94%EC%8B%9C%EC%A7%80_Key_is_already_in_use)
 - [갑자기 git 명령이 timeout 날 때, Mr.star](https://lhb0517.tistory.com/entry/%EA%B0%91%EC%9E%90%EA%B8%B0-git-%EB%AA%85%EB%A0%B9%EC%9D%B4-timeout-%EB%82%A0-%EB%95%8C)
