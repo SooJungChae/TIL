@@ -1,8 +1,9 @@
 [목차]
 - [ts 를 js 로 만들기](#ts-를-js-로-만들기)
 - [Typescript 5분 뽀개기](#Typescript-5분-뽀개기)
+- [Typescript 기본 타입](#Typescript-기본-타입)
 
-## ts 를 js 로 만들기
+# ts 를 js 로 만들기
 타입스크립트를 js 로 만들려면 다음을 커맨드라인에 입력.
 ```cmd
 tsc greeter.ts
@@ -56,6 +57,42 @@ type myBool = true | false;
 
 **Generic**<br/>
 타입에 변수를 제공하는 방법
+
+---
+
+# Typescript 기본 타입
+자바스크립트와 동일한데 몇가지가 더 추가된다. 
+`string`, `boolean`, `number`, `undefined`, `null`, **`Tuple`**, **`enum`**, **`any`**, **`void`**, **`never`** 
+
+**Tuple**<br/>
+타입과 개수가 고정된 배열을 사용할 수 있다.
+```ts
+let x: [string, number];
+
+// success
+x = ["hello", 10];
+
+// error
+x = [10, "hello"];
+```
+
+**Enum**<br/>
+값의 집합에 이름을 붙여줄 수 있다. 
+```ts
+// `0` 부터 시작해서 멤버들의 번호를 매긴다.
+enum Color { Red, Green, Blue }
+
+// 시작값을 변경할 수도 있다.
+enum Color { Red = 1, Green, Blue }
+
+enum Color { Red = 2, Green = 3, Blue = 5 }
+
+// 매겨진 값을 사용해 enum 멤버의 이름을 알아낼 수 있다.
+enum Color { Red, Green, Blue }
+let colorName: string = Color[2];
+
+console.log(colorName); // 'Blue'
+```
 
 ---
 
