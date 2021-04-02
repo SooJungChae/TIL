@@ -1,24 +1,15 @@
-# Typescript 5분 뽀개기
-```ts
-// greeter.ts
-function greeter(person: string) {
-    return 'Hello ' + person;
-}
+[목차]
+- [ts 를 js 로 만들기](#ts-를-js-로-만들기)
+- [Typescript 5분 뽀개기](#Typescript-5분-뽀개기)
 
-const myName = 'Soojung';
-
-document.body.textContent = greeter(myName);
-```
-
-변수에 타입을 지정할 수 있다.
-
+## ts 를 js 로 만들기
 타입스크립트를 js 로 만들려면 다음을 커맨드라인에 입력.
 ```cmd
 tsc greeter.ts
 ```
 그럼 js 파일이 생긴다.
 
-## 에러
+
 변수에 다른 타입이 들어오면 에러가 나온다.
 (에러가 나도 js 파일은 생긴다.)
 
@@ -28,28 +19,45 @@ const name = 12345;
 // error TS2345: Argument of type '12345' is not assignable to parameter of type 'string'.
 ```
 
+# Typescript 5분 뽀개기
+
 ## Interface
-인터페이스를 선언할 수 있다.
+- 객체의 형태를 나타낸다.
+- 함수에서 매개변수와 리턴 값을 명시할 수 있다.
 
+객체의 형태를 나타내기
 ```ts
-interface fullName {
-    firstName: string,
-    lastName: string
+interface User {
+    name: string;
+    id: number;
 }
 
-function greeter(person: fullName) {
-    return 'Hello ' + person;
+const user: User = {
+    name: "Soo",
+    id: 0
 }
-
-const user = {
-    firstName: 'Chae',
-    lastName: 'Soojung'
-};
-
-document.body.textContent = greeter(myName);
 ```
 
-타입을 **인터페이스**로도 만들 수 있다.
+함수에서 매개변수와 리턴 값을 명시하기
+```ts
+function getAdminUser(): User { ... }
+
+function deleteAdminUser(user: User) { ... }
+```
+
+## 타입 구성
+객체를 조합해서 크고 복잡한 객체를 만드는 방법에는 `Union`, `Generic` 이 있다.
+
+**Unions**<br/>
+타입이 여러 타입 중 하나일 수 있다.
+```ts
+type myBool = true | false;
+```
+
+**Generic**<br/>
+타입에 변수를 제공하는 방법
+
+---
 
 ## Class
 자바스크립트 객체지향 프로그램을 목표로 ES6에서 클래스가 생겼다.
