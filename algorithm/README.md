@@ -31,4 +31,11 @@ return +(b.arrive < a.arrive) || +(b.arrive < a.arrive) - 1;
 - for...in 객체의 key 에 접근
 - for...of iterable 속성의 value 에 접근
 
+### 문자열 탐색 & 교체
+- reduce 사용해서 교체하거나, replace 함수를 사용하거나 for 문을 돌면된다.
+- replace() 안에 정규식 사용해도 된다. replace(/A/g, '#');
+- `split()` 을 사용하면 문자열에 특정 문자가 몇개가 포함되어있는지 알 수 있다. [10-문자찾기](./javascript/inflearn/10-문자찾기.js)
+- 대문자 찾을 때 `char === char.toUpperCase()` 로 비교! 
+- string 은 주소값이 아니라 '값' 이 복사된다. [11-대문자찾기](./javascript/inflearn/11-대문자찾기.js)
+    - ASCII 코드로도 찾을 수 있다. str.charCodeAt() 사용하면 찾을 수 있음.
 ### DFS/BFS
