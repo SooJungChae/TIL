@@ -15,7 +15,7 @@ routing 을 통해서 자연적으로 줄여지긴 하지만
 ## 테스트 해보자
 `npm run build`빌드를 실행해보면 만들어지는 파일들을 볼 수 있고, 각 파일이 빌드하는데 어느정도 걸리는 지 아 수 있다.
 
-gtmetrix 라는 곳에서 사이트 속도 테스트를 해봤다.
+[GTmetrix](https://gtmetrix.com/) 라는 곳에서 사이트 속도 테스트를 해봤다.
 309KB 를 로드하는데 3.9s 가 걸렸다. (아....)
 
 next 에서 First load js 는 서버에서 페이지에 접속해 다운로드받는 파일 사이즈를 말한다. 이 모든 JS 가 분리되어서 사용되게 된다. 
@@ -38,7 +38,9 @@ Webpack 이 이 구문을 만나면 자동적으로 code-splitting 을 진행한
 
 컴포넌트도 dynamic 로딩이 가능하다.
 
-
+## React.lazy 랑 dynamic 로딩의 차이
+서버사이드 렌더링에서는 지원안한다.
+서버사이드 렌더링되는 앱에서 code-splitting 을 하고 싶다면 `Loadable Components` 를 추천한다.
 
 
 ## 참고
