@@ -286,7 +286,52 @@ element.setX(1).setY(2).setZ(3);
 
 ## 클로저
 
-> 이너 함수가 스코프 밖에 있는 객체, 변수에 접근하는 것.
+> 이너 함수에 스코프 밖에 있는 변수에 접근하기 위한 객체
+
+```js
+for (var i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log('i:', i);  
+  }, 3000);
+}
+```
+
+이때 항상 `i: 4` 가 나온다. 콘솔에 값을 찍기전에 이미 i 는 4까지 증가된 상태이고
+콘솔에 찍을 땐 변화된 값을 참조하기 때문이다.
+
+이걸 해결하기 위한 방법에는 두가지가 있다.
+
+1. 즉시실행함수 추가하기
+2. `var` 대신에 `let` 사용하기
+
+1번은 이렇게 구현할 수 있다.
+
+```js
+for (var i = 0; i < 5; i++) {
+  (function(currentI) {
+    setTimeout(function() {
+    console.log('i:', currentI);  
+  }, 3000);
+  })(i);
+}
+```
+`var` 는 'Function Scope' 이다. 그래서 즉시실행 함수로 setTimeout 을 감싸주면 새로운 스코프가 만들어지고,
+각각의 스코프에 현재 i 를 할당해줘서 i 값이 유지되게 된다.
+
+2번은 스코프의 특성을 사용하는 방법이다.
+앞서 얘기했다시피 `var` 는 'Function Scope' 이다. 반면 ES6 에서 만들어진 `let` 은 'Block Scope' 이다.
+그래서 loop 가 돌면서 새로운 스코프가 만들어지고, i 값은 내부 setTimeout 함수에서 유지될 수 있는 것이다. 
+
+```js
+for (let i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log('i:', i);  
+  }, 3000);
+}
+```
+
+- https://stackoverflow.com/questions/762011/whats-the-difference-between-using-let-and-var
+- https://rypro.tistory.com/100   
 
 ```js
 function makeAdd(x) {
