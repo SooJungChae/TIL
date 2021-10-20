@@ -422,7 +422,72 @@ console.log(add10(3)); // 113 (x: 10, y: 100, z:3)
 
 > prototype 기반의 상속 보다 명료하게 사용하는 함수.
 
-- 호이스팅 안 일어남.
+prototype 기반 함수
+```js
+function Car() {
+    this.fuel = 0;
+    this.distance = 0;
+}
+Car.prototype.move = function() {
+    if (this.fuel < 1) {
+        throw new RangeError('Fuel tank is depleted');
+    }
+    this.fuel--;
+    this.distance += 2;
+}
+Car.prototype.addFuel = function () {
+  if (this.fuel >= 60) {
+    throw new RangeError('Fuel tank is full')
+  }
+  this.fuel++
+}
+```
+실행결과
+```js
+var car = new Car()
+car.addFuel()
+car.move()
+car.move() // <- RangeError: 'Fuel tank is depleted'
+```
+prototype 을 class 로 표시하면 이렇게 바꿀 수 있다.
+```js
+class Car {
+  constructor () {
+    this.fuel = 0;
+    this.distance = 0;
+  }
+  move() {
+      if (this.fuel < 1) {
+        throw new RangeError('Fuel tank is depleted')
+      }
+      this.fuel--
+      this.distance += 2
+  }
+  addFuel () {
+    if (this.fuel >= 60) {
+      throw new RangeError('Fuel tank is full')
+    }
+    this.fuel++
+  }
+}
+```
+- 뒤에 콤마를 생략할 수 있다.
+- prototype 을 명시안해도 된다.
+- extends 와 메소드 override 가 가능하다.
+```js
+class Tesla extends Car {
+  move() {
+    super.move()
+    this.distance += 4;
+  }
+}
+```
+- `super` 는 상속한 클래스 `Car`를 가리킨다.
+- TODO: constructor 에 `super` 를 추가하기도 하는데 왜 써야할까? 참고 2번 확인하기 
+- 호이스팅 안 일어남. =-> ???
+
+- https://ponyfoo.com/articles/es6-classes-in-depth
+- https://medium.com/@umioh1109/react-es6-class-constructor%EC%97%90%EC%84%9C%EC%9D%98-super-9d53ba0611d9
 
 ## 생성자 함수
 
