@@ -289,12 +289,13 @@ element.setX(1).setY(2).setZ(3);
 > 함수 안에 있는 선언들을 모두 끌어올려서 함수의 유효범위 안의 최상단에 선언하는 것
 
 - var, let, const, 함수선언문이 끌어올려진다.
-- let 과 const 가 호이스팅 되지 않는다고 알고있는데 이건 잘못알고있다고 한다. 
-2번째 레퍼런스에도 잘은 안나오고 있어서 추가적으로 3번째 레퍼 보는중... 
+- let 과 const 가 호이스팅 되지 않는다고 알고있는데 이건 잘못알고있는 것이다. 
+둘다 호이스팅은 일어나지만 실제로 `let` 과 `const` 로 선언된 구문을 만나기 까지 `TDZ(Temporary Dead Zone)` 에 갇힌다.
+이 안에 있으면 변수에 접근할 수 없어서 `Reference error` 가 발생하는 것이다.
 
 - https://gmlwjd9405.github.io/2019/04/22/javascript-hoisting.html
 - https://medium.com/korbit-engineering/let%EA%B3%BC-const%EB%8A%94-%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85-%EB%90%A0%EA%B9%8C-72fcf2fac365
-- TODO: https://ponyfoo.com/articles/es6-let-const-and-temporal-dead-zone-in-depth
+- https://ponyfoo.com/articles/es6-let-const-and-temporal-dead-zone-in-depth
 
 ## 클로저
 
