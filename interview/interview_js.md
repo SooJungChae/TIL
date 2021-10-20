@@ -8,6 +8,7 @@
 - [모듈 패턴](#모듈-패턴)
 - [이벤트 루프](#이벤트-루프)
 - [체이닝](#체이닝)
+- [호이스팅](#호이스팅)
 - [클로저](#클로저)
 - [일급객체](#일급객체)
 - [람다함수](#람다함수)
@@ -283,6 +284,18 @@ element.setX(1).setY(2).setZ(3);
 ### 체이닝의 장단점
 
 > 코드를 간결하게 하지만, 디버깅이 어렵다.
+
+## 호이스팅
+> 함수 안에 있는 선언들을 모두 끌어올려서 함수의 유효범위 안의 최상단에 선언하는 것
+
+- var, let, const, 함수선언문이 끌어올려진다.
+- let 과 const 가 호이스팅 되지 않는다고 알고있는데 이건 잘못알고있는 것이다. 
+둘다 호이스팅은 일어나지만 실제로 `let` 과 `const` 로 선언된 구문을 만나기 까지 `TDZ(Temporary Dead Zone)` 에 갇힌다.
+이 안에 있으면 변수에 접근할 수 없어서 `Reference error` 가 발생하는 것이다.
+
+- https://gmlwjd9405.github.io/2019/04/22/javascript-hoisting.html
+- https://medium.com/korbit-engineering/let%EA%B3%BC-const%EB%8A%94-%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85-%EB%90%A0%EA%B9%8C-72fcf2fac365
+- https://ponyfoo.com/articles/es6-let-const-and-temporal-dead-zone-in-depth
 
 ## 클로저
 
