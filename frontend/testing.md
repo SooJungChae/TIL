@@ -11,8 +11,12 @@
 - Scope: Tests the functions and methods of an application.
 - Possible tools:, AVA, Jasmine, Jest, Karma, Mocha
 
-페이지네이션 작업을 할 때 사용했던 방법. 확실히 이 코드를 작성했을 때 컴포넌트가 오류가 생겨도 금방 해결해낼 자신이 있었다.
+페이지네이션 작업을 할 때 사용했던 테스팅 방법. 확실히 이 코드를 작성했을 때 컴포넌트가 오류가 생겨도 금방 해결해낼 자신이 있었다.
 
+## Integration testing
+- Level: Medium
+- Scope: Tests Interactions between units.
+- Possible tools: AVA, Jest, Testing Library
 
 
 
