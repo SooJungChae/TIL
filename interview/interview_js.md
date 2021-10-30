@@ -250,6 +250,8 @@ Execution context
 - 변수에 값이 할당된다.
 8) 코드를 실행한 후 실행 컨텍스트를 파기한다.
 
+- TODO: 화살표 함수에서의 this https://velog.io/@yhe228/%ED%99%94%EC%82%B4%ED%91%9C-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-this
+
 ## 모듈 패턴
 
 > 네임스페이스 캡슐화를 사용하는 방법
