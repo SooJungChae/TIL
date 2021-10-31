@@ -16,6 +16,7 @@
 - [JSONP](#jsonp)
 - [Debouncing](#debouncing)
 - [타입스크립트](#타입스크립트)
+- [React vs Vue](#React-vs-Vue)
 
 ## 자바스크립트의 특징
 
@@ -599,7 +600,22 @@ parseResponse({"Name": "Foo", "Id": 1234, "Rank": 7});
 
 > MVC 웹 프레임워크로 SPA 형태의 웹 어플리케이션을 빠르게 개발할 수 있도록 도와준다.
 
+## React vs Vue
 
+| React | Vue | 
+| 라이브러리 | 프레임워크 |
+| - | 속도가 조금 더 빠름 |
+| 코드 제약이 없음 | 자바스크립트 코드에 미숙하다 |
+| 넓은 커뮤니티 및 개발 인력시장이 큼 | - |
+| 커스터마이징 및 자유도가 높음 | 기존 html css js 구조로 작성된 코드를 SPA 로 옮기고 싶다 |
+| 타입스크립트 사용 유리 | - |
+| 컴포넌트를 작은 단위로 나누어 비슷한 UI 재사요을 많이 할 예정이다 | - |
+| 프로젝트의 규모가 크다 | - |
+
+- https://velog.io/@leehaeun0/React-vs-Vue-%EC%9E%A5%EB%8B%A8%EC%A0%90-%EB%B9%84%EA%B5%90
+
+Vue
+- 프레임워크
 
 ## XHR
 
