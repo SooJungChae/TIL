@@ -406,10 +406,14 @@ console.log(add10(3)); // 113 (x: 10, y: 100, z:3)
 
 > function 키워드 대신 화살표를 사용해서 보다 간략한 방법으로 함수를 선언하는 방법
 
-- 함수 표현식을 사용한다.
-- Lexical this 를 지원해서 콜백 함수로 사용하기 편리하다.
-- call, apply, bind 메소드로 this 변경 불가.
-- prototype 프로퍼티 없음.
+일반 함수와 화살표 함수의 가장 큰 차이점은 this 이다.
+
+일반 함수는 함수가 호출될 때 this 가 결정되는데 **화살표함수의 this 는 언제나 상위 스코프의 this 를 가리킨다.**
+이를 Lexical this 라 한다.
+
+- 화살표 함수는 call, apply, bind 메소드를 사용하여 this 를 변경할 수 없다.
+- 생성자 함수는 prototype 객체의 constructor 를 사용해서 prototype 객체가 필요한데 
+화살표 함수는 prototype 프로퍼티를 가지고 있지 않아서 생성자 함수로 사용할 수 없다. 
 
 ### 화살표 함수 사용하면 안되는 경우
 
