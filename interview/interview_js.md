@@ -340,7 +340,12 @@ element.setX(1).setY(2).setZ(3);
 
 ## 클로저
 
+> 함수와 해당 함수가 참조하고 있는 주변 환경(렉시컬 환경)과의 조합이다. <br/> 
 > 이너 함수에 스코프 밖에 있는 변수에 접근하기 위한 객체
+
+- 자바스크립트에서 클로저는 함수가 생성될 때마다, 함수가 생성되는 시점에 생성된다.
+
+비슷한 
 
 ```js
 for (var i = 0; i < 5; i++) {
@@ -404,9 +409,11 @@ console.log(add10(3)); // 113 (x: 10, y: 100, z:3)
 - 같은 함수를 공유하지만, 서로 다른 맥락(어휘)적 환경을 저장한다.
 - 세가지 스코프가 있다. local, global, outer function 스코프
 
-- [](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures)
-- [](https://aljjabaegi.tistory.com/294)
-- [](https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%81%B4%EB%A1%9C%EC%A0%80Closure)
+- https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Closures
+- https://aljjabaegi.tistory.com/294
+- https://yuddomack.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%81%B4%EB%A1%9C%EC%A0%80Closure
+- https://oneroomtable.tistory.com/entry/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%ED%81%B4%EB%A1%9C%EC%A0%80-%EC%84%A4%EB%AA%85-%EC%98%88%EC%8B%9C-%ED%99%9C%EC%9A%A9
+- https://velog.io/@proshy/JS%ED%81%B4%EB%A1%9C%EC%A0%B8closure%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%B8%EC%9D%98-%EC%82%AC%EC%9A%A9-%EC%98%88%EC%A0%9C
 
 ## 스코프
 
