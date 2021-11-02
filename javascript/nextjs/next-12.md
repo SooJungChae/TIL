@@ -134,5 +134,7 @@ function handleClick() {
  }
 ```
 
+TODO: transition
+
 
 - https://velog.io/@jay/React-18-%EB%B3%80%EA%B2%BD%EC%A0%90
