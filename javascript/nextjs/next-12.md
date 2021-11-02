@@ -134,7 +134,26 @@ function handleClick() {
  }
 ```
 
-TODO: transition
+## Transition
+
+타이핑 처럼 이벤트에 따라 큰 화면이 업데이트 되어야 할 때 
+`startTransition` 을 사용하면 각 상태 업데이트에 대한 우선순위를 정해줄 수 있다.
+
+```js
+import { startTransition } from 'react';
+
+
+// Urgent: Show what was typed
+setInputValue(input);
+
+// Mark any state updates inside as transitions
+startTransition(() => {
+  // Transition: Show the results
+  setSearchQuery(input);
+});
+``` 
+
+키 입력이 다 끝나고 나면 렌더링 업데이트가 중단되고 키 입력이 다 끝나고 난 후의 업데이트만 발생하게 된다.
 
 
 - https://velog.io/@jay/React-18-%EB%B3%80%EA%B2%BD%EC%A0%90
