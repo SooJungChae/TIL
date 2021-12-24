@@ -5,5 +5,6 @@
 
 - [자바스크립트 개발자라면 알아야 할 33가지 개념 #13 자바스크립트에서, DOM 이해하기, jakeseo_me](https://velog.io/@jakeseo_me/2019-05-02-1105-%EC%9E%91%EC%84%B1%EB%90%A8-z4jv623o55)
 
-**2019-08-16** [웹 접근성](https://happycorgi.tistory.com/41) <br>
-**2019-08-17** [미들웨어, 플러그인, 모듈 차이점](https://happycorgi.tistory.com/44)
+- [테스트 방법](./testing.md)
+- **2019-08-16** [웹 접근성](https://happycorgi.tistory.com/41)
+- **2019-08-17** [미들웨어, 플러그인, 모듈 차이점](https://happycorgi.tistory.com/44)

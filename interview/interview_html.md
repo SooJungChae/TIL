@@ -89,7 +89,7 @@
 - [기본적인 웹 사이트 최적화 방법](https://12bme.tistory.com/128)
 
 ## RESTful 아키텍쳐
-
+[https://kkd927.github.io/general/web/2016/10/28/10-Best-Practices-for-Better-RESTful-API.html](https://kkd927.github.io/general/web/2016/10/28/10-Best-Practices-for-Better-RESTful-API.html)
 
 ## HTML
 [맨 위로](#목차)
