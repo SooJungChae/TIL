@@ -590,8 +590,8 @@ parseResponse({"Name": "Foo", "Id": 1234, "Rank": 7});
 
 > 연이어 호출된 함수들 중 마지막 함수만 호출하도록 하는 것.
 
-- [Debouncing 코드](../javascript/pattern/debounce.html)
-- [Throttling 코드](../javascript/pattern/throttle.html)
+- [Debouncing 코드](../what-is/javascript/debounce.html)
+- [Throttling 코드](../what-is/javascript/throttle.html)
 
 - [Debounce, throttle 참고](https://webclub.tistory.com/607)
 
