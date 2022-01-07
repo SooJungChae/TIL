@@ -2,7 +2,7 @@
 [https://www.vobour.com/1-flexbox-%EC%9D%B4%ED%95%B4-%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%EB%AA%A8%EB%93%A0-%EA%B2%83-understa](https://www.vobour.com/1-flexbox-%EC%9D%B4%ED%95%B4-%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%EB%AA%A8%EB%93%A0-%EA%B2%83-understa)
 [https://joshuajangblog.wordpress.com/2016/09/19/learn-css-flexbox-in-3mins/](https://joshuajangblog.wordpress.com/2016/09/19/learn-css-flexbox-in-3mins/)
 
-- ul, li 가 있다고 하자.
+- ul, li 가 있다고 하자!!!!
 - ul 는 부모. li 는 자식이다.
 - 부모는 flex-container 라 하고
 - 자식은 flex-items 라 한다.
