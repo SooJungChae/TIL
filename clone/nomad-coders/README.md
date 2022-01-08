@@ -75,7 +75,82 @@ package.json
 }
 ````
 
+---
+
+## `interface`
+
+- Object 가 올바른지 체크하기 위해 `interface`를 사용한다.
+- JS 로 컴파일 하지 않는다.
+
+```ts
+// index.ts
+interface Human {
+  name: string;
+  age: number;
+  gender: string;
+}
+const person: Human = {
+  name: 'soo',
+  age: 24,
+  gender: 'woman'
+}
+
+// index.js
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const person = {
+    name: 'soo',
+    age: 24,
+    gender: 'woman'
+};
+
+...
+```
+
+## `class`
+
+- 코드를 컨트롤 할 수 있다. (public, private)  
+- JS 파일 내부에 컴파일 된다.
+
+```ts
+class Human {
+  // ts 에서는 속성을 선언해줘야 한다.
+  public name: string;
+  public age: number;
+  public gender: string;
+
+  // class 가 시작할 때마다 호출된다. (객체를 만들 때) 
+  constructor(name: string, age: number, gender: string) {
+    this.name = name;    
+    this.age = age;    
+    this.gender = gender;    
+  }
+}
+```
+- js 에서는 아니지만 ts 에서는 속성을 선언해줘야 한다.
+- 변수를 숨길 수도 있다.
+```ts
+// 컴파일 된 파일 (index.js)
+// 모두 public 일 때
+class Human {
+  public name: string;
+  private age: number;  // --------> private!
+  public gender?: string;
+
+  ...
+}
+
+const person = new Human('soo', 24);
+
+const sayHello = (person: Human): void => {
+  // person.age 에 접근 시 에러 발생.
+  console.log(`Hello ${person.name}, you are ${person.age}!`);
+}
+```
+
 - [Typescript로 블록체인 만들기- #1 Introduction and What are we building](https://www.youtube.com/watch?v=7wAhwv2Rbxw)
 - [Typescript로 블록체인 만들기- #2 Setting Typescript Up](https://www.youtube.com/watch?v=-dyrcJr5NiQ)
 - [Typescript로 블록체인 만들기- #3 First steps with Typescript](https://www.youtube.com/watch?v=l-rpsjE13KI)
 - [Typescript로 블록체인 만들기- #4 Types in Typescript](https://www.youtube.com/watch?v=uEicpgp13tI)
+- [Typescript로 블록체인 만들기- #5 Interfaces on Typescript](https://www.youtube.com/watch?v=WYi0MNHEBsM)
+- [Typescript로 블록체인 만들기- #6 Classes on Typescript part One](https://www.youtube.com/watch?v=J7FrKaspoNE)
