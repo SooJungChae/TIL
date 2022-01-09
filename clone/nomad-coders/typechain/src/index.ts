@@ -15,6 +15,17 @@ class Block {
     timestamp: number
   ): string => CryptoJS.SHA256(index + previousHash + data + timestamp);
 
+  // 블록이 유효한지 검증한다.
+  static validateStructure = (block: Block): boolean => {
+    return (
+      typeof block.index === "number" &&
+      typeof block.hash === "string" &&
+      typeof block.previousHash === "string" &&
+      typeof block.data === "string" &&
+      typeof block.timestamp === "number"
+    );
+  };
+
   constructor(
     index: number,
     hash: string,
@@ -58,6 +69,17 @@ const createNewBlock = (data: string): Block => {
     newTimestamp
   );
   return newBlock;
+};
+
+const isBlockValid = (candidateBlock: Block, previousBlock: Block): boolean => {
+  if (!Block.validateStructure(candidateBlock)) {
+    return false;
+  } else if (previousBlock.index + 1 !== candidateBlock.index) {
+    return false;
+  } else if (previousBlock.hash !== candidateBlock.previousHash) {
+    return false;
+  }
+  return true;
 };
 
 // console.log(blockchain);
