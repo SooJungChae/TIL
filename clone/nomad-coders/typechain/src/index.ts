@@ -34,10 +34,35 @@ const genesisBlock: Block = new Block(0, "20202020202020", "", "Hello", 12345);
 
 let blockchain: Block[] = [genesisBlock];
 
-const getBlockHain = (): Block[] => blockchain;
+const getBlockchain = (): Block[] => blockchain;
 
 const getLatestBlock = (): Block => blockchain[blockchain.length - 1];
 
-console.log(blockchain);
+const getNewTimestamp = (): number => Math.round(new Date().getTime() / 1000);
+
+const createNewBlock = (data: string): Block => {
+  const latestBlock: Block = getLatestBlock();
+  const newIndex: number = latestBlock.index + 1;
+  const newTimestamp: number = getNewTimestamp();
+  const newHash: string = Block.calculateBlockHash(
+    newIndex,
+    latestBlock.previousHash,
+    data,
+    newTimestamp
+  );
+  const newBlock = new Block(
+    newIndex,
+    newHash,
+    latestBlock.hash,
+    data,
+    newTimestamp
+  );
+  return newBlock;
+};
+
+// console.log(blockchain);
+
+console.log(createNewBlock("first block"));
+console.log(createNewBlock("second block"));
 
 export {};

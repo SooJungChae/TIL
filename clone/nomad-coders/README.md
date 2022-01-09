@@ -159,3 +159,5 @@ const sayHello = (person: Human): void => {
 - [Typescript로 블록체인 만들기- #6 Classes on Typescript part One](https://www.youtube.com/watch?v=J7FrKaspoNE)
 - [Typescript로 블록체인 만들기- #7 Blockchain Creating a Block](https://www.youtube.com/watch?v=0nOjxJUuuCo)
 - [Typescript로 블록체인 만들기 - #8 Creating a Block part Two](https://www.youtube.com/watch?v=wFRg3Dor0AU)
+- [Typescript로 블록체인 만들기 - #9 Creating a Block part Three](https://www.youtube.com/watch?v=J6FHo7SWZkE)
+
