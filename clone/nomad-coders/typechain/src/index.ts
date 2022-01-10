@@ -13,7 +13,8 @@ class Block {
     previousHash: string,
     data: string,
     timestamp: number
-  ): string => CryptoJS.SHA256(index + previousHash + data + timestamp);
+  ): string =>
+    CryptoJS.SHA256(index + previousHash + data + timestamp).toString();
 
   // 블록이 유효한지 검증한다.
   static validateStructure = (block: Block): boolean => {
@@ -57,7 +58,7 @@ const createNewBlock = (data: string): Block => {
   const newTimestamp: number = getNewTimestamp();
   const newHash: string = Block.calculateBlockHash(
     newIndex,
-    latestBlock.previousHash,
+    latestBlock.hash,
     data,
     newTimestamp
   );
@@ -68,8 +69,18 @@ const createNewBlock = (data: string): Block => {
     data,
     newTimestamp
   );
+
+  addBlock(newBlock);
   return newBlock;
 };
+
+const getHashforBlock = (aBlock: Block) =>
+  Block.calculateBlockHash(
+    aBlock.index,
+    aBlock.previousHash,
+    aBlock.data,
+    aBlock.timestamp
+  );
 
 const isBlockValid = (candidateBlock: Block, previousBlock: Block): boolean => {
   if (!Block.validateStructure(candidateBlock)) {
@@ -78,13 +89,23 @@ const isBlockValid = (candidateBlock: Block, previousBlock: Block): boolean => {
     return false;
   } else if (previousBlock.hash !== candidateBlock.previousHash) {
     return false;
+  } else if (getHashforBlock(candidateBlock) !== candidateBlock.hash) {
+    return false;
   }
+
   return true;
 };
 
-// console.log(blockchain);
+const addBlock = (candidateBlock: Block): void => {
+  if (isBlockValid(candidateBlock, getLatestBlock())) {
+    blockchain.push(candidateBlock);
+  }
+};
 
-console.log(createNewBlock("first block"));
-console.log(createNewBlock("second block"));
+createNewBlock("second block");
+createNewBlock("third block");
+createNewBlock("fourth block");
+
+console.log(blockchain);
 
 export {};
