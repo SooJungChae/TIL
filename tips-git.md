@@ -47,3 +47,7 @@ git update-index --asume-unchanged [<file>...]
 git checkout <branch> -- <path>
 ```
 
+#### 브랜치 remote 연결 상태 확인하기
+```
+git remote show .
+```
