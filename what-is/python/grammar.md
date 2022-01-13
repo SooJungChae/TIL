@@ -43,6 +43,20 @@ soo = {
     "age": 22,
 }
 ```
+
+## Function
+
+- `def` 로 함수 선언
+- `:` 를 꼭 사용
+- `{}` 없이 tab 으로 블록 처리
+
+```py
+def plus(a, b):
+    print(a + b)
+
+plus(2,3) // 5
+``` 
+
 ---
 
 - [파이썬 테스트 웹 사이트 replit.com](https://replit.com/@SooJungChae)
