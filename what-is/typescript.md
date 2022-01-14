@@ -6,7 +6,8 @@ number, string, boolean, null, undefined, symbol, object
 ```
 여기에 추가적으로 `any`(아무거나 가능), `unknown`(누군가가 정의할 수 있는 타입), `void`(undefined 를 리턴하거나 아무것도 리턴하지 않는 함수) 타입을 사용할 수 있다.
 
-type 을 만드는 방법이 `Interface` 와 `Type` 2가지 있다. 주로 `Interface` 를 사용한다.
+type 을 만드는 방법은 `Interface` 와 `Type` 2가지 있다. 주로 `Interface` 를 사용한다.
+([Interface vs Type](./diff/typescript/interface-vs-type.md))
 
 ### interface
 특정한 형태를 갖도록 제약한다.
