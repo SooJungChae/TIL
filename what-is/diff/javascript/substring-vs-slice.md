@@ -31,7 +31,18 @@ console.log(text.substring(5, 2)); // => "zil"
 console.log(text.slice(5, 2));     // => ""
 ```
 
+## splice vs slice
+
+splice 는 원본 배열이 바뀌지만 slice 는 바뀌지 않는다.
+그래서 array 를 copy 할 때 `slice` 를 사용하기도 한다.  
+
+```
+S LICE = Gives part of array & NO splitting original array
+SP LICE = Gives part of array & SPlitting original array
+```
+
 ## 출처
 
 - https://stackoverflow.com/questions/18224226/why-two-different-methods-slice-substring/18224720#18224720
 - https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/substring#differences_between_substring_and_slice
+- https://stackoverflow.com/questions/37601282/javascript-array-splice-vs-slice
