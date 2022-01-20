@@ -57,6 +57,32 @@ def plus(a, b):
 plus(2,3) // 5
 ``` 
 
+## keyword arguments
+
+```py
+def say_hello(name, age):
+    return f"Hello {name} you are {age} years old"
+
+say_hello(age=24, name='soo') # Hello soo you are 24 years old
+```
+- string 앞에`f` 를 붙이면 arguments 이름을 바로 사용할 수 있다.
+- arguments 에 keyword 를 붙이면 위치에 상관없이 해당 변수에 일치하는 곳에 값이 들어간다.
+
+---
+
+## Code challenge 
+
+숙제) 7가지 연산자를 활용해 계산기 만들기
+주의) 사용자 입력을 고려해야 한다. (string 을 넣을 경우 예외처리) 
+
+plus x + y
+minus x - y
+times x * y
+division x / y
+remainder x % y
+nagation -x
+power x ** y
+
 ---
 
 - [파이썬 테스트 웹 사이트 replit.com](https://replit.com/@SooJungChae)
