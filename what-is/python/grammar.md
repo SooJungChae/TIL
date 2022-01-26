@@ -68,6 +68,21 @@ say_hello(age=24, name='soo') # Hello soo you are 24 years old
 - string 앞에`f` 를 붙이면 arguments 이름을 바로 사용할 수 있다.
 - arguments 에 keyword 를 붙이면 위치에 상관없이 해당 변수에 일치하는 곳에 값이 들어간다.
 
+## modules
+
+- import 로 만들어진 함수 라이브러리를 가져올 수 있다.
+- 다 가져올 필요없이 사용하는 함수만 가져오는 게 효율적.
+- 파일명도 바로 import 가능
+
+```py
+# import math 대신에 from & import 사용
+# as 로 이름 변경 가능
+from math import ceil, fsum as sexy_sum
+
+print(ceil(1.2))    // 2
+print(sexy_sum([1,2,3,4])   //28.0
+```
+
 ---
 
 ## Code challenge 
