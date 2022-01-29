@@ -1,5 +1,22 @@
 # Repaint
 
+브라우저가 웹페이지를 렌더링할 때 
+HTML 과 CSS 를 파싱해서 어디에 위치할지 결정하고 
+실제 스크린에 컨텐츠를 그리게 된다.
+
+이후에 페이지에서 보여지는 부분이 변경되면 repaint 가 일어난다.
+
+repaint 작업은 많은 연산이 필요하기 때문에  
+브라우저는 스크린에서 "damaged" 된 부분만 찾아내서 repaint 하려고 한다.
+
+화면을 split 해서 필요한 부분만 업데이트 하는 방식이다. 
+
+repaint 가 발생 되면 사용자 응답이 느려지기 때문에 최소화 하는 방법을 고민해야 한다.
+
+## 참고 
+
+- [Paint Flashing Tool](https://developer.mozilla.org/en-US/docs/Tools/Paint_Flashing_Tool)
+
 # Reflow
 
 웹 페이지 전체나 일부를 렌더링할 때 
