@@ -87,3 +87,6 @@ it('should not fail for empty props', async () => {
 })
 ```
 
+## 참고
+- [https://ko.reactjs.org/docs/test-utils.html#act](https://ko.reactjs.org/docs/test-utils.html#act)
+- [https://coffeeandcakeandnewjeong.tistory.com/65](https://coffeeandcakeandnewjeong.tistory.com/65)
