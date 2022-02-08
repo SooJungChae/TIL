@@ -1,6 +1,6 @@
-# react-testing-library 과 "not wrapped in act" in React Admin project  
+# react-testing-library "not wrapped in act" error in React Admin project  
 
-## 에러메세
+## Problem
 
 ```js
 Warning: An update to SelectPlanet inside a test was not wrapped in act(...).
@@ -63,7 +63,7 @@ useEffect 를 사용해서 렌더링이 완료된 후, 내부에서 API 호출�
 
 그래서 새로운 비동기 액션으로 인해 act() 경고문이 발생한 것이다.
 
-## 해결방법
+## Solution
 
 testing-library 에서는 `waitFor` 함수를 제공하는데 이걸 쓰면 timeout (default 1000ms)될 때까지 Promise 로 callback 을 기다린다.
 > https://testing-library.com/docs/dom-testing-library/api-async/#waitfor
@@ -87,6 +87,6 @@ it('should not fail for empty props', async () => {
 })
 ```
 
-## 참고
+## Reference
 - [https://ko.reactjs.org/docs/test-utils.html#act](https://ko.reactjs.org/docs/test-utils.html#act)
 - [https://coffeeandcakeandnewjeong.tistory.com/65](https://coffeeandcakeandnewjeong.tistory.com/65)
