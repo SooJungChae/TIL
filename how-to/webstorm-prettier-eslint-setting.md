@@ -15,5 +15,8 @@
   - Set ESLint package path
   - Check `Run eslint --fix on save`
 
+## TroubleSooting
+https://youtrack.jetbrains.com/issue/WEB-52236
+
 ## Reference
 - https://github.com/airbnb/javascript
