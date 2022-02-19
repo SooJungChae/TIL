@@ -16,7 +16,10 @@
   - Check `Run eslint --fix on save`
 
 ## TroubleSooting
-https://youtrack.jetbrains.com/issue/WEB-52236
+Problem : `ESLint: TypeError: this.cliEngineCtor is not a constructor`
+
+Solution : Update Webstorm (2021.02.02)
+- https://youtrack.jetbrains.com/issue/WEB-52236
 
 ## Reference
 - https://github.com/airbnb/javascript
