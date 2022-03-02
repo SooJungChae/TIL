@@ -130,7 +130,39 @@ describe('router test', () => {
 ```
 
 ## TroubleShooting
-- **Dependency error**
+
+**Problom: Cannot find module paths in tsconfig.json**
+> Cannot find module '@utils/selectOptionHandler' from 'src/utils/selectOptionHandler.test.ts
+
+**How to solve: Define `moduleNameMapper` paths in jest.config.js**
+example) 
+
+```js
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@constants/*": ["./src/constants/*"]
+    }
+  }
+}
+```
+
+```js
+// jest.config.js
+module.exports = {
+  // [...]
+  moduleNameMapper: {
+    // [...]
+    '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^@constants/(.*)$': '<rootDir>/src/constants/$1',
+  },
+}
+```
 
 ```
 npm WARN old lockfile 
