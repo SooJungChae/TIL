@@ -131,7 +131,7 @@ describe('router test', () => {
 
 ## TroubleShooting
 
-**Problom: Cannot find module paths in tsconfig.json**
+**Problem1: Cannot find module paths in tsconfig.json**
 > Cannot find module '@utils/selectOptionHandler' from 'src/utils/selectOptionHandler.test.ts
 
 **How to solve: Define `moduleNameMapper` paths in jest.config.js**
@@ -164,6 +164,7 @@ module.exports = {
 }
 ```
 
+**Problem2: Dependency error**
 ```
 npm WARN old lockfile 
 npm WARN old lockfile The package-lock.json file was created with an old version of npm,
