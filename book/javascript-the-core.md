@@ -3,29 +3,35 @@ http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
 
 ## An object
 
-> An object is a collection of properties and has a single prototype object. 
-The prototype may be either an object or the null value.
+> object 는 프로퍼티의 집합이고, 하나의 prototype object 를 갖고 있다.
 
-A prototype of an object is referenced by the internal [[Prototype]] property
+- 값은 object 나 null 이 될 수 있다
 
-What for these prototypes are needed? Let’s consider a prototype chain concept
+object 의 prototype 은 `[[prototype]]` 프로퍼티로 연결된다. (유저레벨 코드에선 `_proto_` 프로퍼티로 표현된다.)
+
+## A prototype
+
+> prototype 은 prototype 기반 상속을 구현하는 데 사용되는 위임 객체다.
+
+모든 object 는 생성될 때 prototype 을 받는다. (receive)
+
+- 명시적으로 prototype 이 셋팅되지 않는다면 상속된 object 를 기본 prototype 값으로 받는다.
+    - 명시적 → Object.create
+    - 암시적 → `__proto__` 프로퍼티
+
+prototype 값에는 object 나 null 이 올 수 있다.
+
+- null 이 아닌 해당 prototype 에 대한 참조가 있으면 프로토타입 체인이라고 한다.
 
 ## A prototype chain
 
-If a prototype has a non-null reference to its prototype, and so on, this is called the prototype chain.
+> prototype chain 은 상속 및 공유 프로퍼티를 구현하는데 사용되는 유한한 object 체인이다.
 
-> A prototype chain is a finite chain of objects which is used to implement inheritance and shared properties.
+룰은 간단한데, 만약 property 나 method 가 object 에 없으면 prototype chain 에서 찾는다.
 
-ECMAScript has no concept of a class. 
-However, a code reuse stylistics does not differ much and achieved via the prototype chain. 
-
-This kind of inheritance is called a delegation based inheritance 
-(or, closer to ECMAScript, a prototype based inheritance)
-
-The rule is simple: if a property or a method is not found in the object itself (i.e. the object has no such an own property), then there is an attempt to find this property/method in the prototype chain. 
-If the property is not found in the prototype, then a prototype of the prototype is considered, and so on, i.e. the whole prototype chain
-
-Thus, a found property is called inherited property. If the property is not found after the whole prototype chain lookup, then undefined value is returned.
+- prototype 에 없으면 prototype 의 prototype 에서 찾고, 없으면 상위에서 계속 찾는다.
+- 이걸 delegation 이라고 하는데, 런타임에서 일어나기 때문에 dynamic dispatch 라고도 불린다.
+- 못 찾으면 undefined 가 리턴된다.
 
 Notice, that this value in using an inherited method is set to the original object, but not to the (prototype) object in which the method is found
 
