@@ -2,7 +2,11 @@
 
 `npx install-peerdeps --dev eslint-config-airbnb`
 
+## Install prettier
+`yarn add prettier -D`
+
 ## Create .prettierrc
+https://github.com/SooJungChae/dotfiles/blob/master/.prettierrc
 
 ## Set prettier in webstorm
 - `Preferences > Languages & Frameworks > javascript > Prettier` > Prettier package set
